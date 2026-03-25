@@ -26,9 +26,8 @@
     <!-- Mobile layout only — no font changes -->
     <style>
         @media (max-width: 768px) {
-            .fc .fc-toolbar { flex-wrap: wrap !important; gap: 6px !important; justify-content: center !important; }
-            .fc .fc-toolbar-title { width: 100% !important; text-align: center !important; display: none !important; }
-            .fc .fc-toolbar .fc-prev-button, .fc .fc-toolbar .fc-next-button, .fc .fc-toolbar .fc-today-button { display: none !important; }
+            .fc .fc-header-toolbar { justify-content: center !important; }
+            .fc .fc-toolbar-chunk:first-child, .fc .fc-toolbar-chunk:nth-child(2) { display: none !important; }
             .shift-types-mobile { display: flex !important; }
             .shift-types-desktop { display: none !important; }
         }
