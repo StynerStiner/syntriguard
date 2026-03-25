@@ -8,10 +8,7 @@
     <!-- Mobile layout only — no font changes -->
     <style>
         @media (max-width: 768px) {
-            .fc .fc-header-toolbar { justify-content: center !important; width: 100% !important; }
-            .fc .fc-toolbar-chunk:first-child, .fc .fc-toolbar-chunk:nth-child(2) { display: none !important; }
-            .fc .fc-toolbar-chunk:last-child { width: 100% !important; text-align: center !important; }
-            .fc .fc-toolbar-chunk:last-child .fc-button-group { display: flex !important; justify-content: center !important; }
+            .fc .fc-header-toolbar { display: none !important; }
             .shift-types-mobile { display: flex !important; }
             .shift-types-desktop { display: none !important; }
         }
@@ -73,7 +70,11 @@
                             <td class="text-center" style="width:12%"><button class="btn btn-light w-100" id="cal-next-month"><i class="ti ti-chevron-right"></i></button></td>
                             <td class="text-center d-none d-md-table-cell" style="width:15%"><button class="btn btn-primary w-100" id="cal-today-btn">Today</button></td>
                         </tr></table>
-                        <button class="btn btn-primary w-100 mt-2 d-md-none" id="cal-today-btn-mobile">Today</button>
+                        <div class="d-flex gap-2 mt-2 d-md-none">
+                            <button class="btn btn-primary flex-grow-1" id="cal-today-btn-mobile">Today</button>
+                            <button class="btn btn-light" id="cal-view-list-mobile">List</button>
+                            <button class="btn btn-light" id="cal-view-month-mobile">Month</button>
+                        </div>
                     </div>
                 </div>
 

@@ -566,6 +566,15 @@ class CalendarSchedule {
             syncDropdowns();
         });
 
+        var listMobile = document.getElementById('cal-view-list-mobile');
+        var monthMobile = document.getElementById('cal-view-month-mobile');
+        if (listMobile) listMobile.addEventListener('click', function () {
+            self.calendarObj.changeView('listWeek');
+        });
+        if (monthMobile) monthMobile.addEventListener('click', function () {
+            self.calendarObj.changeView('dayGridMonth');
+        });
+
         // Sync when FullCalendar's own nav is used
         self.calendarObj.on('datesSet', function () { syncDropdowns(); });
         syncDropdowns();
