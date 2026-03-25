@@ -66,8 +66,14 @@
                     <div class="card-body py-2 px-3">
                         <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                             <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
-                            <select class="form-select w-auto" id="cal-month-select"></select>
-                            <select class="form-select w-auto" id="cal-year-select"></select>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button>
+                                <div class="dropdown-menu" id="cal-month-menu"></div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button>
+                                <div class="dropdown-menu" id="cal-year-menu"></div>
+                            </div>
                             <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
                             <button class="btn btn-primary" id="cal-today-btn">Today</button>
                         </div>
