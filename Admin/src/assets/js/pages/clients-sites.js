@@ -117,10 +117,10 @@ function renderTable(filter) {
             '<td>' + escHtml(district) + '</td>' +
             '<td>' + guardCount + '</td>' +
             '<td>' + contractValue + '</td>' +
-            '<td><span class="badge ' + statusInfo.badge + ' fs-12 p-1">' + statusInfo.label + '</span></td>' +
+            '<td><span class="badge ' + statusInfo.badge + ' fs-13 p-1">' + statusInfo.label + '</span></td>' +
             '<td class="pe-3">' +
                 '<div class="dropdown">' +
-                '<button class="btn btn-sm btn-light dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown">' +
+                '<button class="btn btn-light dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown">' +
                 '<i class="ti ti-dots-vertical fs-18"></i></button>' +
                 '<div class="dropdown-menu dropdown-menu-end">' +
                 '<a href="javascript:void(0);" class="dropdown-item" onclick="viewSiteDetails(' + s.id + ')">' +
@@ -161,10 +161,10 @@ function renderTable(filter) {
             '<td>' + escHtml(c.district || '—') + '</td>' +
             '<td>0</td>' +
             '<td>' + contractValue + '</td>' +
-            '<td><span class="badge ' + statusInfo.badge + ' fs-12 p-1">' + statusInfo.label + '</span></td>' +
+            '<td><span class="badge ' + statusInfo.badge + ' fs-13 p-1">' + statusInfo.label + '</span></td>' +
             '<td class="pe-3">' +
                 '<div class="dropdown">' +
-                '<button class="btn btn-sm btn-light dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown">' +
+                '<button class="btn btn-light dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown">' +
                 '<i class="ti ti-dots-vertical fs-18"></i></button>' +
                 '<div class="dropdown-menu dropdown-menu-end">' +
                 '<a href="javascript:void(0);" class="dropdown-item" onclick="viewClientDetails(' + c.id + ')">' +

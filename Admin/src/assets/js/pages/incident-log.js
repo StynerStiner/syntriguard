@@ -98,10 +98,10 @@ async function loadIncidents() {
                 '</td>' +
                 '<td>' + damages + '</td>' +
                 '<td><span class="text-muted">' + recoveryDate + '</span></td>' +
-                '<td><span class="badge ' + statusInfo.badge + ' fs-12 p-1">' + statusInfo.label + '</span></td>' +
+                '<td><span class="badge ' + statusInfo.badge + ' fs-13 p-1">' + statusInfo.label + '</span></td>' +
                 '<td class="pe-3">' +
                     '<div class="dropdown">' +
-                    '<button class="btn btn-sm btn-light dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown">' +
+                    '<button class="btn btn-light dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown">' +
                     '<i class="ti ti-dots-vertical fs-18"></i></button>' +
                     '<div class="dropdown-menu dropdown-menu-end">' +
                     '<a href="javascript:void(0);" class="dropdown-item" onclick="viewIncident(' + inc.id + ')">' +
