@@ -5,6 +5,12 @@
 document.addEventListener('DOMContentLoaded', async function () {
     var DEFAULT_AVATAR = 'https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png';
 
+    // Auto-set month/year label
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var now = new Date();
+    var dateLabel = document.getElementById('perf-date-label');
+    if (dateLabel) dateLabel.textContent = months[now.getMonth()] + ' ' + now.getFullYear();
+
     try {
         var guards = await SyntriGuard.getGuards();
         if (!guards || !Array.isArray(guards)) return;
