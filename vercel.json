@@ -1,36 +1,48 @@
 {
   "version": 2,
-  "buildCommand": "cd Admin && npm install && cd server && npm install && cd ../.. && cd Admin && npx gulp build && cp -r src/assets/js/pages dist/assets/js/ && cp src/assets/js/api.js dist/assets/js/api.js",
-  "outputDirectory": "Admin/dist",
-  "functions": {
-    "api/**/*.js": {
-      "maxDuration": 30
+  "builds": [
+    {
+      "src": "Admin/dist/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
     }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.js" },
-    { "source": "/dashboard", "destination": "/index.html" },
-    { "source": "/login", "destination": "/auth-login.html" },
-    { "source": "/register", "destination": "/auth-register.html" },
-    { "source": "/guards", "destination": "/tables-gridjs.html" },
-    { "source": "/guard-roster", "destination": "/tables-gridjs.html" },
-    { "source": "/scheduler", "destination": "/apps-calendar.html" },
-    { "source": "/calendar", "destination": "/apps-calendar.html" },
-    { "source": "/map", "destination": "/maps-leaflet.html" },
-    { "source": "/deployment-map", "destination": "/maps-leaflet.html" },
-    { "source": "/clients", "destination": "/clients-sites.html" },
-    { "source": "/sites", "destination": "/clients-sites.html" },
-    { "source": "/incidents", "destination": "/apps-invoices.html" },
-    { "source": "/incident-log", "destination": "/apps-invoices.html" },
-    { "source": "/file-report", "destination": "/apps-invoice-create.html" },
-    { "source": "/messages", "destination": "/apps-chat.html" },
-    { "source": "/chat", "destination": "/apps-chat.html" },
-    { "source": "/ai", "destination": "/ai-assistant.html" },
-    { "source": "/ai-assistant", "destination": "/ai-assistant.html" },
-    { "source": "/settings", "destination": "/settings.html" },
-    { "source": "/performance", "destination": "/guard-performance.html" }
   ],
-  "redirects": [
-    { "source": "/", "destination": "/login" }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.js" },
+    { "src": "/dashboard", "dest": "/Admin/dist/index.html" },
+    { "src": "/login", "dest": "/Admin/dist/auth-login.html" },
+    { "src": "/register", "dest": "/Admin/dist/auth-register.html" },
+    { "src": "/guards", "dest": "/Admin/dist/tables-gridjs.html" },
+    { "src": "/guard-roster", "dest": "/Admin/dist/tables-gridjs.html" },
+    { "src": "/scheduler", "dest": "/Admin/dist/apps-calendar.html" },
+    { "src": "/calendar", "dest": "/Admin/dist/apps-calendar.html" },
+    { "src": "/map", "dest": "/Admin/dist/maps-leaflet.html" },
+    { "src": "/deployment-map", "dest": "/Admin/dist/maps-leaflet.html" },
+    { "src": "/clients", "dest": "/Admin/dist/clients-sites.html" },
+    { "src": "/sites", "dest": "/Admin/dist/clients-sites.html" },
+    { "src": "/incidents", "dest": "/Admin/dist/apps-invoices.html" },
+    { "src": "/incident-log", "dest": "/Admin/dist/apps-invoices.html" },
+    { "src": "/file-report", "dest": "/Admin/dist/apps-invoice-create.html" },
+    { "src": "/messages", "dest": "/Admin/dist/apps-chat.html" },
+    { "src": "/chat", "dest": "/Admin/dist/apps-chat.html" },
+    { "src": "/ai", "dest": "/Admin/dist/ai-assistant.html" },
+    { "src": "/ai-assistant", "dest": "/Admin/dist/ai-assistant.html" },
+    { "src": "/settings", "dest": "/Admin/dist/settings.html" },
+    { "src": "/performance", "dest": "/Admin/dist/guard-performance.html" },
+    { "src": "/assets/(.*)", "dest": "/Admin/dist/assets/$1" },
+    { "src": "/(.*\\.html)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.css)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.js)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.png)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.jpg)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.svg)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.ico)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.woff2?)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.eot)", "dest": "/Admin/dist/$1" },
+    { "src": "/(.*\\.ttf)", "dest": "/Admin/dist/$1" },
+    { "src": "/", "status": 302, "headers": { "Location": "/login" } }
   ]
 }

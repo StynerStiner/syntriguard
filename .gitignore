@@ -7,8 +7,8 @@ node_modules/
 server/.env
 **/google-service-account.json
 
-# Build output (can be regenerated)
-Admin/dist/
+# Build output (included for Vercel deployment)
+# Admin/dist/
 
 # Template documentation (not ours)
 Documentation/
@@ -24,3 +24,4 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+.vercel

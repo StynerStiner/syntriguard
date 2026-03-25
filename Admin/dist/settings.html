@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Settings | SyntriGuard - Security Operations Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="SyntriGuard Security Operations Management Platform" name="description" />
+    <meta content="StynerDev" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Theme Config Js -->
+    <script src="assets/js/config.js"></script>
+
+    <!-- Vendor css -->
+    <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- Menu -->
+        <!-- Sidenav Menu Start -->
+        <div class="sidenav-menu">
+
+            <!-- Brand Logo -->
+            <a href="/dashboard" class="logo">
+                <span class="logo-light">
+                    <span class="logo-lg d-flex align-items-center gap-1"><img src="assets/images/logo-sm.png" alt="logo" height="24"><span class="fw-bold fs-18 text-white">SyntriGuard</span></span>
+                    <span class="logo-sm"><img src="assets/images/logo-sm.png" alt="logo" height="24"></span>
+                </span>
+
+                <span class="logo-dark">
+                    <span class="logo-lg d-flex align-items-center gap-1"><img src="assets/images/logo-sm.png" alt="logo" height="24"><span class="fw-bold fs-18">SyntriGuard</span></span>
+                    <span class="logo-sm"><img src="assets/images/logo-sm.png" alt="logo" height="24"></span>
+                </span>
+            </a>
+
+            <!-- Sidebar Hover Menu Toggle Button -->
+            <button class="button-sm-hover">
+                <i class="ri-circle-line align-middle"></i>
+            </button>
+
+            <!-- Full Sidebar Menu Close Button -->
+            <button class="button-close-fullsidebar">
+                <i class="ti ti-x align-middle"></i>
+            </button>
+
+            <div data-simplebar>
+
+                <!--- Sidenav Menu -->
+                <ul class="side-nav">
+                    <li class="side-nav-title">
+                        SyntriGuard
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/dashboard" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-dashboard"></i></span>
+                            <span class="menu-text"> Dashboard </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarGuards" aria-expanded="false" aria-controls="sidebarGuards" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-users"></i></span>
+                            <span class="menu-text"> Guards</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarGuards">
+                            <ul class="sub-menu">
+                                <li class="side-nav-item">
+                                    <a href="/guards" class="side-nav-link">
+                                        <span class="menu-text">Roster</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="/register" class="side-nav-link">
+                                        <span class="menu-text">Add Guard</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="/performance" class="side-nav-link">
+                                        <span class="menu-text">Performance</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/scheduler" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-calendar"></i></span>
+                            <span class="menu-text"> Scheduler </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/deployment-map" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-map-2"></i></span>
+                            <span class="menu-text"> Deployment Map </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/clients" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-building"></i></span>
+                            <span class="menu-text"> Clients & Sites </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarIncidents" aria-expanded="false" aria-controls="sidebarIncidents" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-alert-triangle"></i></span>
+                            <span class="menu-text"> Incidents</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarIncidents">
+                            <ul class="sub-menu">
+                                <li class="side-nav-item">
+                                    <a href="/file-report" class="side-nav-link">
+                                        <span class="menu-text">File Report</span>
+                                    </a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="/incidents" class="side-nav-link">
+                                        <span class="menu-text">Incident Log</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/messages" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-message"></i></span>
+                            <span class="menu-text"> Messages </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/ai-assistant" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-robot"></i></span>
+                            <span class="menu-text"> AI Assistant </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/settings" class="side-nav-link">
+                            <span class="menu-icon"><i class="ti ti-settings"></i></span>
+                            <span class="menu-text"> Settings </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- Sidenav Menu End -->
+
+        
+        <!-- Topbar Start -->
+        <header class="app-topbar" id="header">
+            <div class="page-container topbar-menu">
+                <div class="d-flex align-items-center gap-2">
+
+                    <!-- Brand Logo (hidden on mobile — sidenav has its own) -->
+                    <a href="/dashboard" class="logo d-none d-md-flex">
+                        <span class="logo-light">
+                            <span class="logo-lg d-flex align-items-center gap-1"><img src="assets/images/logo-sm.png" alt="logo" height="24"><span class="fw-bold fs-18 text-white">SyntriGuard</span></span>
+                            <span class="logo-sm d-flex align-items-center gap-1"><img src="assets/images/logo-sm.png" alt="logo" height="22"><span class="fw-bold fs-14 text-white">SyntriGuard</span></span>
+                        </span>
+
+                        <span class="logo-dark">
+                            <span class="logo-lg d-flex align-items-center gap-1"><img src="assets/images/logo-sm.png" alt="logo" height="24"><span class="fw-bold fs-18">SyntriGuard</span></span>
+                            <span class="logo-sm d-flex align-items-center gap-1"><img src="assets/images/logo-sm.png" alt="logo" height="22"><span class="fw-bold fs-14">SyntriGuard</span></span>
+                        </span>
+                    </a>
+
+                    <!-- Sidebar Menu Toggle Button -->
+                    <button class="sidenav-toggle-button">
+                        <i class="ri-menu-5-line fs-24"></i>
+                    </button>
+
+                    <!-- Horizontal Menu Toggle Button -->
+                    <button class="topnav-toggle-button px-2" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                        <i class="ri-menu-5-line fs-24"></i>
+                    </button>
+
+                    <!-- Topbar Page Title -->
+                    <div class="topbar-item d-none d-md-flex px-2">
+                        
+                        <div>
+                            <h4 class="page-title fs-20 fw-semibold mb-0">Settings</h4>
+
+                        </div>
+                        
+
+                        
+                    </div>
+
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+
+                    <!-- Search for small devices -->
+                    <div class="topbar-item d-flex d-xl-none">
+                        <button class="topbar-link" data-bs-toggle="modal" data-bs-target="#searchModal" type="button">
+                            <i class="ri-search-line fs-22"></i>
+                        </button>
+                    </div>
+
+                    <!-- Button Trigger Search Modal -->
+                    <div class="topbar-search text-muted d-none d-xl-flex gap-2 me-2 align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#searchModal" type="button">
+                        <i class="ri-search-line fs-18"></i>
+                        <span class="me-2 text-nowrap">Search...</span>
+                    </div>
+
+                    <!-- Quick AI Actions -->
+                    <div class="topbar-item d-none d-md-flex">
+                        <button class="topbar-link" onclick="window.sgQuickAction('Give me today\'s shift summary — who is on duty, who is off, and any coverage gaps.')" title="AI: Shift Summary" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <i class="ti ti-report-analytics fs-22 text-info"></i>
+                        </button>
+                        <button class="topbar-link" onclick="window.sgQuickAction('Brief me on all open incidents — severity, sites, and recommended actions.')" title="AI: Incidents" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <i class="ti ti-alert-triangle fs-22 text-danger"></i>
+                        </button>
+                        <button class="topbar-link" onclick="window.sgQuickAction('Which guards are available right now? Show me who is on duty, off duty, and on leave.')" title="AI: Guards" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <i class="ti ti-users fs-22 text-success"></i>
+                        </button>
+                        <button class="topbar-link" onclick="window.sgQuickAction('Give me the status of all active sites — guard counts, alerts, and any issues.')" title="AI: Sites" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <i class="ti ti-map-2 fs-22 text-warning"></i>
+                        </button>
+                    </div>
+
+                    <!-- Notification Dropdown -->
+                    <div class="topbar-item">
+                        <div class="dropdown">
+                            <button class="topbar-link dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown"
+                                data-bs-offset="0,18" type="button" data-bs-auto-close="outside" aria-haspopup="false"
+                                aria-expanded="false">
+                                <i class="ri-notification-snooze-line animate-ring fs-22"></i>
+                                <span class="noti-icon-badge"></span>
+                            </button>
+
+                            <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg bg-body" style="min-height: 300px; opacity: 1 !important;">
+                                <div class="p-2 border-bottom position-relative border-dashed">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <h6 class="m-0 fs-16 fw-semibold"> Notifications</h6>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="dropdown">
+                                                <a href="#" class="dropdown-toggle drop-arrow-none link-dark"
+                                                    data-bs-toggle="dropdown" data-bs-offset="0,15" aria-expanded="false">
+                                                    <i class="ri-settings-2-line fs-22 align-middle"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item">Mark as Read</a>
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item">Delete All</a>
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item">Do not Disturb</a>
+                                                    <!-- item-->
+                                                    <a href="javascript:void(0);" class="dropdown-item">Other Settings</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="position-relative rounded-0" style="max-height: 300px;" data-simplebar id="live-notifications">
+                                    <!-- item-->
+                                    <div class="dropdown-item notification-item py-2 text-wrap active" id="notification-1">
+                                        <span class="d-flex align-items-center">
+                                            <span class="me-3 position-relative flex-shrink-0">
+                                                <img src="assets/images/users/avatar-7.jpg" class="avatar-lg rounded-circle"
+                                                    alt="" />
+                                            </span>
+                                            <span class="flex-grow-1 text-muted">
+                                                <span class="fw-medium text-body">Marcus Redan</span> filed <span
+                                                    class="fw-medium text-body">Incident #052</span> — Unauthorized Entry at Presidential Palace
+                                                <br />
+                                                <span class="fs-12">12 min ago</span>
+                                            </span>
+                                            <span class="notification-item-close">
+                                                <button type="button"
+                                                    class="btn btn-ghost-danger rounded-circle btn-sm btn-icon"
+                                                    data-dismissible="#notification-1">
+                                                    <i class="ri-close-line fs-16"></i>
+                                                </button>
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <!-- item-->
+                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-2">
+                                        <span class="d-flex align-items-center">
+                                            <span class="me-3 position-relative flex-shrink-0">
+                                                <img src="assets/images/users/avatar-4.jpg" class="avatar-lg rounded-circle"
+                                                    alt="" />
+                                            </span>
+                                            <span class="flex-grow-1 text-muted">
+                                                <span class="fw-medium text-body">Priya Nankoe</span> completed shift at <span
+                                                    class="fw-medium text-body">Port of Paramaribo</span>
+                                                <br />
+                                                <span class="fs-12">45 min ago</span>
+                                            </span>
+                                            <span class="notification-item-close">
+                                                <button type="button"
+                                                    class="btn btn-ghost-danger rounded-circle btn-sm btn-icon"
+                                                    data-dismissible="#notification-2">
+                                                    <i class="ri-close-line fs-16"></i>
+                                                </button>
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <!-- item-->
+                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-3">
+                                        <span class="d-flex align-items-center">
+                                            <div class="avatar-lg flex-shrink-0 me-3">
+                                                <span class="avatar-title bg-success-subtle text-success rounded-circle fs-22">
+                                                    <iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon>
+                                                </span>
+                                            </div>
+                                            <span class="flex-grow-1 text-muted">
+                                                Schedule updated: <span class="fw-medium text-body">Remy Sedoc</span> assigned to front gate Thursday AM
+                                                <br />
+                                                <span class="fs-12">1 hour ago</span>
+                                            </span>
+                                            <span class="notification-item-close">
+                                                <button type="button"
+                                                    class="btn btn-ghost-danger rounded-circle btn-sm btn-icon"
+                                                    data-dismissible="#notification-3">
+                                                    <i class="ri-close-line fs-16"></i>
+                                                </button>
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <!-- item-->
+                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-4">
+                                        <span class="d-flex align-items-center">
+                                            <div class="avatar-lg flex-shrink-0 me-3">
+                                                <span class="avatar-title bg-warning-subtle text-warning rounded-circle fs-22">
+                                                    <iconify-icon icon="solar:settings-bold-duotone"></iconify-icon>
+                                                </span>
+                                            </div>
+                                            <span class="flex-grow-1 text-muted">
+                                                Maintenance request filed: <span class="fw-medium text-body">Dock 3 perimeter fence</span> — Port
+                                                <br />
+                                                <span class="fs-12">2 hours ago</span>
+                                            </span>
+                                            <span class="notification-item-close">
+                                                <button type="button"
+                                                    class="btn btn-ghost-danger rounded-circle btn-sm btn-icon"
+                                                    data-dismissible="#notification-4">
+                                                    <i class="ri-close-line fs-16"></i>
+                                                </button>
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <!-- item-->
+                                    <div class="dropdown-item notification-item py-2 text-wrap" id="notification-5">
+                                        <span class="d-flex align-items-center">
+                                            <span class="me-3 position-relative flex-shrink-0">
+                                                <img src="assets/images/users/avatar-5.jpg" class="avatar-lg rounded-circle"
+                                                    alt="" />
+                                            </span>
+                                            <span class="flex-grow-1 text-muted">
+                                                <span class="fw-medium text-body">Devon Figueira</span> clocked in for overnight shift at <span
+                                                    class="fw-medium text-body">Staatsolie HQ</span>
+                                                <br />
+                                                <span class="fs-12">3 hours ago</span>
+                                            </span>
+                                            <span class="notification-item-close">
+                                                <button type="button"
+                                                    class="btn btn-ghost-danger rounded-circle btn-sm btn-icon"
+                                                    data-dismissible="#notification-5">
+                                                    <i class="ri-close-line fs-16"></i>
+                                                </button>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- All-->
+                                <a href="javascript:void(0);"
+                                    class="dropdown-item notification-item text-center text-reset text-decoration-underline fw-bold notify-item border-top border-light py-2">
+                                    View All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Apps Dropdown -->
+                    <div class="topbar-item d-none d-sm-flex">
+                        <div class="dropdown">
+                            <button class="topbar-link dropdown-toggle drop-arrow-none" data-bs-toggle="dropdown"
+                                data-bs-offset="0,18" type="button" aria-haspopup="false" aria-expanded="false">
+                                <i class="ri-apps-2-add-line fs-22"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg p-0">
+                                <div class="p-2">
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="index.html">
+                                                <i class="ti ti-dashboard fs-24"></i>
+                                                <span>Dashboard</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="tables-gridjs.html">
+                                                <i class="ti ti-users fs-24"></i>
+                                                <span>Guard Roster</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="apps-calendar.html">
+                                                <i class="ti ti-calendar fs-24"></i>
+                                                <span>Scheduler</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="maps-leaflet.html">
+                                                <i class="ti ti-map-2 fs-24"></i>
+                                                <span>Deploy Map</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="apps-invoices.html">
+                                                <i class="ti ti-alert-triangle fs-24"></i>
+                                                <span>Incidents</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="apps-chat.html">
+                                                <i class="ti ti-message fs-24"></i>
+                                                <span>Messages</span>
+                                            </a>
+                                        </div>
+                                    </div> <!-- end row-->
+
+                                    <div class="row g-0">
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="ai-assistant.html">
+                                                <img src="assets/images/logo-sm.png" height="24" alt="AI">
+                                                <span>AI Assistant</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="clients-sites.html">
+                                                <i class="ti ti-building fs-24"></i>
+                                                <span>Clients</span>
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="dropdown-icon-item" href="index.html">
+                                                <i class="ti ti-settings fs-24"></i>
+                                                <span>Settings</span>
+                                            </a>
+                                        </div>
+                                    </div> <!-- end row-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button Trigger Customizer Offcanvas -->
+                    <div class="topbar-item d-none d-sm-flex">
+                        <button class="topbar-link" data-bs-toggle="offcanvas" data-bs-target="#theme-settings-offcanvas"
+                            type="button">
+                            <i class="ri-settings-4-line fs-22"></i>
+                        </button>
+                    </div>
+
+                    <!-- Light/Dark Mode Button -->
+                    <div class="topbar-item d-none d-sm-flex">
+                        <button class="topbar-link" id="light-dark-mode" type="button">
+                            <i class="ri-moon-line light-mode-icon fs-22"></i>
+                            <i class="ri-sun-line dark-mode-icon fs-22"></i>
+                        </button>
+                    </div>
+
+                    <!-- User Dropdown -->
+                    <div class="topbar-item nav-user">
+                        <div class="dropdown">
+                            <a class="topbar-link dropdown-toggle drop-arrow-none px-2" data-bs-toggle="dropdown"
+                                data-bs-offset="0,19" type="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" width="32" class="rounded-circle me-lg-2 d-flex"
+                                    alt="user-image" id="topbar-user-avatar">
+                                <span class="d-lg-flex flex-column gap-1 d-none">
+                                    <h5 class="my-0" id="topbar-user-name">Raoul Stiner</h5>
+                                </span>
+                                <i class="ri-arrow-down-s-line d-none d-lg-block align-middle ms-1"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="ri-account-circle-line me-1 fs-16 align-middle"></i>
+                                    <span class="align-middle">My Account</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="ri-settings-2-line me-1 fs-16 align-middle"></i>
+                                    <span class="align-middle">Settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="ri-question-line me-1 fs-16 align-middle"></i>
+                                    <span class="align-middle">Support</span>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item">
+                                    <i class="ri-lock-line me-1 fs-16 align-middle"></i>
+                                    <span class="align-middle">Lock Screen</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item active fw-semibold text-danger" id="btn-sign-out">
+                                    <i class="ri-logout-box-line me-1 fs-16 align-middle"></i>
+                                    <span class="align-middle">Sign Out</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Topbar End -->
+
+        <!-- Search Modal -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form>
+                        <div class="px-3 py-2 d-flex flex-row align-items-center" id="top-search">
+                            <i class="ri-search-line fs-22"></i>
+                            <input type="search" class="form-control bg-transparent fs-16 border-0" id="search-modal-input"
+                                placeholder="Search guards, sites, incidents...">
+                            <button type="submit" class="btn p-0" data-bs-dismiss="modal" aria-label="Close">[esc]</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+
+        
+
+        
+
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush" id="settings-tabs">
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2 active" data-tab="company">
+                                        <i class="ti ti-building fs-18"></i> Company Profile
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="security">
+                                        <i class="ti ti-shield fs-18"></i> Security Policies
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="notifications">
+                                        <i class="ti ti-bell fs-18"></i> Notifications
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="users">
+                                        <i class="ti ti-users fs-18"></i> User Management
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="data">
+                                        <i class="ti ti-database fs-18"></i> Data & Backup
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-8">
+
+                        <!-- TAB: Company Profile -->
+                        <div class="card settings-panel" id="panel-company">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Company Profile</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="settings-success" class="alert alert-success d-none"></div>
+                                <div id="settings-error" class="alert alert-danger d-none"></div>
+
+                                <form id="settings-form">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Company Name</label>
+                                            <input type="text" id="set-company_name" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Registration Number</label>
+                                            <input type="text" id="set-registration_number" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Tax ID (TIN)</label>
+                                            <input type="text" id="set-tax_id" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input type="text" id="set-phone" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Address</label>
+                                        <textarea id="set-address" class="form-control" rows="2"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" id="set-email" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Website</label>
+                                            <input type="text" id="set-website" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Default Currency</label>
+                                            <select id="set-currency" class="form-select">
+                                                <option value="SRD">SRD (Surinamese Dollar)</option>
+                                                <option value="USD">USD</option>
+                                                <option value="EUR">EUR</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Time Zone</label>
+                                            <select id="set-timezone" class="form-select">
+                                                <option value="America/Paramaribo">America/Paramaribo (SRT, UTC-3)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Operating Hours</label>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="text" id="set-operating_hours_start" class="form-control" placeholder="06:00">
+                                                <span class="text-muted">to</span>
+                                                <input type="text" id="set-operating_hours_end" class="form-control" placeholder="22:00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button type="submit" class="btn btn-primary" id="settings-save-btn">Save Changes</button>
+                                        <button type="button" class="btn btn-light" onclick="loadSettings()">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TAB: Security Policies -->
+                        <div class="card settings-panel d-none" id="panel-security">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Security Policies</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="security-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Maximum Shift Duration (hours)</label>
+                                        <input type="number" id="set-max_shift_hours" class="form-control" value="12">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Maximum Weekly Shifts per Guard</label>
+                                        <input type="number" id="set-max_weekly_shifts" class="form-control" value="6">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Late Clock-in Threshold (minutes)</label>
+                                        <input type="number" id="set-late_threshold_minutes" class="form-control" value="15">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Auto-notify Supervisor on Critical Incident</label>
+                                        <select id="set-auto_notify_critical" class="form-select">
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Minimum Guards per Site</label>
+                                        <input type="number" id="set-min_guards_per_site" class="form-control" value="2">
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button type="submit" class="btn btn-primary">Save Policies</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TAB: Notifications -->
+                        <div class="card settings-panel d-none" id="panel-notifications">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Notification Preferences</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="notifications-form">
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_incidents" checked>
+                                        <label class="form-check-label" for="set-notify_incidents">New Incident Alerts</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_schedule_changes" checked>
+                                        <label class="form-check-label" for="set-notify_schedule_changes">Schedule Change Alerts</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_clock_in" checked>
+                                        <label class="form-check-label" for="set-notify_clock_in">Guard Clock-in/Clock-out</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_sick_calls">
+                                        <label class="form-check-label" for="set-notify_sick_calls">Sick Call Notifications</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_whatsapp">
+                                        <label class="form-check-label" for="set-notify_whatsapp">WhatsApp Notifications</label>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TAB: User Management -->
+                        <div class="card settings-panel d-none" id="panel-users">
+                            <div class="card-header border-bottom border-dashed d-flex justify-content-between align-items-center">
+                                <h4 class="header-title">User Management</h4>
+                                <a href="/register" class="btn btn-primary btn-sm"><i class="ti ti-plus me-1"></i>Add User</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="bg-light-subtle">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="users-table-body">
+                                            <tr><td colspan="5" class="text-center text-muted py-3">Loading users...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB: Data & Backup -->
+                        <div class="card settings-panel d-none" id="panel-data">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Data & Backup</h4>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="mb-3">Export Data</h5>
+                                <div class="d-flex flex-wrap gap-2 mb-4">
+                                    <button class="btn btn-soft-primary" onclick="if(typeof SyntriGuard!=='undefined')SyntriGuard.downloadPDF('roster')">
+                                        <i class="ti ti-file-download me-1"></i>Guard Roster PDF
+                                    </button>
+                                    <button class="btn btn-soft-primary" onclick="if(typeof SyntriGuard!=='undefined')SyntriGuard.downloadPDF('schedule',{start:new Date().toISOString().split('T')[0],end:new Date(Date.now()+30*86400000).toISOString().split('T')[0]})">
+                                        <i class="ti ti-file-download me-1"></i>Schedule PDF
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('roster')">
+                                        <i class="ti ti-table me-1"></i>Roster to Sheets
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('schedule')">
+                                        <i class="ti ti-table me-1"></i>Schedule to Sheets
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('incidents')">
+                                        <i class="ti ti-table me-1"></i>Incidents to Sheets
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('clients')">
+                                        <i class="ti ti-table me-1"></i>Clients to Sheets
+                                    </button>
+                                </div>
+
+                                <h5 class="mb-3">Database Info</h5>
+                                <div id="db-info" class="text-muted">Loading...</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="page-container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start">
+                            <script>document.write(new Date().getFullYear())</script> © SyntriGuard - By <span class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">StynerDev</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-end footer-links d-none d-md-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+    </div>
+
+    <!-- Theme Settings -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
+        <div class="d-flex align-items-center gap-2 px-3 py-3 offcanvas-header border-bottom border-dashed">
+            <h5 class="flex-grow-1 fs-16 fw-bold mb-0">Theme Settings</h5>
+
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body p-0 h-100" data-simplebar>
+            <div class="p-3 border-bottom border-dashed">
+                <h5 class="mb-3 fs-13 text-uppercase fw-bold">Color Scheme</h5>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-check card-radio">
+                            <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-light"
+                                value="light">
+                            <label class="form-check-label p-3 w-100 d-flex justify-content-center align-items-center"
+                                for="layout-color-light">
+                                <iconify-icon icon="solar:sun-bold-duotone" class="fs-32 text-muted"></iconify-icon>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Light</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check card-radio">
+                            <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-dark"
+                                value="dark">
+                            <label class="form-check-label p-3 w-100 d-flex justify-content-center align-items-center"
+                                for="layout-color-dark">
+                                <iconify-icon icon="solar:cloud-sun-2-bold-duotone" class="fs-32 text-muted"></iconify-icon>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Dark</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 border-bottom border-dashed sidebarMode">
+                <h5 class="mb-3 fs-13 text-uppercase fw-bold">Layout Mode</h5>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-check card-radio">
+                            <input class="form-check-input" type="radio" name="data-layout-mode" id="layout-mode-fluid"
+                                value="fluid">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="layout-mode-fluid">
+                                <div>
+                                    <span class="d-flex h-100">
+                                        <span class="flex-shrink-0">
+                                            <span class="bg-light d-flex h-100 border-end flex-column p-1 px-2">
+                                                <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            </span>
+                                        </span>
+                                        <span class="flex-grow-1">
+                                            <span class="d-flex h-100 flex-column rounded-2">
+                                                <span class="bg-light d-block p-1"></span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <span class="d-flex h-100 flex-column">
+                                        <span
+                                            class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
+                                            <span class="d-block p-1 bg-dark-subtle rounded me-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                        </span>
+                                        <span class="bg-light d-block p-1"></span>
+                                    </span>
+                                </div>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Fluid</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-layout-mode" id="data-layout-detached"
+                                value="detached">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="data-layout-detached">
+                                <span class="d-flex h-100 flex-column">
+                                    <span class="bg-light d-flex p-1 align-items-center border-bottom ">
+                                        <span class="d-block p-1 bg-dark-subtle rounded me-1"></span>
+                                        <span
+                                            class="d-block border border-3 border-secondary border-opacity-25 rounded ms-auto"></span>
+                                        <span
+                                            class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                        <span
+                                            class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                        <span
+                                            class="d-block border border-3 border-secondary border-opacity-25 rounded ms-1"></span>
+                                    </span>
+                                    <span class="d-flex h-100 p-1 px-2">
+                                        <span class="flex-shrink-0">
+                                            <span class="bg-light d-flex h-100 flex-column p-1 px-2">
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                                <span
+                                                    class="d-block border border-3 border-secondary border-opacity-25 rounded w-100"></span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <span class="bg-light d-block p-1 mt-auto px-2"></span>
+                                </span>
+
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Detached</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 border-bottom border-dashed">
+                <h5 class="mb-3 fs-16 fw-bold">Menu Color</h5>
+
+                <div class="row">
+                    <div class="col-3">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-menu-color" id="sidenav-color-light"
+                                value="light">
+                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="sidenav-color-light">
+                                <span class="d-flex align-items-center justify-content-center h-100">
+                                    <span class="p-2 d-inline-flex shadow rounded-circle bg-white"></span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Light</h5>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-menu-color" id="sidenav-color-dark"
+                                value="dark">
+                            <label class="form-check-label p-0 avatar-lg w-100 bg-light" for="sidenav-color-dark">
+                                <span class="d-flex align-items-center justify-content-center h-100">
+                                    <span class="p-2 d-inline-flex shadow rounded-circle"
+                                        style="background-color: #000000;"></span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Dark</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 .border-bottom .border-dashed sidebarMode">
+                <h5 class="mb-3 fs-13 text-uppercase fw-bold">Sidebar Size</h5>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-default"
+                                value="default">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-default">
+                                <span class="d-flex h-100">
+                                    <span class="flex-shrink-0">
+                                        <span class="bg-light d-flex h-100 border-end  flex-column p-1 px-2">
+                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                        </span>
+                                    </span>
+                                    <span class="flex-grow-1">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="bg-light d-block p-1"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Default</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-compact"
+                                value="compact">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-compact">
+                                <span class="d-flex h-100">
+                                    <span class="flex-shrink-0">
+                                        <span class="bg-light d-flex h-100 border-end  flex-column p-1">
+                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                        </span>
+                                    </span>
+                                    <span class="flex-grow-1">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="bg-light d-block p-1"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Compact</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-small"
+                                value="condensed">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-small">
+                                <span class="d-flex h-100">
+                                    <span class="flex-shrink-0">
+                                        <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
+                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                        </span>
+                                    </span>
+                                    <span class="flex-grow-1">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="bg-light d-block p-1"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Condensed</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                id="sidenav-size-small-hover" value="sm-hover">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-small-hover">
+                                <span class="d-flex h-100">
+                                    <span class="flex-shrink-0">
+                                        <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
+                                            <span class="d-block p-1 bg-dark-subtle rounded mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                            <span
+                                                class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
+                                        </span>
+                                    </span>
+                                    <span class="flex-grow-1">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="bg-light d-block p-1"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Hover View</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-sidenav-size" id="sidenav-size-full"
+                                value="full">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-full">
+                                <span class="d-flex h-100">
+                                    <span class="flex-shrink-0">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="d-block p-1 bg-dark-subtle mb-1"></span>
+                                        </span>
+                                    </span>
+                                    <span class="flex-grow-1">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="bg-light d-block p-1"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Full Layout</h5>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-check sidebar-setting card-radio">
+                            <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                id="sidenav-size-fullscreen" value="fullscreen">
+                            <label class="form-check-label p-0 avatar-xl w-100" for="sidenav-size-fullscreen">
+                                <span class="d-flex h-100">
+                                    <span class="flex-grow-1">
+                                        <span class="d-flex h-100 flex-column">
+                                            <span class="bg-light d-block p-1"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                        <h5 class="fs-14 text-center text-muted mt-2">Hidden</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 border-bottom border-dashed d-none">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="fs-16 mb-0">Container Width</h5>
+
+                    <div class="btn-group radio" role="group">
+                        <input type="radio" class="btn-check" name="data-container-position" id="container-width-fixed"
+                            value="fixed">
+                        <label class="btn btn-sm btn-soft-primary w-sm" for="container-width-fixed">Full</label>
+
+                        <input type="radio" class="btn-check" name="data-container-position" id="container-width-scrollable"
+                            value="scrollable">
+                        <label class="btn btn-sm btn-soft-primary w-sm ms-0" for="container-width-scrollable">Boxed</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 border-bottom border-dashed d-none">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="fs-16 mb-0">Layout Position</h5>
+
+                    <div class="btn-group radio" role="group">
+                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-fixed"
+                            value="fixed">
+                        <label class="btn btn-sm btn-soft-primary w-sm" for="layout-position-fixed">Fixed</label>
+
+                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-scrollable"
+                            value="scrollable">
+                        <label class="btn btn-sm btn-soft-primary w-sm ms-0"
+                            for="layout-position-scrollable">Scrollable</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2 px-3 py-2 offcanvas-header border-top border-dashed">
+            <button type="button" class="btn w-50 btn-soft-danger" id="reset-layout">Reset</button>
+            <a href="javascript:void(0);" class="btn w-50 btn-soft-info">StynerDev</a>
+        </div>
+
+    </div>
+
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- SyntriGuard API Client -->
+    <script src="assets/js/api.js"></script>
+
+    <script>
+    var settingsFields = [
+        'company_name', 'registration_number', 'tax_id', 'phone',
+        'address', 'email', 'website', 'currency', 'timezone',
+        'operating_hours_start', 'operating_hours_end',
+        'max_shift_hours', 'max_weekly_shifts', 'late_threshold_minutes',
+        'auto_notify_critical', 'min_guards_per_site'
+    ];
+
+    async function loadSettings() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            if (!token) return;
+            var resp = await fetch('/api/settings', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var settings = await resp.json();
+
+            settingsFields.forEach(function(key) {
+                var el = document.getElementById('set-' + key);
+                if (el && settings[key] != null) {
+                    el.value = settings[key];
+                }
+            });
+
+            // Checkboxes
+            ['notify_incidents','notify_schedule_changes','notify_clock_in','notify_sick_calls','notify_whatsapp'].forEach(function(key) {
+                var el = document.getElementById('set-' + key);
+                if (el) el.checked = settings[key] === 'true' || settings[key] === true || settings[key] == null;
+            });
+        } catch (err) {
+            console.error('Failed to load settings:', err);
+        }
+    }
+
+    async function saveSettingsForm(formId) {
+        var successDiv = document.getElementById('settings-success');
+        var errorDiv = document.getElementById('settings-error');
+        if (successDiv) successDiv.classList.add('d-none');
+        if (errorDiv) errorDiv.classList.add('d-none');
+
+        var data = {};
+        settingsFields.forEach(function(key) {
+            var el = document.getElementById('set-' + key);
+            if (el) data[key] = el.value;
+        });
+        ['notify_incidents','notify_schedule_changes','notify_clock_in','notify_sick_calls','notify_whatsapp'].forEach(function(key) {
+            var el = document.getElementById('set-' + key);
+            if (el) data[key] = el.checked ? 'true' : 'false';
+        });
+
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/settings', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                body: JSON.stringify(data)
+            });
+            if (!resp.ok) throw new Error('Failed to save');
+            if (successDiv) { successDiv.textContent = 'Settings saved!'; successDiv.classList.remove('d-none'); }
+            setTimeout(function() { if (successDiv) successDiv.classList.add('d-none'); }, 3000);
+        } catch (err) {
+            if (errorDiv) { errorDiv.textContent = err.message; errorDiv.classList.remove('d-none'); }
+        }
+    }
+
+    async function loadUsers() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var users = await resp.json();
+            var tbody = document.getElementById('users-table-body');
+            if (!tbody) return;
+
+            var html = '';
+            users.forEach(function(u) {
+                html += '<tr>' +
+                    '<td class="fw-semibold">' + u.full_name + '</td>' +
+                    '<td>' + u.email + '</td>' +
+                    '<td><span class="badge bg-primary-subtle text-primary">' + u.role + '</span></td>' +
+                    '<td><span class="badge ' + (u.is_active ? 'bg-success' : 'bg-secondary') + '">' + (u.is_active ? 'Active' : 'Inactive') + '</span></td>' +
+                    '<td><a href="/register" class="btn btn-sm btn-soft-primary"><i class="ti ti-edit"></i></a></td>' +
+                    '</tr>';
+            });
+            tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted">No users found</td></tr>';
+        } catch (err) {
+            console.error('Failed to load users:', err);
+        }
+    }
+
+    async function loadDbInfo() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/dashboard/stats', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var stats = await resp.json();
+            var el = document.getElementById('db-info');
+            if (el) {
+                el.innerHTML = '<p class="mb-1"><strong>Guards:</strong> ' + stats.guards.total + '</p>' +
+                    '<p class="mb-1"><strong>Sites:</strong> ' + stats.sites.total + '</p>' +
+                    '<p class="mb-1"><strong>Incidents:</strong> ' + stats.incidents.total + '</p>' +
+                    '<p class="mb-1"><strong>Shifts:</strong> ' + stats.shifts.today + ' today</p>' +
+                    '<p class="mb-0"><strong>Database:</strong> Supabase PostgreSQL (Cloud)</p>';
+            }
+        } catch (err) {}
+    }
+
+    async function exportSheet(type) {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var url = '/api/sheets/' + type;
+            var body = type === 'schedule' ? { month: new Date().toISOString().substring(0, 7) } : {};
+            if (type === 'schedule') url = '/api/sheets/schedule/sync';
+            var resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                body: JSON.stringify(body)
+            });
+            var result = await resp.json();
+            if (result.url) window.open(result.url, '_blank');
+        } catch (err) { alert('Export failed: ' + err.message); }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSettings();
+
+        // Tab switching
+        document.querySelectorAll('#settings-tabs a').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs
+                document.querySelectorAll('#settings-tabs a').forEach(function(t) { t.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Hide all panels, show selected
+                document.querySelectorAll('.settings-panel').forEach(function(p) { p.classList.add('d-none'); });
+                var panel = document.getElementById('panel-' + this.getAttribute('data-tab'));
+                if (panel) panel.classList.remove('d-none');
+
+                // Load data for specific tabs
+                if (this.getAttribute('data-tab') === 'users') loadUsers();
+                if (this.getAttribute('data-tab') === 'data') loadDbInfo();
+            });
+        });
+
+        // Save forms
+        ['settings-form', 'security-form', 'notifications-form'].forEach(function(id) {
+            var form = document.getElementById(id);
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    saveSettingsForm(id);
+                });
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>

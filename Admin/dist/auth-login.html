@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Log In | SyntriGuard - Security Operations Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="SyntriGuard Security Operations Management Platform" name="description" />
+    <meta content="StynerDev" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Theme Config Js -->
+    <script src="assets/js/config.js"></script>
+
+    <!-- Vendor css -->
+    <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="auth-bg d-flex min-vh-100">
+        <div class="row g-0 justify-content-center w-100 m-xxl-5 px-xxl-4 m-3">
+            <div class="col-xxl-3 col-lg-5 col-md-6">
+                <a href="index.html" class="auth-brand d-flex justify-content-center mb-2">
+                    <img src="assets/images/logo-dark.png" alt="dark logo" height="44" class="logo-dark">
+                    <img src="assets/images/logo.png" alt="logo light" height="44" class="logo-light">
+                </a>
+
+                <p class="fw-semibold mb-4 text-center text-muted fs-15">Security Operations by StynerDev</p>
+
+                <div class="card overflow-hidden text-center p-xxl-4 p-3 mb-0">
+
+                    <h4 class="fw-semibold mb-3 fs-18">Log in to your account</h4>
+
+                    <form id="login-form" class="text-start mb-3" autocomplete="off">
+                        <div id="login-error" class="alert alert-danger d-none" role="alert"></div>
+                        <div id="login-success" class="alert alert-success d-none" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="login-email">Email</label>
+                            <input type="email" id="login-email" name="sg_email" class="form-control"
+                                placeholder="Enter your email" autocomplete="username" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="login-password">Password</label>
+                            <div class="input-group">
+                                <input type="password" id="login-password" name="sg_password" class="form-control"
+                                    placeholder="Enter your password" autocomplete="current-password" required>
+                                <button class="btn btn-light" type="button" id="toggle-password">
+                                    <i class="ti ti-eye fs-16" id="toggle-password-icon"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkbox-signin">
+                                <label class="form-check-label" for="checkbox-signin">Remember me</label>
+                            </div>
+
+                            <a href="auth-recoverpw.html" class="text-muted border-bottom border-dashed">Forget
+                                Password</a>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary fw-semibold" type="submit" id="login-btn">Login</button>
+                        </div>
+                    </form>
+
+                    <p class="text-muted fs-14 mb-0">Don't have an account?
+                        <a href="/register" class="fw-semibold text-danger ms-1">Sign Up !</a>
+                    </p>
+
+                </div>
+                <p class="mt-4 text-center mb-0">
+                    <script>document.write(new Date().getFullYear())</script> © SyntriGuard - By <span
+                        class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">StynerDev</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- SyntriGuard API Client -->
+    <script src="assets/js/api.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // If already logged in, redirect to dashboard
+        if (typeof SyntriGuard !== 'undefined' && SyntriGuard.isLoggedIn()) {
+            window.location.href = '/dashboard';
+            return;
+        }
+
+        // Clear any old autofill
+        document.getElementById('login-email').value = '';
+        document.getElementById('login-password').value = '';
+
+        // Toggle password visibility
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            var input = document.getElementById('login-password');
+            var icon = document.getElementById('toggle-password-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('ti-eye');
+                icon.classList.add('ti-eye-off');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('ti-eye-off');
+                icon.classList.add('ti-eye');
+            }
+        });
+
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('login-btn');
+            var errorDiv = document.getElementById('login-error');
+            var successDiv = document.getElementById('login-success');
+            var email = document.getElementById('login-email').value.trim();
+            var password = document.getElementById('login-password').value;
+
+            if (!email || !password) {
+                errorDiv.textContent = 'Please enter your email and password';
+                errorDiv.classList.remove('d-none');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Logging in...';
+            errorDiv.classList.add('d-none');
+
+            try {
+                var result = await SyntriGuard.login(email, password);
+                if (result && result.token) {
+                    successDiv.textContent = 'Welcome, ' + result.user.name + '!';
+                    successDiv.classList.remove('d-none');
+                    setTimeout(function() {
+                        window.location.href = '/dashboard';
+                    }, 500);
+                } else {
+                    throw new Error('Invalid credentials');
+                }
+            } catch(err) {
+                errorDiv.textContent = err.message || 'Invalid email or password';
+                errorDiv.classList.remove('d-none');
+                btn.disabled = false;
+                btn.textContent = 'Login';
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>

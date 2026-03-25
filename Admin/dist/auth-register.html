@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Add Guard | SyntriGuard - Security Operations Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="SyntriGuard Security Operations Management Platform" name="description" />
+    <meta content="StynerDev" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Theme Config Js -->
+    <script src="assets/js/config.js"></script>
+
+    <!-- Vendor css -->
+    <link href="assets/css/vendor.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- App css -->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div class="auth-bg d-flex min-vh-100">
+        <div class="row g-0 justify-content-center w-100 m-xxl-5 px-xxl-4 m-3">
+            <div class="col-xxl-4 col-lg-6 col-md-8">
+                <a href="/dashboard" class="auth-brand d-flex justify-content-center mb-2">
+                    <img src="assets/images/logo-dark.png" alt="dark logo" height="44" class="logo-dark">
+                    <img src="assets/images/logo.png" alt="logo light" height="44" class="logo-light">
+                </a>
+
+                <p class="fw-semibold mb-4 text-center text-muted fs-15">Security Operations by StynerDev</p>
+
+                <div class="card overflow-hidden p-xxl-4 p-3 mb-0">
+
+                    <h4 class="fw-semibold mb-3 fs-18 text-center">Add New Guard / User</h4>
+
+                    <form id="register-form" class="text-start mb-3" autocomplete="off" enctype="multipart/form-data">
+                        <div id="register-error" class="alert alert-danger d-none" role="alert"></div>
+                        <div id="register-success" class="alert alert-success d-none" role="alert"></div>
+
+                        <!-- Profile Photo -->
+                        <div class="text-center mb-3">
+                            <div class="position-relative d-inline-block">
+                                <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" id="avatar-preview" class="rounded-circle" width="80" height="80" alt="Profile">
+                                <label for="reg-avatar" class="position-absolute bottom-0 end-0 btn btn-sm btn-primary btn-icon rounded-circle">
+                                    <i class="ti ti-camera fs-14"></i>
+                                </label>
+                                <input type="file" id="reg-avatar" class="d-none" accept="image/*">
+                            </div>
+                            <p class="text-muted fs-13 mt-1 mb-0">Click camera to upload photo</p>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="reg-name">Full Name</label>
+                                <input type="text" id="reg-name" name="full_name" class="form-control"
+                                    placeholder="Enter full name" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="reg-email">Email</label>
+                                <input type="email" id="reg-email" name="email" class="form-control"
+                                    placeholder="Enter email" autocomplete="off" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="reg-password">Password</label>
+                                <div class="input-group">
+                                    <input type="password" id="reg-password" name="password" class="form-control"
+                                        placeholder="Min 6 characters" autocomplete="new-password" required>
+                                    <button class="btn btn-light" type="button" onclick="var i=document.getElementById('reg-password');var ic=this.querySelector('i');if(i.type==='password'){i.type='text';ic.classList.remove('ti-eye');ic.classList.add('ti-eye-off');}else{i.type='password';ic.classList.remove('ti-eye-off');ic.classList.add('ti-eye');}">
+                                        <i class="ti ti-eye fs-16"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="reg-role">Role</label>
+                                <select id="reg-role" name="role" class="form-select">
+                                    <option value="guard">Guard</option>
+                                    <option value="operator">Operator / Supervisor</option>
+                                    <option value="client">Client</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="reg-phone">Phone</label>
+                                <input type="text" id="reg-phone" name="phone" class="form-control"
+                                    placeholder="+597 861-XXXX">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="reg-site">Assigned Site</label>
+                                <select id="reg-site" name="site" class="form-select">
+                                    <option value="">None / Unassigned</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="reg-notes">Notes</label>
+                            <textarea id="reg-notes" class="form-control" rows="2" placeholder="Any additional notes..."></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="checkbox-terms" required>
+                                <label class="form-check-label" for="checkbox-terms">I agree to all <a href="#!"
+                                        class="link-dark text-decoration-underline">Terms & Conditions</a></label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <a href="/guards" class="btn btn-light flex-grow-1">Cancel</a>
+                            <button class="btn btn-primary fw-semibold flex-grow-1" type="submit" id="register-btn">Create Account</button>
+                        </div>
+                    </form>
+
+                    <p class="text-muted fs-14 mb-0 text-center">Already have an account? <a href="/login"
+                            class="fw-semibold text-danger ms-1">Login !</a></p>
+                </div>
+                <p class="mt-4 text-center mb-0">
+                    <script>document.write(new Date().getFullYear())</script> © SyntriGuard - By <span
+                        class="fw-bold text-decoration-underline text-uppercase text-reset fs-12">StynerDev</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
+
+    <!-- SyntriGuard API Client -->
+    <script src="assets/js/api.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        // Load sites dropdown
+        try {
+            var token = localStorage.getItem('sg_token');
+            if (token) {
+                var resp = await fetch('/api/sites', { headers: { 'Authorization': 'Bearer ' + token } });
+                var sites = await resp.json();
+                var sel = document.getElementById('reg-site');
+                if (sites && sites.length) {
+                    sites.forEach(function(s) {
+                        var opt = document.createElement('option');
+                        opt.value = s.id;
+                        opt.textContent = s.name;
+                        sel.appendChild(opt);
+                    });
+                }
+            }
+        } catch(e) {}
+
+        // Avatar preview
+        document.getElementById('reg-avatar').addEventListener('change', function(e) {
+            var file = e.target.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(ev) {
+                    document.getElementById('avatar-preview').src = ev.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Form submit
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('register-btn');
+            var errorDiv = document.getElementById('register-error');
+            var successDiv = document.getElementById('register-success');
+
+            var name = document.getElementById('reg-name').value.trim();
+            var email = document.getElementById('reg-email').value.trim();
+            var password = document.getElementById('reg-password').value;
+            var role = document.getElementById('reg-role').value;
+            var phone = document.getElementById('reg-phone').value.trim();
+            var siteId = document.getElementById('reg-site').value;
+            var notes = document.getElementById('reg-notes').value.trim();
+            var avatarFile = document.getElementById('reg-avatar').files[0];
+
+            if (!name || !email || !password) {
+                errorDiv.textContent = 'Please fill in Name, Email, and Password';
+                errorDiv.classList.remove('d-none');
+                return;
+            }
+            if (password.length < 6) {
+                errorDiv.textContent = 'Password must be at least 6 characters';
+                errorDiv.classList.remove('d-none');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Creating account...';
+            errorDiv.classList.add('d-none');
+
+            try {
+                // Step 1: Create the user account
+                var response = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, password: password, full_name: name, role: role })
+                });
+                var data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Registration failed');
+
+                var userId = data.id;
+
+                // Step 2: If guard role, update guard with phone, site, notes
+                if (role === 'guard' && (phone || siteId || notes)) {
+                    try {
+                        var token = localStorage.getItem('sg_token');
+                        // Find the guard that was auto-created
+                        var guardsResp = await fetch('/api/guards', { headers: { 'Authorization': 'Bearer ' + token } });
+                        var guards = await guardsResp.json();
+                        var newGuard = guards.find(function(g) { return g.user_id === userId; });
+                        if (newGuard) {
+                            await fetch('/api/guards/' + newGuard.id, {
+                                method: 'PUT',
+                                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                                body: JSON.stringify({
+                                    full_name: name,
+                                    role: newGuard.role,
+                                    phone: phone || newGuard.phone,
+                                    assigned_site_id: siteId || null,
+                                    notes: notes,
+                                    status: 'active'
+                                })
+                            });
+                        }
+                    } catch(guardErr) {
+                        console.error('Guard update failed:', guardErr);
+                    }
+                }
+
+                // Step 3: Upload avatar if provided
+                if (avatarFile) {
+                    try {
+                        var token = localStorage.getItem('sg_token');
+                        var formData = new FormData();
+                        formData.append('avatar', avatarFile);
+                        formData.append('user_id', userId);
+                        await fetch('/api/uploads/avatar', {
+                            method: 'POST',
+                            headers: { 'Authorization': 'Bearer ' + token },
+                            body: formData
+                        });
+                    } catch(avatarErr) {
+                        console.error('Avatar upload failed:', avatarErr);
+                    }
+                }
+
+                successDiv.textContent = 'Account created for ' + data.full_name + '!';
+                successDiv.classList.remove('d-none');
+
+                setTimeout(function() {
+                    window.location.href = '/guards';
+                }, 1500);
+            } catch(err) {
+                errorDiv.textContent = err.message || 'Registration failed';
+                errorDiv.classList.remove('d-none');
+                btn.disabled = false;
+                btn.textContent = 'Create Account';
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>
