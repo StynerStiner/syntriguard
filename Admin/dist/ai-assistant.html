@@ -651,35 +651,23 @@
                                         <i class="ti ti-chevrons-left fs-20"></i>
                                     </a>
 
-                                    <button class="btn btn-sm btn-icon btn-ghost-light text-dark d-xl-none d-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#chatUserList" aria-controls="chatUserList">
+                                    <button class="btn btn-icon btn-ghost-light text-dark d-xl-none d-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#chatUserList" aria-controls="chatUserList">
                                         <i class="ti ti-menu-2 fs-20"></i>
                                     </button>
 
-                                    <div class="avatar-lg rounded-circle bg-light d-flex align-items-center justify-content-center">
-                                        <img src="assets/images/logo-sm.png" height="22" alt="AI">
-                                    </div>
+                                    <img src="assets/images/logo-sm.png" height="28" alt="AI" class="rounded-circle">
 
                                     <div>
-                                        <h5 class="my-0 lh-base">
-                                            <a href="#" class="text-reset">SyntriGuard AI</a>
-                                        </h5>
-                                        <p class="mb-0 text-muted">
-                                            <small class="ti ti-circle-filled text-success"></small> Online — Ready
-                                        </p>
+                                        <h6 class="my-0 lh-base">SyntriGuard AI</h6>
+                                        <span class="text-success"><i class="ti ti-circle-filled fs-10"></i></span>
+                                        <span class="text-muted">Online</span>
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-center gap-2">
-                                    <a href="javascript: void(0);" class="btn btn-sm btn-icon btn-ghost-primary d-none d-xl-flex" data-bs-toggle="modal" data-bs-target="#userCall" data-bs-toggle="tooltip" data-bs-placement="top" title="Voice Call">
-                                        <i class="ti ti-phone-call fs-20"></i>
-                                    </a>
-                                    <a href="javascript: void(0);" class="btn btn-sm btn-icon btn-ghost-primary d-none d-xl-flex" data-bs-toggle="modal" data-bs-target="#userVideoCall" data-bs-toggle="tooltip" data-bs-placement="top" title="Video Call">
-                                        <i class="ti ti-video fs-20"></i>
-                                    </a>
-
-                                    <a href="javascript: void(0);" class="btn btn-sm btn-icon btn-ghost-primary d-xl-flex">
-                                        <i class="ti ti-info-circle fs-20"></i>
-                                    </a>
+                                <div class="d-flex align-items-center gap-1">
+                                    <button class="btn btn-icon btn-ghost-primary" id="btn-new-chat-mobile" title="New chat">
+                                        <i class="ti ti-plus fs-20"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -810,8 +798,8 @@
                                 <form class="position-relative w-100" name="chat-form" id="chat-form">
                                     <textarea name="message" id="ai-chat-input" class="form-control rounded-pill pe-5" placeholder="Ask SyntriGuard AI" required rows="1"></textarea>
                                     <div class="position-absolute end-0 top-50 translate-middle-y d-flex align-items-center gap-1 me-2">
-                                        <button type="button" class="btn btn-icon btn-ghost-primary p-0" id="btn-voice-input" title="Voice input">
-                                            <i class="ti ti-microphone fs-20"></i>
+                                        <button type="button" class="btn btn-icon p-0 text-muted" id="btn-voice-input" title="Voice input">
+                                            <i class="ti ti-microphone fs-20" id="mic-icon"></i>
                                         </button>
                                         <button type="submit" class="btn btn-icon btn-success rounded-circle chat-send">
                                             <i class="ti ti-send fs-18"></i>

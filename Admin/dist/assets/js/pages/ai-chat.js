@@ -535,6 +535,14 @@ class AIChatApp {
             });
         }
 
+        // Mobile new chat button
+        var newChatMobile = document.getElementById('btn-new-chat-mobile');
+        if (newChatMobile) {
+            newChatMobile.addEventListener('click', function() {
+                self.startNewConversation();
+            });
+        }
+
         // Search conversations
         var searchInput = document.getElementById('search-conversations');
         if (searchInput) {
@@ -611,22 +619,20 @@ var recognition = null;
 
 function setMicOff() {
     isListening = false;
-    if (voiceBtn) {
-        voiceBtn.innerHTML = '<i class="ti ti-microphone fs-20"></i>';
-        voiceBtn.classList.remove('btn-danger', 'btn-soft-danger', 'text-danger');
-        voiceBtn.classList.add('btn-ghost-primary');
-    }
+    var icon = document.getElementById('mic-icon');
+    if (voiceBtn) voiceBtn.classList.remove('text-primary', 'text-danger');
+    if (voiceBtn) voiceBtn.classList.add('text-muted');
+    if (icon) { icon.className = 'ti ti-microphone fs-20'; }
     if (voiceStatus) voiceStatus.classList.add('d-none');
 }
 
 function setMicOn() {
     isListening = true;
     stoppedManually = false;
-    if (voiceBtn) {
-        voiceBtn.innerHTML = '<i class="ti ti-microphone-off fs-20 text-white"></i>';
-        voiceBtn.classList.remove('btn-ghost-primary');
-        voiceBtn.classList.add('btn-danger');
-    }
+    var icon = document.getElementById('mic-icon');
+    if (voiceBtn) voiceBtn.classList.remove('text-muted', 'text-danger');
+    if (voiceBtn) voiceBtn.classList.add('text-primary');
+    if (icon) { icon.className = 'ti ti-microphone fs-20'; }
     if (voiceStatus) voiceStatus.classList.remove('d-none');
 }
 
