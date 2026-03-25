@@ -64,20 +64,14 @@
 
                 <!-- Month/Year Jump -->
                 <div class="card mb-2">
-                    <div class="card-body py-2 px-3 text-center">
-                        <div class="btn-group">
-                            <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle h-100" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button>
-                                <div class="dropdown-menu" id="cal-month-menu"></div>
-                            </div>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle h-100" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button>
-                                <div class="dropdown-menu" id="cal-year-menu"></div>
-                            </div>
-                            <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
-                            <button class="btn btn-primary" id="cal-today-btn"><i class="ti ti-calendar-event d-sm-none"></i><span class="d-none d-sm-inline">Today</span></button>
-                        </div>
+                    <div class="card-body py-2 px-2">
+                        <table class="w-100"><tr>
+                            <td class="text-center" style="width:15%"><button class="btn btn-light w-100" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button></td>
+                            <td class="text-center px-1"><div class="dropdown"><button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button><div class="dropdown-menu" id="cal-month-menu"></div></div></td>
+                            <td class="text-center px-1"><div class="dropdown"><button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button><div class="dropdown-menu" id="cal-year-menu"></div></div></td>
+                            <td class="text-center" style="width:15%"><button class="btn btn-light w-100" id="cal-next-month"><i class="ti ti-chevron-right"></i></button></td>
+                            <td class="text-center" style="width:20%"><button class="btn btn-primary w-100" id="cal-today-btn">Today</button></td>
+                        </tr></table>
                     </div>
                 </div>
 
