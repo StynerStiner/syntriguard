@@ -1,0 +1,65 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "Deployment Map"})
+
+    <!-- leaflet Css -->
+    <link href="assets/vendor/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include("./partials/menu.html", {"title": "Deployment Map"})
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header border-bottom border-dashed d-flex align-items-center">
+                                <h4 class="header-title">Guard Deployment Map — Suriname</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="leaflet-map" id="basicMap" style="height: 600px;"></div>
+                            </div>
+                        </div> <!-- end card-->
+                    </div>
+                </div>
+            </div> <!-- container -->
+
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <!-- leaflet plugin -->
+    <script src="assets/vendor/leaflet/leaflet.js"></script>
+
+    <!-- leaflet map -->
+    <script src="assets/js/components/maps-leaflet.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,288 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "AI Assistant"})
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include("./partials/menu.html", {"title": "AI Assistant"})
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="page-content">
+            <div class="page-container">
+
+                <div class="chat d-flex gap-2">
+                    <div class="offcanvas-xxl offcanvas-start" tabindex="-1" id="chatUserList" aria-labelledby="chatUserListLabel">
+                        <div id="chat-user-list" class="card collapse collapse-horizontal show">
+                            <div class="chat-user-list">
+                                <div class="card-body py-2 px-3 border-bottom">
+                                    <div class="d-flex align-items-center gap-2 py-1">
+                                        <div class="chat-users">
+                                            <div class="avatar-lg chat-avatar-online">
+                                                <div class="h-100 w-100 rounded-circle bg-light d-flex align-items-center justify-content-center">
+                                                    <img src="assets/images/logo-sm.png" height="28" alt="AI">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-0">
+                                                <a href="#!" class="text-reset lh-base">SyntriGuard AI</a>
+                                            </h5>
+                                            <p class="mb-0 fs-13 text-muted">Security Operations Assistant</p>
+                                        </div>
+                                        <button type="button" class="flex-grow-0 btn btn-sm btn-icon btn-soft-danger d-xl-none" data-bs-dismiss="offcanvas" data-bs-target="#chatUserList" aria-label="Close">
+                                            <i class="ti ti-x fs-20"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- New Conversation Button -->
+                                <div class="px-3 pt-2 pb-1">
+                                    <button class="btn btn-primary w-100" id="btn-new-conversation">
+                                        <i class="ti ti-plus me-1"></i> New Conversation
+                                    </button>
+                                </div>
+
+                                <!-- Search Conversations -->
+                                <div class="px-3 pb-2">
+                                    <div class="position-relative">
+                                        <input type="text" class="form-control form-control-sm" id="search-conversations" placeholder="Search conversations...">
+                                    </div>
+                                </div>
+
+                                <!-- Quick Actions & Recent Conversations -->
+                                <div class="d-flex flex-column" style="height: calc(100vh - 280px); overflow: hidden;">
+                                    <div class="users-list position-relative" data-simplebar style="height: 100%; overflow-y: auto;">
+                                        <hr class="my-0 mx-3">
+
+                                        <div class="d-flex align-items-center px-3 py-2">
+                                            <iconify-icon icon="solar:chat-line-bold-duotone" class="fs-18 text-muted"></iconify-icon>
+                                            <h5 class="mb-0 ms-1 fw-semibold fs-14">Recent Conversations</h5>
+                                        </div>
+
+                                        <!-- Conversations loaded dynamically by ai-chat.js -->
+                                        <div id="conversations-list">
+                                            <div class="text-center py-3 text-muted fs-13">Loading conversations...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Quick Actions & Recent Conversations -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card chat-content d-flex flex-column" style="min-height: calc(100vh - 180px);">
+                        <div class="card-header py-2 px-3 border-bottom">
+                            <div class="d-flex align-items-center justify-content-between py-1">
+                                <div class="d-flex align-items-center gap-2">
+
+                                    <a href="#" class="btn btn-sm btn-icon btn-soft-primary d-none d-xl-flex me-2" data-bs-toggle="collapse" data-bs-target="#chat-user-list" aria-expanded="true">
+                                        <i class="ti ti-chevrons-left fs-20"></i>
+                                    </a>
+
+                                    <button class="btn btn-sm btn-icon btn-ghost-light text-dark d-xl-none d-flex" type="button" data-bs-toggle="offcanvas" data-bs-target="#chatUserList" aria-controls="chatUserList">
+                                        <i class="ti ti-menu-2 fs-20"></i>
+                                    </button>
+
+                                    <div class="avatar-lg rounded-circle bg-light d-flex align-items-center justify-content-center">
+                                        <img src="assets/images/logo-sm.png" height="22" alt="AI">
+                                    </div>
+
+                                    <div>
+                                        <h5 class="my-0 lh-base">
+                                            <a href="#" class="text-reset">SyntriGuard AI</a>
+                                        </h5>
+                                        <p class="mb-0 text-muted">
+                                            <small class="ti ti-circle-filled text-success"></small> Online — Ready
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <a href="javascript: void(0);" class="btn btn-sm btn-icon btn-ghost-primary d-none d-xl-flex" data-bs-toggle="modal" data-bs-target="#userCall" data-bs-toggle="tooltip" data-bs-placement="top" title="Voice Call">
+                                        <i class="ti ti-phone-call fs-20"></i>
+                                    </a>
+                                    <a href="javascript: void(0);" class="btn btn-sm btn-icon btn-ghost-primary d-none d-xl-flex" data-bs-toggle="modal" data-bs-target="#userVideoCall" data-bs-toggle="tooltip" data-bs-placement="top" title="Video Call">
+                                        <i class="ti ti-video fs-20"></i>
+                                    </a>
+
+                                    <a href="javascript: void(0);" class="btn btn-sm btn-icon btn-ghost-primary d-xl-flex">
+                                        <i class="ti ti-info-circle fs-20"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <div class="chat-scroll p-3" data-simplebar data-apps-chat="messages-scroll-wrapper">
+                                <ul class="chat-list" data-apps-chat="messages-list">
+                                    <li class="chat-group" id="even-1">
+                                        <div class="avatar-sm rounded-circle bg-light d-flex align-items-center justify-content-center">
+                                            <img src="assets/images/logo-sm.png" height="18" alt="AI">
+                                        </div>
+
+                                        <div class="chat-body">
+                                            <div>
+                                                <h6 class="d-inline-flex">SyntriGuard AI.</h6>
+                                                <h6 class="d-inline-flex text-muted">07:00am</h6>
+                                            </div>
+
+                                            <div class="chat-message">
+                                                <p>Good morning. Here's your operations briefing for today:<br><br>
+                                                    &bull; 12 shifts scheduled (6 morning, 4 afternoon, 2 overnight)<br>
+                                                    &bull; 48 guards active, 3 unassigned<br>
+                                                    &bull; 1 open critical incident at Presidential Palace<br>
+                                                    &bull; All 7 sites reporting normal except Palace (elevated alert)</p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="chat-group odd" id="odd-1">
+                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" class="avatar-sm rounded-circle" alt="avatar-1" />
+
+                                        <div class="chat-body">
+                                            <div>
+                                                <h6 class="d-inline-flex">You.</h6>
+                                                <h6 class="d-inline-flex text-muted">07:02am</h6>
+                                            </div>
+
+                                            <div class="chat-message">
+                                                <p>What's the status on the Presidential Palace incident?</p>
+
+                                                <div class="chat-actions dropdown">
+                                                    <button class="btn btn-sm btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="ti ti-dots-vertical"></i>
+                                                    </button>
+
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#"><i class="ti ti-copy fs-14 align-text-top me-1"></i>
+                                                            Copy Message</a>
+                                                        <a class="dropdown-item" href="#"><i class="ti ti-edit-circle fs-14 align-text-top me-1"></i>
+                                                            Edit</a>
+                                                        <a class="dropdown-item" href="#" data-dismissible="#odd-1"><i class="ti ti-trash fs-14 align-text-top me-1"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="chat-group" id="even-2">
+                                        <div class="avatar-sm rounded-circle bg-light d-flex align-items-center justify-content-center">
+                                            <img src="assets/images/logo-sm.png" height="18" alt="AI">
+                                        </div>
+
+                                        <div class="chat-body">
+                                            <div>
+                                                <h6 class="d-inline-flex">SyntriGuard AI.</h6>
+                                                <h6 class="d-inline-flex text-muted">07:02am</h6>
+                                            </div>
+
+                                            <div class="chat-message">
+                                                <p><strong>Incident #52 — Unauthorized Entry Attempt</strong><br><br>
+                                                    Filed: Today at 06:14 AM by Marcus Redan<br>
+                                                    Severity: Critical | Status: Open<br><br>
+                                                    Details: Unidentified individual attempted rear gate access during shift change. Guard responded within 90 seconds. Individual fled on foot. CCTV footage captured and saved. Police notified at 06:18 AM.<br><br>
+                                                    <strong>Recommendation:</strong> Increase rear gate coverage during shift transitions. I can draft a schedule adjustment if you approve.</p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="chat-group odd" id="odd-2">
+                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" class="avatar-sm rounded-circle" alt="avatar-1" />
+
+                                        <div class="chat-body">
+                                            <div>
+                                                <h6 class="d-inline-flex">You.</h6>
+                                                <h6 class="d-inline-flex text-muted">07:04am</h6>
+                                            </div>
+
+                                            <div class="chat-message">
+                                                <p>Yes, draft the schedule adjustment and notify Marcus.</p>
+
+                                                <div class="chat-actions dropdown">
+                                                    <button class="btn btn-sm btn-link" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="ti ti-dots-vertical"></i>
+                                                    </button>
+
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#"><i class="ti ti-copy fs-14 align-text-top me-1"></i>
+                                                            Copy Message</a>
+                                                        <a class="dropdown-item" href="#"><i class="ti ti-edit-circle fs-14 align-text-top me-1"></i>
+                                                            Edit</a>
+                                                        <a class="dropdown-item" href="#" data-dismissible="#odd-2"><i class="ti ti-trash fs-14 align-text-top me-1"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="chat-group" id="even-3">
+                                        <div class="avatar-sm rounded-circle bg-light d-flex align-items-center justify-content-center">
+                                            <img src="assets/images/logo-sm.png" height="18" alt="AI">
+                                        </div>
+
+                                        <div class="chat-body">
+                                            <div>
+                                                <h6 class="d-inline-flex">SyntriGuard AI.</h6>
+                                                <h6 class="d-inline-flex text-muted">07:05am</h6>
+                                            </div>
+
+                                            <div class="chat-message">
+                                                <p>Done. I've drafted a revised schedule adding overlapping coverage at the rear gate during all shift transitions (05:45-06:30, 13:45-14:30, 21:45-22:30). Marcus Redan has been notified via the messaging system. Would you like me to also flag this pattern for the weekly security review?</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="px-3 pt-5 pb-5 border-top w-100 mb-0 d-flex align-items-center">
+                                <form class="d-flex align-items-center gap-2 w-100" name="chat-form" id="chat-form">
+
+                                    <div>
+                                        <button type="button" class="btn btn-icon btn-soft-warning">
+                                            <iconify-icon icon="solar:smile-circle-outline" class="fs-20"></iconify-icon>
+                                        </button>
+                                    </div>
+
+                                    <input type="text" name="message" id="chat-form" class="form-control rounded-3" placeholder="Ask SyntriGuard AI anything..." required style="padding: 16px 18px; height: 54px;">
+
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="submit" class="btn btn-icon btn-success chat-send"><i class='ti ti-send'></i></button>
+                                        <a href="#" class="btn btn-icon btn-soft-primary d-none d-md-inline-flex"><i class="ti ti-microphone"></i> </a>
+                                        <a href="#" class="btn btn-icon btn-soft-primary d-none d-md-inline-flex"><i class="ti ti-paperclip"></i></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- container -->
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <script src="assets/js/pages/ai-chat.js"></script>
+
+</body>
+
+</html>

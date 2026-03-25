@@ -1,0 +1,803 @@
+@@include('./partials/html.html')
+
+    <head>
+        @@include("./partials/title-meta.html", {"title": "Dashboard"})
+
+        @@include('./partials/head-css.html')
+    </head>
+
+    <body>
+        <!-- Begin page -->
+        <div class="wrapper">
+
+            @@include("./partials/menu.html", {"title":"Dashboard"})
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+            <div class="page-content">
+                <div class="page-container">
+
+                    <div class="row row-cols-xxl-4 row-cols-md-2 row-cols-1">
+                        <div class="col">
+                            <div class="card">
+                                <div class="d-flex card-header justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="header-title">Active Guards</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle drop-arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill fs-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/guards" class="dropdown-item">View All Guards</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Export a full guard roster report')">Export Report</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Analyze guard performance and deployment')">Guard Analysis</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0">
+                                    <div class="d-flex align-items-center gap-2 justify-content-between">
+                                        <span class="badge bg-primary rounded-pill fs-13">+3 <i class="ti ti-trending-up"></i> </span>
+                                        <div class="text-end">
+                                            <h3 class="fw-semibold">48</h3>
+                                            <p class="text-muted mb-0">+3 this week</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress progress-soft progress-sm mt-3">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="d-flex card-header justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="header-title">Shifts Today</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle drop-arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill fs-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/scheduler" class="dropdown-item">View Schedule</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Export this week shift schedule to Google Sheets')">Export Report</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Analyze shift coverage and identify gaps')">Shift Analysis</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0">
+                                    <div class="d-flex align-items-center gap-2 justify-content-between">
+                                        <span class="badge bg-success rounded-pill fs-13">50% <i class="ti ti-trending-up"></i> </span>
+                                        <div class="text-end">
+                                            <h3 class="fw-semibold">12</h3>
+                                            <p class="text-muted mb-0">6 completed, 6 upcoming</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress progress-soft progress-sm mt-3">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="d-flex card-header justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="header-title">Active Sites</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle drop-arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill fs-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/clients" class="dropdown-item">View All Sites</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Export all site data to Google Sheets')">Export Data</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Analyze site security coverage and deployment')">Site Analysis</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0">
+                                    <div class="d-flex align-items-center gap-2 justify-content-between">
+                                        <span class="badge bg-warning rounded-pill fs-13">+2 <i class="ti ti-trending-up"></i> </span>
+                                        <div class="text-end">
+                                            <h3 class="fw-semibold">7</h3>
+                                            <p class="text-muted mb-0">2 new this month</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress progress-soft progress-sm mt-3">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="d-flex card-header justify-content-between align-items-center">
+                                    <div>
+                                        <h4 class="header-title">Open Incidents</h4>
+                                    </div>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle drop-arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill fs-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/incidents" class="dropdown-item">View Incidents</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Export all incidents to Google Sheets')">Export Data</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Analyze incident trends and patterns')">Incident Analysis</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0">
+                                    <div class="d-flex align-items-center gap-2 justify-content-between">
+                                        <span class="badge bg-info rounded-pill fs-13">1 critical <i class="ti ti-trending-down"></i> </span>
+                                        <div class="text-end">
+                                            <h3 class="fw-semibold">3</h3>
+                                            <p class="text-muted mb-0">1 critical</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress progress-soft progress-sm mt-3">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="col-xxl-8 col-xl-12">
+                            <div class="card">
+                                <div class="d-flex card-header justify-content-between align-items-center border-bottom border-dashed">
+                                    <h4 class="header-title">Shift Coverage Overview</h4>
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle drop-arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ri-more-2-fill fs-18"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Generate a shift coverage report for this month')">Coverage Report</a>
+                                            <a href="javascript:void(0);" class="dropdown-item" onclick="sgQuickAction('Export shift coverage data to Google Sheets')">Export Report</a>
+                                            <a href="/scheduler" class="dropdown-item">View Schedule</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body p-0 pt-1">
+                                    <div dir="ltr" class="px-2">
+                                        <div id="revenue-chart" class="apex-charts" data-colors="#1478f0,#f83f32,#30cf46"></div>
+                                    </div>
+
+                                    <div class="border-top border-dashed mt-2">
+                                        <div class="row text-center align-items-center g-0">
+                                            <div class="col-md-4 col-12">
+                                                <p class="text-muted mt-3 mb-1">Scheduled</p>
+                                                <h4 class="mb-3">
+                                                    <span>84 shifts</span>
+                                                </h4>
+                                            </div>
+                                            <div class="col-md-4 col-6 border-start border-end border-dashed">
+                                                <p class="text-muted mt-3 mb-1">Completed</p>
+                                                <h4 class="mb-3">
+                                                    <span class="ri-arrow-left-down-box-line text-success me-1"></span>
+                                                    <span>78 shifts</span>
+                                                </h4>
+                                            </div>
+                                            <div class="col-md-4 col">
+                                                <p class="text-muted mt-3 mb-1">Missed</p>
+                                                <h4 class="mb-3">
+                                                    <span class="ri-arrow-left-up-box-line text-danger me-1"></span>
+                                                    <span>6 shifts</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                        <div class="col-xxl-4 col-xl-6">
+                            <div class="card">
+                                <div class="card-header d-flex flex-wrap align-items-center justify-content-between gap-2 border-bottom border-dashed">
+                                    <h4 class="header-title">Guard Deployment</h4>
+
+                                    <div class="d-flex gap-2 justify-content-end text-end">
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-light" id="btn-refresh-deployment">Refresh <i class="ri-refresh-line ms-1"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body pt-2">
+                                    <div dir="ltr">
+                                        <div id="data-visits-chart" class="apex-charts" data-colors="#1478f0,#faae37,#30cf46,#4bbee1"></div>
+
+                                        <div class="row mt-3">
+                                            <div class="col">
+                                                <div class="d-flex justify-content-between align-items-center p-1">
+                                                    <div>
+                                                        <i class="ri-circle-fill fs-12 align-middle me-1 text-primary"></i>
+                                                        <span class="align-middle fw-semibold">On Duty</span>
+                                                    </div>
+                                                    <span class="fw-semibold text-muted float-end"><i class="ri-arrow-up-s-fill text-success"></i> 28</span>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between align-items-center p-1">
+                                                    <div>
+                                                        <i class="ri-circle-fill fs-12 text-secondary align-middle me-1"></i>
+                                                        <span class="align-middle fw-semibold">Off Duty</span>
+                                                    </div>
+                                                    <span class="fw-semibold text-muted float-end"><i class="ri-arrow-down-s-fill text-danger"></i> 12</span>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="d-flex justify-content-between align-items-center p-1">
+                                                    <div>
+                                                        <i class="ri-circle-fill fs-12 text-success align-middle me-1"></i>
+                                                        <span class="align-middle fw-semibold">On Leave</span>
+                                                    </div>
+                                                    <span class="fw-semibold text-muted float-end"><i class="ri-arrow-down-s-fill text-danger"></i> 5</span>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between align-items-center p-1">
+                                                    <div>
+                                                        <i class="ri-circle-fill fs-12 text-info align-middle me-1"></i>
+                                                        <span class="align-middle fw-semibold">Unassigned</span>
+                                                    </div>
+                                                    <span class="fw-semibold text-muted float-end"><i class="ri-arrow-down-s-fill text-danger"></i> 3</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                    </div> <!-- end row-->
+
+                    <div class="row row-cols-xxl-5 row-cols-md-2 row-cols-1">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center gap-2">
+                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="team-member-image" class="me-1 avatar-xl img-thumbnail rounded-circle">
+                                    <div>
+                                        <h5>Marcus Redan</h5>
+                                        <p class="text-muted">Lead Guard</p>
+                                        <p class="m-0 fs-14">42 shifts <a href="#!" class="link-reset fw-medium"><i class="ti ti-arrow-right"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center gap-2">
+                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="team-member-image" class="me-1 avatar-xl img-thumbnail rounded-circle">
+                                    <div>
+                                        <h5>Priya Nankoe</h5>
+                                        <p class="text-muted">Site Guard</p>
+                                        <p class="m-0 fs-14">38 shifts <a href="#!" class="link-reset fw-medium"><i class="ti ti-arrow-right"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center gap-2">
+                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="team-member-image" class="me-1 avatar-xl img-thumbnail rounded-circle">
+                                    <div>
+                                        <h5>Devon Figueira</h5>
+                                        <p class="text-muted">Night Guard</p>
+                                        <p class="m-0 fs-14">35 shifts <a href="#!" class="link-reset fw-medium"><i class="ti ti-arrow-right"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center gap-2">
+                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="team-member-image" class="me-1 avatar-xl img-thumbnail rounded-circle">
+                                    <div>
+                                        <h5>Aisha Jagessar</h5>
+                                        <p class="text-muted">Patrol Guard</p>
+                                        <p class="m-0 fs-14">31 shifts <a href="#!" class="link-reset fw-medium"><i class="ti ti-arrow-right"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body d-flex align-items-center gap-2">
+                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="team-member-image" class="me-1 avatar-xl img-thumbnail rounded-circle">
+                                    <div>
+                                        <h5>Remy Sedoc</h5>
+                                        <p class="text-muted">Guard Trainee</p>
+                                        <p class="m-0 fs-14">12 shifts <a href="#!" class="link-reset fw-medium"><i class="ti ti-arrow-right"></i></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end row-->
+
+                    <div class="row">
+                        <div class="col-xxl-6">
+                            <div class="card">
+                                <div class="d-flex card-header justify-content-between align-items-center">
+                                    <h4 class="header-title">Active Sites</h4>
+                                    <a href="/clients" class="btn btn-sm btn-primary" id="btn-dash-add-site">Add Site <i class="ti ti-plus ms-1"></i></a>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="bg-light bg-opacity-50 py-1 text-center">
+                                        <p class="m-0"><b>7</b> Active sites out of <span class="fw-medium">9</span></p>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-custom table-centered table-sm table-nowrap table-hover mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-md flex-shrink-0 me-2">
+                                                                <span class="avatar-title bg-primary-subtle rounded-circle">
+                                                                    <img src="assets/images/products/logo/logo-1.svg" alt="" height="22">
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-muted fs-12">Government</span> <br />
+                                                                <h5 class="fs-14 mt-1">Presidential Palace</h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Location</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal">Paramaribo</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Guards Assigned</span> <br />
+                                                        <h5 class="fs-14 mt-1 fw-normal">14</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Status</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal"><i class="ti ti-circle-filled fs-12 text-success"></i> Active
+                                                        </h5>
+                                                    </td>
+                                                    <td style="width: 30px;">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle text-muted drop-arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ti ti-dots-vertical"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a href="javascript:void(0);" class="dropdown-item">View Details</a>
+                                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-md flex-shrink-0 me-2">
+                                                                <span class="avatar-title bg-info-subtle rounded-circle">
+                                                                    <img src="assets/images/products/logo/logo-2.svg" alt="" height="22">
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-muted fs-12">Maritime</span> <br />
+                                                                <h5 class="fs-14 mt-1">Port of Paramaribo</h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Location</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal">Paramaribo</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Guards Assigned</span> <br />
+                                                        <h5 class="fs-14 mt-1 fw-normal">10</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Status</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal"><i class="ti ti-circle-filled fs-12 text-success"></i> Active
+                                                        </h5>
+                                                    </td>
+                                                    <td style="width: 30px;">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle text-muted drop-arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ti ti-dots-vertical"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a href="javascript:void(0);" class="dropdown-item">View Details</a>
+                                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-md flex-shrink-0 me-2">
+                                                                <span class="avatar-title bg-primary-subtle rounded-circle">
+                                                                    <img src="assets/images/products/logo/logo-3.svg" alt="" height="22">
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-muted fs-12">Corporate</span> <br />
+                                                                <h5 class="fs-14 mt-1">Staatsolie HQ</h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Location</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal">Flora</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Guards Assigned</span> <br />
+                                                        <h5 class="fs-14 mt-1 fw-normal">8</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Status</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal"><i class="ti ti-circle-filled fs-12 text-success"></i> Active
+                                                        </h5>
+                                                    </td>
+                                                    <td style="width: 30px;">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle text-muted drop-arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ti ti-dots-vertical"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a href="javascript:void(0);" class="dropdown-item">View Details</a>
+                                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-md flex-shrink-0 me-2">
+                                                                <span class="avatar-title bg-secondary-subtle rounded-circle">
+                                                                    <img src="assets/images/products/logo/logo-4.svg" alt="" height="22">
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-muted fs-12">Financial</span> <br />
+                                                                <h5 class="fs-14 mt-1">Hakrinbank</h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Location</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal">Paramaribo</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Guards Assigned</span> <br />
+                                                        <h5 class="fs-14 mt-1 fw-normal">6</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Status</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal"><i class="ti ti-circle-filled fs-12 text-success"></i> Active
+                                                        </h5>
+                                                    </td>
+                                                    <td style="width: 30px;">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle text-muted drop-arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ti ti-dots-vertical"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a href="javascript:void(0);" class="dropdown-item">View Details</a>
+                                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-md flex-shrink-0 me-2">
+                                                                <span class="avatar-title bg-danger-subtle rounded-circle">
+                                                                    <img src="assets/images/products/logo/logo-5.svg" alt="" height="22">
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-muted fs-12">Aviation</span> <br />
+                                                                <h5 class="fs-14 mt-1">Johan Adolf Pengel Airport</h5>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Location</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal">Zanderij</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Guards Assigned</span> <br />
+                                                        <h5 class="fs-14 mt-1 fw-normal">10</h5>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-muted fs-12">Status</span>
+                                                        <h5 class="fs-14 mt-1 fw-normal"><i class="ti ti-circle-filled fs-12 text-warning"></i> Pending
+                                                        </h5>
+                                                    </td>
+                                                    <td style="width: 30px;">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle text-muted drop-arrow-none card-drop p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <i class="ti ti-dots-vertical"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <a href="javascript:void(0);" class="dropdown-item">View Details</a>
+                                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Additional rows with new data -->
+                                            </tbody>
+                                        </table>
+                                    </div> <!-- end table-responsive-->
+                                </div> <!-- end card-body-->
+
+                                <div class="card-footer">
+                                    <div class="align-items-center justify-content-between row text-center text-sm-start">
+                                        <div class="col-sm">
+                                            <div class="text-muted">
+                                                Showing <span class="fw-semibold">5</span> of <span class="fw-semibold">9</span> Results
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-auto mt-3 mt-sm-0">
+                                            <ul class="pagination pagination-boxed pagination-sm mb-0 justify-content-center">
+                                                <li class="page-item disabled">
+                                                    <a href="#" class="page-link"><i class="ti ti-chevron-left"></i></a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a href="#" class="page-link">1</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="#" class="page-link">2</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="#" class="page-link"><i class="ti ti-chevron-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- -->
+                                </div>
+
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+
+                        <div class="col-xxl-6">
+                            <div class="card card-h-100">
+                                <div class="card-header d-flex flex-wrap align-items-center gap-2 border-bottom border-dashed">
+                                    <h4 class="header-title me-auto">Recent Incidents</h4>
+
+                                    <div class="d-flex gap-2 justify-content-end text-end">
+                                        <a href="/file-report" class="btn btn-sm btn-light">File Report <i class="ti ti-plus ms-1"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-sm btn-primary" id="btn-export-incidents">Export <i class="ti ti-file-export ms-1"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-custom align-middle table-nowrap table-hover mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 85px;">
+                                                        <div class="avatar-lg border rounded">
+                                                            <span class="avatar-title bg-danger-subtle text-danger rounded-2 fs-22">
+                                                                <i class="ti ti-alert-triangle"></i>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="ps-0">
+                                                        <h5 class="fs-14 my-1"><a href="#!" class="link-reset">Unauthorized Entry</a></h5>
+                                                        <span class="text-muted fs-12">Presidential Palace</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1">Marcus Redan</h5>
+                                                        <span class="text-muted fs-12">Guard</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1"><span class="badge bg-danger">Critical</span></h5>
+                                                        <span class="text-muted fs-12">Severity</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-end">
+                                                            <div class="me-2">
+                                                                <h5 class="fs-14 my-1"><span class="badge bg-warning-subtle text-warning">Open</span></h5>
+                                                                <span class="text-muted fs-12">Status</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 85px;">
+                                                        <div class="avatar-lg border rounded">
+                                                            <span class="avatar-title bg-warning-subtle text-warning rounded-2 fs-22">
+                                                                <i class="ti ti-fence"></i>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="ps-0">
+                                                        <h5 class="fs-14 my-1"><a href="#!" class="link-reset">Perimeter Breach</a></h5>
+                                                        <span class="text-muted fs-12">Port of Paramaribo</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1">Priya Nankoe</h5>
+                                                        <span class="text-muted fs-12">Guard</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1"><span class="badge bg-warning">High</span></h5>
+                                                        <span class="text-muted fs-12">Severity</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-end">
+                                                            <div class="me-2">
+                                                                <h5 class="fs-14 my-1"><span class="badge bg-warning-subtle text-warning">Open</span></h5>
+                                                                <span class="text-muted fs-12">Status</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 85px;">
+                                                        <div class="avatar-lg border rounded">
+                                                            <span class="avatar-title bg-info-subtle text-info rounded-2 fs-22">
+                                                                <i class="ti ti-package"></i>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="ps-0">
+                                                        <h5 class="fs-14 my-1"><a href="#!" class="link-reset">Equipment Theft</a></h5>
+                                                        <span class="text-muted fs-12">Staatsolie HQ</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1">Devon Figueira</h5>
+                                                        <span class="text-muted fs-12">Guard</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1"><span class="badge bg-warning">High</span></h5>
+                                                        <span class="text-muted fs-12">Severity</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-end">
+                                                            <div class="me-2">
+                                                                <h5 class="fs-14 my-1"><span class="badge bg-primary-subtle text-primary">Investigating</span></h5>
+                                                                <span class="text-muted fs-12">Status</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 85px;">
+                                                        <div class="avatar-lg border rounded">
+                                                            <span class="avatar-title bg-secondary-subtle text-secondary rounded-2 fs-22">
+                                                                <i class="ti ti-alert-circle"></i>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="ps-0">
+                                                        <h5 class="fs-14 my-1"><a href="#!" class="link-reset">Disturbance</a></h5>
+                                                        <span class="text-muted fs-12">Hakrinbank</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1">Aisha Jagessar</h5>
+                                                        <span class="text-muted fs-12">Guard</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1"><span class="badge bg-info">Medium</span></h5>
+                                                        <span class="text-muted fs-12">Severity</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-end">
+                                                            <div class="me-2">
+                                                                <h5 class="fs-14 my-1"><span class="badge bg-success-subtle text-success">Resolved</span></h5>
+                                                                <span class="text-muted fs-12">Status</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 85px;">
+                                                        <div class="avatar-lg border rounded">
+                                                            <span class="avatar-title bg-success-subtle text-success rounded-2 fs-22">
+                                                                <i class="ti ti-bell-off"></i>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="ps-0">
+                                                        <h5 class="fs-14 my-1"><a href="#!" class="link-reset">False Alarm</a></h5>
+                                                        <span class="text-muted fs-12">Johan Adolf Pengel Airport</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1">Remy Sedoc</h5>
+                                                        <span class="text-muted fs-12">Guard</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1"><span class="badge bg-secondary">Low</span></h5>
+                                                        <span class="text-muted fs-12">Severity</span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center justify-content-end">
+                                                            <div class="me-2">
+                                                                <h5 class="fs-14 my-1"><span class="badge bg-success-subtle text-success">Closed</span></h5>
+                                                                <span class="text-muted fs-12">Status</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div> <!-- end table-responsive-->
+                                </div> <!-- end card-body-->
+
+                                <div class="card-footer">
+                                    <div class="align-items-center justify-content-between row text-center text-sm-start">
+                                        <div class="col-sm">
+                                            <div class="text-muted">
+                                                Showing <span class="fw-semibold">5</span> of <span class="fw-semibold">10</span> Results
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-auto mt-3 mt-sm-0">
+                                            <ul class="pagination pagination-boxed pagination-sm mb-0 justify-content-center">
+                                                <li class="page-item disabled">
+                                                    <a href="#" class="page-link"><i class="ti ti-chevron-left"></i></a>
+                                                </li>
+                                                <li class="page-item active">
+                                                    <a href="#" class="page-link">1</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="#" class="page-link">2</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a href="#" class="page-link"><i class="ti ti-chevron-right"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- -->
+                                </div>
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    </div> <!-- end row-->
+
+                </div> <!-- container -->
+
+                @@include('./partials/footer.html')
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END wrapper -->
+
+        @@include('./partials/customizer.html')
+
+        @@include('./partials/footer-scripts.html')
+
+        <!-- Apex Chart js -->
+        <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+
+        <!-- Projects Analytics Dashboard App js -->
+        <script src="assets/js/pages/dashboard.js"></script>
+
+        <!-- Dashboard Live Data -->
+        <script src="assets/js/pages/dashboard-live.js"></script>
+
+    </body>
+
+</html>

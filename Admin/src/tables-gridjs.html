@@ -1,0 +1,161 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "Guard Roster"})
+
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="assets/vendor/gridjs/theme/mermaid.min.css">
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include("./partials/menu.html", {"title": "Guard Roster"})
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header border-bottom border-dashed d-flex justify-content-between align-items-center">
+                                <h4 class="card-title mb-0 flex-grow-1">Guard Roster</h4>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-soft-primary btn-sm" onclick="exportGuardsPDF()">
+                                        <i class="ti ti-file-download me-1"></i>PDF
+                                    </button>
+                                    <button class="btn btn-soft-success btn-sm" onclick="exportGuardsSheet()">
+                                        <i class="ti ti-table me-1"></i>Sheets
+                                    </button>
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#guardModal" onclick="openAddGuard()">
+                                        <i class="ti ti-plus me-1"></i>Add Guard
+                                    </button>
+                                </div>
+                            </div><!-- end card header -->
+
+                            <div class="card-body">
+                                <div id="table-gridjs"></div>
+                            </div><!-- end card-body -->
+                        </div><!-- end card -->
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <!-- Guard Add/Edit Modal -->
+                <div class="modal fade" id="guardModal" tabindex="-1" aria-labelledby="guardModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form id="guard-form">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="guardModalLabel">Add Guard</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" id="guard-edit-id">
+                                    <!-- Profile Photo -->
+                                    <div class="text-center mb-3">
+                                        <div class="position-relative d-inline-block">
+                                            <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" id="guard-avatar-preview" class="rounded-circle" width="72" height="72" alt="Profile">
+                                            <label for="guard-avatar-file" class="position-absolute bottom-0 end-0 btn btn-sm btn-primary btn-icon rounded-circle">
+                                                <i class="ti ti-camera fs-14"></i>
+                                            </label>
+                                            <input type="file" id="guard-avatar-file" class="d-none" accept="image/*">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Guard ID</label>
+                                            <input type="text" id="guard-guard-id" class="form-control" placeholder="G-013" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" id="guard-name" class="form-control" placeholder="Full name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Role</label>
+                                            <select id="guard-role" class="form-select">
+                                                <option value="Site Guard">Site Guard</option>
+                                                <option value="Lead Guard">Lead Guard</option>
+                                                <option value="Patrol Guard">Patrol Guard</option>
+                                                <option value="Night Guard">Night Guard</option>
+                                                <option value="Trainee">Trainee</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Status</label>
+                                            <select id="guard-status" class="form-select">
+                                                <option value="on_duty">On Duty</option>
+                                                <option value="off_duty">Off Duty</option>
+                                                <option value="on_leave">On Leave</option>
+                                                <option value="unassigned">Unassigned</option>
+                                                <option value="active">Active</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input type="text" id="guard-phone" class="form-control" placeholder="+597 861-XXXX">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" id="guard-email" class="form-control" placeholder="email@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Assigned Site</label>
+                                        <select id="guard-site" class="form-select">
+                                            <option value="">Unassigned</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Notes</label>
+                                        <textarea id="guard-notes" class="form-control" rows="2" placeholder="Any additional notes..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary" id="guard-save-btn">Save Guard</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- container -->
+
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <!-- gridjs js -->
+    <script src="assets/vendor/gridjs/gridjs.umd.js"></script>
+
+    <script src="assets/js/components/table-gridjs.js"></script>
+
+</body>
+
+</html>

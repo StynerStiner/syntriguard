@@ -1,0 +1,426 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "Settings"})
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include('./partials/menu.html', {"title":"Settings"})
+
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush" id="settings-tabs">
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2 active" data-tab="company">
+                                        <i class="ti ti-building fs-18"></i> Company Profile
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="security">
+                                        <i class="ti ti-shield fs-18"></i> Security Policies
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="notifications">
+                                        <i class="ti ti-bell fs-18"></i> Notifications
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="users">
+                                        <i class="ti ti-users fs-18"></i> User Management
+                                    </a>
+                                    <a href="javascript:void(0);" class="list-group-item list-group-item-action d-flex align-items-center gap-2" data-tab="data">
+                                        <i class="ti ti-database fs-18"></i> Data & Backup
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-8">
+
+                        <!-- TAB: Company Profile -->
+                        <div class="card settings-panel" id="panel-company">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Company Profile</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="settings-success" class="alert alert-success d-none"></div>
+                                <div id="settings-error" class="alert alert-danger d-none"></div>
+
+                                <form id="settings-form">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Company Name</label>
+                                            <input type="text" id="set-company_name" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Registration Number</label>
+                                            <input type="text" id="set-registration_number" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Tax ID (TIN)</label>
+                                            <input type="text" id="set-tax_id" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input type="text" id="set-phone" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Address</label>
+                                        <textarea id="set-address" class="form-control" rows="2"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input type="email" id="set-email" class="form-control">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Website</label>
+                                            <input type="text" id="set-website" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Default Currency</label>
+                                            <select id="set-currency" class="form-select">
+                                                <option value="SRD">SRD (Surinamese Dollar)</option>
+                                                <option value="USD">USD</option>
+                                                <option value="EUR">EUR</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Time Zone</label>
+                                            <select id="set-timezone" class="form-select">
+                                                <option value="America/Paramaribo">America/Paramaribo (SRT, UTC-3)</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Operating Hours</label>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input type="text" id="set-operating_hours_start" class="form-control" placeholder="06:00">
+                                                <span class="text-muted">to</span>
+                                                <input type="text" id="set-operating_hours_end" class="form-control" placeholder="22:00">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button type="submit" class="btn btn-primary" id="settings-save-btn">Save Changes</button>
+                                        <button type="button" class="btn btn-light" onclick="loadSettings()">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TAB: Security Policies -->
+                        <div class="card settings-panel d-none" id="panel-security">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Security Policies</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="security-form">
+                                    <div class="mb-3">
+                                        <label class="form-label">Maximum Shift Duration (hours)</label>
+                                        <input type="number" id="set-max_shift_hours" class="form-control" value="12">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Maximum Weekly Shifts per Guard</label>
+                                        <input type="number" id="set-max_weekly_shifts" class="form-control" value="6">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Late Clock-in Threshold (minutes)</label>
+                                        <input type="number" id="set-late_threshold_minutes" class="form-control" value="15">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Auto-notify Supervisor on Critical Incident</label>
+                                        <select id="set-auto_notify_critical" class="form-select">
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Minimum Guards per Site</label>
+                                        <input type="number" id="set-min_guards_per_site" class="form-control" value="2">
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button type="submit" class="btn btn-primary">Save Policies</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TAB: Notifications -->
+                        <div class="card settings-panel d-none" id="panel-notifications">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Notification Preferences</h4>
+                            </div>
+                            <div class="card-body">
+                                <form id="notifications-form">
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_incidents" checked>
+                                        <label class="form-check-label" for="set-notify_incidents">New Incident Alerts</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_schedule_changes" checked>
+                                        <label class="form-check-label" for="set-notify_schedule_changes">Schedule Change Alerts</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_clock_in" checked>
+                                        <label class="form-check-label" for="set-notify_clock_in">Guard Clock-in/Clock-out</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_sick_calls">
+                                        <label class="form-check-label" for="set-notify_sick_calls">Sick Call Notifications</label>
+                                    </div>
+                                    <div class="mb-3 form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="set-notify_whatsapp">
+                                        <label class="form-check-label" for="set-notify_whatsapp">WhatsApp Notifications</label>
+                                    </div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <button type="submit" class="btn btn-primary">Save Preferences</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- TAB: User Management -->
+                        <div class="card settings-panel d-none" id="panel-users">
+                            <div class="card-header border-bottom border-dashed d-flex justify-content-between align-items-center">
+                                <h4 class="header-title">User Management</h4>
+                                <a href="/register" class="btn btn-primary btn-sm"><i class="ti ti-plus me-1"></i>Add User</a>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="bg-light-subtle">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="users-table-body">
+                                            <tr><td colspan="5" class="text-center text-muted py-3">Loading users...</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB: Data & Backup -->
+                        <div class="card settings-panel d-none" id="panel-data">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title">Data & Backup</h4>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="mb-3">Export Data</h5>
+                                <div class="d-flex flex-wrap gap-2 mb-4">
+                                    <button class="btn btn-soft-primary" onclick="if(typeof SyntriGuard!=='undefined')SyntriGuard.downloadPDF('roster')">
+                                        <i class="ti ti-file-download me-1"></i>Guard Roster PDF
+                                    </button>
+                                    <button class="btn btn-soft-primary" onclick="if(typeof SyntriGuard!=='undefined')SyntriGuard.downloadPDF('schedule',{start:new Date().toISOString().split('T')[0],end:new Date(Date.now()+30*86400000).toISOString().split('T')[0]})">
+                                        <i class="ti ti-file-download me-1"></i>Schedule PDF
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('roster')">
+                                        <i class="ti ti-table me-1"></i>Roster to Sheets
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('schedule')">
+                                        <i class="ti ti-table me-1"></i>Schedule to Sheets
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('incidents')">
+                                        <i class="ti ti-table me-1"></i>Incidents to Sheets
+                                    </button>
+                                    <button class="btn btn-soft-success" onclick="exportSheet('clients')">
+                                        <i class="ti ti-table me-1"></i>Clients to Sheets
+                                    </button>
+                                </div>
+
+                                <h5 class="mb-3">Database Info</h5>
+                                <div id="db-info" class="text-muted">Loading...</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+    </div>
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <script>
+    var settingsFields = [
+        'company_name', 'registration_number', 'tax_id', 'phone',
+        'address', 'email', 'website', 'currency', 'timezone',
+        'operating_hours_start', 'operating_hours_end',
+        'max_shift_hours', 'max_weekly_shifts', 'late_threshold_minutes',
+        'auto_notify_critical', 'min_guards_per_site'
+    ];
+
+    async function loadSettings() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            if (!token) return;
+            var resp = await fetch('/api/settings', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var settings = await resp.json();
+
+            settingsFields.forEach(function(key) {
+                var el = document.getElementById('set-' + key);
+                if (el && settings[key] != null) {
+                    el.value = settings[key];
+                }
+            });
+
+            // Checkboxes
+            ['notify_incidents','notify_schedule_changes','notify_clock_in','notify_sick_calls','notify_whatsapp'].forEach(function(key) {
+                var el = document.getElementById('set-' + key);
+                if (el) el.checked = settings[key] === 'true' || settings[key] === true || settings[key] == null;
+            });
+        } catch (err) {
+            console.error('Failed to load settings:', err);
+        }
+    }
+
+    async function saveSettingsForm(formId) {
+        var successDiv = document.getElementById('settings-success');
+        var errorDiv = document.getElementById('settings-error');
+        if (successDiv) successDiv.classList.add('d-none');
+        if (errorDiv) errorDiv.classList.add('d-none');
+
+        var data = {};
+        settingsFields.forEach(function(key) {
+            var el = document.getElementById('set-' + key);
+            if (el) data[key] = el.value;
+        });
+        ['notify_incidents','notify_schedule_changes','notify_clock_in','notify_sick_calls','notify_whatsapp'].forEach(function(key) {
+            var el = document.getElementById('set-' + key);
+            if (el) data[key] = el.checked ? 'true' : 'false';
+        });
+
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/settings', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                body: JSON.stringify(data)
+            });
+            if (!resp.ok) throw new Error('Failed to save');
+            if (successDiv) { successDiv.textContent = 'Settings saved!'; successDiv.classList.remove('d-none'); }
+            setTimeout(function() { if (successDiv) successDiv.classList.add('d-none'); }, 3000);
+        } catch (err) {
+            if (errorDiv) { errorDiv.textContent = err.message; errorDiv.classList.remove('d-none'); }
+        }
+    }
+
+    async function loadUsers() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/users', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var users = await resp.json();
+            var tbody = document.getElementById('users-table-body');
+            if (!tbody) return;
+
+            var html = '';
+            users.forEach(function(u) {
+                html += '<tr>' +
+                    '<td class="fw-semibold">' + u.full_name + '</td>' +
+                    '<td>' + u.email + '</td>' +
+                    '<td><span class="badge bg-primary-subtle text-primary">' + u.role + '</span></td>' +
+                    '<td><span class="badge ' + (u.is_active ? 'bg-success' : 'bg-secondary') + '">' + (u.is_active ? 'Active' : 'Inactive') + '</span></td>' +
+                    '<td><a href="/register" class="btn btn-sm btn-soft-primary"><i class="ti ti-edit"></i></a></td>' +
+                    '</tr>';
+            });
+            tbody.innerHTML = html || '<tr><td colspan="5" class="text-center text-muted">No users found</td></tr>';
+        } catch (err) {
+            console.error('Failed to load users:', err);
+        }
+    }
+
+    async function loadDbInfo() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/dashboard/stats', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var stats = await resp.json();
+            var el = document.getElementById('db-info');
+            if (el) {
+                el.innerHTML = '<p class="mb-1"><strong>Guards:</strong> ' + stats.guards.total + '</p>' +
+                    '<p class="mb-1"><strong>Sites:</strong> ' + stats.sites.total + '</p>' +
+                    '<p class="mb-1"><strong>Incidents:</strong> ' + stats.incidents.total + '</p>' +
+                    '<p class="mb-1"><strong>Shifts:</strong> ' + stats.shifts.today + ' today</p>' +
+                    '<p class="mb-0"><strong>Database:</strong> Supabase PostgreSQL (Cloud)</p>';
+            }
+        } catch (err) {}
+    }
+
+    async function exportSheet(type) {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var url = '/api/sheets/' + type;
+            var body = type === 'schedule' ? { month: new Date().toISOString().substring(0, 7) } : {};
+            if (type === 'schedule') url = '/api/sheets/schedule/sync';
+            var resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                body: JSON.stringify(body)
+            });
+            var result = await resp.json();
+            if (result.url) window.open(result.url, '_blank');
+        } catch (err) { alert('Export failed: ' + err.message); }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSettings();
+
+        // Tab switching
+        document.querySelectorAll('#settings-tabs a').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs
+                document.querySelectorAll('#settings-tabs a').forEach(function(t) { t.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Hide all panels, show selected
+                document.querySelectorAll('.settings-panel').forEach(function(p) { p.classList.add('d-none'); });
+                var panel = document.getElementById('panel-' + this.getAttribute('data-tab'));
+                if (panel) panel.classList.remove('d-none');
+
+                // Load data for specific tabs
+                if (this.getAttribute('data-tab') === 'users') loadUsers();
+                if (this.getAttribute('data-tab') === 'data') loadDbInfo();
+            });
+        });
+
+        // Save forms
+        ['settings-form', 'security-form', 'notifications-form'].forEach(function(id) {
+            var form = document.getElementById(id);
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    saveSettingsForm(id);
+                });
+            }
+        });
+    });
+    </script>
+
+</body>
+
+</html>

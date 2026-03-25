@@ -1,0 +1,207 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "File Report"})
+
+    <link href="assets/vendor/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include('./partials/menu.html', {"title":"File Report"})
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card position-relative">
+                            <form>
+                                <div class="card-body">
+                                    <!-- Incident ID -->
+                                    <div class="d-flex align-items-start justify-content-between mb-4">
+                                        <h4 class="fw-bold mb-0">Incident Report</h4>
+                                        <div class="text-end">
+                                            <div class="row g-1 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="incidentNo" class="col-form-label fs-16 fw-bold">Incident ID</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text" id="incidentNo" class="form-control" value="#INC-053" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 mt-3">
+                                            <div class="mb-2">
+                                                <label class="form-label">Date & Time :</label>
+                                                <input type="text" data-provider="flatpickr" data-date-format="d M, Y H:i"
+                                                    data-enable-time="true" data-deafult-date="today" class="form-control"
+                                                    placeholder="Select Date & Time">
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="incidentSeverity" class="form-label">Severity</label>
+                                                <select class="form-select" id="incidentSeverity">
+                                                    <option value="">Select Severity</option>
+                                                    <option value="Critical">Critical</option>
+                                                    <option value="High">High</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="Low">Low</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label for="incidentType" class="form-label">Incident Type</label>
+                                                <select class="form-select" id="incidentType">
+                                                    <option value="">Select Type</option>
+                                                    <option value="Unauthorized Entry">Unauthorized Entry</option>
+                                                    <option value="Perimeter Breach">Perimeter Breach</option>
+                                                    <option value="Equipment Theft">Equipment Theft</option>
+                                                    <option value="Disturbance">Disturbance</option>
+                                                    <option value="Trespassing">Trespassing</option>
+                                                    <option value="Vehicle Incident">Vehicle Incident</option>
+                                                    <option value="False Alarm">False Alarm</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="mb-2">
+                                                <label for="incidentSite" class="form-label">Site</label>
+                                                <select class="form-select" id="incidentSite">
+                                                    <option value="">Select Site</option>
+                                                    <option value="Presidential Palace">Presidential Palace</option>
+                                                    <option value="Port of Paramaribo">Port of Paramaribo</option>
+                                                    <option value="Staatsolie HQ">Staatsolie HQ</option>
+                                                    <option value="Hakrinbank">Hakrinbank</option>
+                                                    <option value="Johan Adolf Pengel Airport">Johan Adolf Pengel Airport</option>
+                                                    <option value="Assuria Tower">Assuria Tower</option>
+                                                    <option value="Fernandes Bottling Plant">Fernandes Bottling Plant</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">Specific Location</label>
+                                                <textarea rows="3" class="form-control"
+                                                    placeholder="e.g. Rear gate, Building B entrance, Parking lot C"></textarea>
+                                            </div>
+                                            <div>
+                                                <label class="form-label">District</label>
+                                                <input type="text" class="form-control" placeholder="e.g. Paramaribo">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-sm-0 mt-3">
+                                            <div class="mb-2">
+                                                <label for="guardName" class="form-label">Guard Name</label>
+                                                <select class="form-select" id="guardName">
+                                                    <option value="">Select Guard</option>
+                                                    <option value="Marcus Redan">Marcus Redan</option>
+                                                    <option value="Priya Nankoe">Priya Nankoe</option>
+                                                    <option value="Devon Figueira">Devon Figueira</option>
+                                                    <option value="Aisha Jagessar">Aisha Jagessar</option>
+                                                    <option value="Remy Sedoc">Remy Sedoc</option>
+                                                    <option value="Keon Bouva">Keon Bouva</option>
+                                                    <option value="Felicia Amania">Felicia Amania</option>
+                                                    <option value="Dwayne Kartopawiro">Dwayne Kartopawiro</option>
+                                                    <option value="Shanaya Perkash">Shanaya Perkash</option>
+                                                    <option value="Ronaldo Esajas">Ronaldo Esajas</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label class="form-label">Guard ID</label>
+                                                <input type="text" class="form-control" placeholder="e.g. G-001">
+                                            </div>
+                                            <div>
+                                                <label class="form-label">Phone</label>
+                                                <input type="text" class="form-control" placeholder="+597 861-XXXX">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label class="form-label fw-semibold">Incident Description</label>
+                                        <textarea class="form-control" rows="6" id="incidentDescription"
+                                            placeholder="Describe what happened, actions taken, and any evidence collected..."></textarea>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="form-label">Damages Estimated (SRD)</label>
+                                                <input type="number" class="form-control" placeholder="0.00" id="incidentDamages">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="form-label">Evidence Attached</label>
+                                                <input type="file" class="form-control">
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="policeNotified" class="form-label">Police Notified</label>
+                                                <select class="form-select" id="policeNotified">
+                                                    <option value="">Select</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Pending">Pending</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="followUp" class="form-label">Follow-up Required</label>
+                                                <select class="form-select" id="followUp">
+                                                    <option value="">Select</option>
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <label class="form-label" for="additionalNotes">Additional Notes</label>
+                                        <textarea class="form-control" id="additionalNotes"
+                                            placeholder="Any additional context, witness information, or recommendations..." rows="3"></textarea>
+                                    </div>
+                                </div> <!-- end card-body-->
+                            </form>
+                        </div><!-- end card -->
+                        <div class="mb-5">
+                            <div class="d-flex justify-content-center gap-2">
+                                <button type="button" class="btn btn-light gap-1" id="btn-save-draft"><i
+                                        class="ti ti-device-floppy fs-16"></i> Save Draft</button>
+                                <button type="button" class="btn btn-primary gap-1" id="btn-submit-report"><i
+                                        class="ti ti-send fs-16"></i> Submit Report</button>
+                            </div>
+                        </div>
+                        <!-- end buttons -->
+                    </div>
+                </div>
+
+            </div> <!-- container -->
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <script src="assets/js/pages/file-report.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "Scheduler"})
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include("./partials/menu.html", {"title":"Scheduler"})
+
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <button class="btn btn-primary w-100" id="btn-new-event">
+                                    <i class="ti ti-plus me-2 align-middle"></i> Add Shift
+                                </button>
+
+                                <div id="external-events" class="mt-2">
+                                    <p class="text-muted">Drag and drop your shift or click in the calendar</p>
+                                    <div class="external-event fc-event bg-success-subtle text-success"
+                                        data-class="bg-success-subtle">
+                                        <i class="ti ti-circle-filled me-2"></i>Morning Shift
+                                    </div>
+                                    <div class="external-event fc-event bg-primary-subtle text-primary"
+                                        data-class="bg-primary-subtle">
+                                        <i class="ti ti-circle-filled me-2"></i>Afternoon Shift
+                                    </div>
+                                    <div class="external-event fc-event bg-danger-subtle text-danger"
+                                        data-class="bg-danger-subtle">
+                                        <i class="ti ti-circle-filled me-2"></i>Overnight Shift
+                                    </div>
+                                    <div class="external-event fc-event bg-warning-subtle text-warning"
+                                        data-class="bg-warning-subtle">
+                                        <i class="ti ti-circle-filled me-2"></i>Training Session
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col-->
+
+                    <div class="col-xl-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+                <!--end row-->
+
+                <!-- Add New Shift MODAL -->
+                <div class="modal fade" id="event-modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form class="needs-validation" name="event-form" id="forms-event" novalidate>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-title">
+                                        Add New Shift
+                                    </h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="title" id="event-title" />
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="shift-guard">Guard</label>
+                                                <select class="form-select" name="guard_id" id="shift-guard" required>
+                                                    <option value="">Select Guard</option>
+                                                </select>
+                                                <div class="invalid-feedback">Please select a guard</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="shift-site">Site</label>
+                                                <select class="form-select" name="site_id" id="shift-site" required>
+                                                    <option value="">Select Site</option>
+                                                </select>
+                                                <div class="invalid-feedback">Please select a site</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="event-category">Shift Type</label>
+                                                <select class="form-select" name="category" id="event-category" required>
+                                                    <option value="bg-danger">Critical Coverage</option>
+                                                    <option value="bg-success">Morning Shift</option>
+                                                    <option value="bg-primary">Afternoon Shift</option>
+                                                    <option value="bg-info">Overnight Shift</option>
+                                                    <option value="bg-dark">Training</option>
+                                                    <option value="bg-warning">On Call</option>
+                                                    <option value="bg-secondary">Off Duty</option>
+                                                </select>
+                                                <div class="invalid-feedback">Please select a valid shift type</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="shift-date">Date</label>
+                                                <input class="form-control" type="date" name="shift_date" id="shift-date" required />
+                                                <div class="invalid-feedback">Please select a date</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="shift-start">Start Time</label>
+                                                <input class="form-control" type="time" name="start_time" id="shift-start" value="06:00" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="shift-end">End Time</label>
+                                                <input class="form-control" type="time" name="end_time" id="shift-end" value="14:00" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="mb-2">
+                                                <label class="form-label" for="shift-notes">Notes</label>
+                                                <textarea class="form-control" name="notes" id="shift-notes" rows="2" placeholder="Optional notes"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-wrap align-items-center gap-2">
+                                        <button type="button" class="btn btn-danger" id="btn-delete-event">
+                                            Delete
+                                        </button>
+
+                                        <button type="button" class="btn btn-light ms-auto" data-bs-dismiss="modal">
+                                            Close
+                                        </button>
+
+                                        <button type="submit" class="btn btn-primary" id="btn-save-event">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end modal-content-->
+                    </div>
+                    <!-- end modal dialog-->
+                </div>
+                <!-- end modal-->
+
+            </div> <!-- container -->
+
+            @@include('./partials/footer.html')
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <!-- Fullcalendar js -->
+    <script src="assets/vendor/fullcalendar/index.global.min.js"></script>
+
+    <!-- Calendar App Demo js -->
+    <script src="assets/js/pages/apps-calendar.js"></script>
+
+</body>
+
+</html>

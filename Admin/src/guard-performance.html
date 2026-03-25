@@ -1,0 +1,320 @@
+@@include('./partials/html.html')
+
+<head>
+    @@include("./partials/title-meta.html", {"title": "Guard Performance"})
+
+    @@include('./partials/head-css.html')
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        @@include('./partials/menu.html', {"title":"Guard Performance"})
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+        <div class="page-content">
+
+            <div class="page-container">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header border-bottom justify-content-between d-flex flex-wrap align-items-center gap-2">
+                                <h4 class="header-title">Guard Performance — March 2026</h4>
+                                <div class="dropdown">
+                                    <a href="#" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        This Month
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="javascript:void(0);" class="dropdown-item">This Week</a>
+                                        <a href="javascript:void(0);" class="dropdown-item active">This Month</a>
+                                        <a href="javascript:void(0);" class="dropdown-item">Last Month</a>
+                                        <a href="javascript:void(0);" class="dropdown-item">This Quarter</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover text-nowrap mb-0">
+                                    <thead class="bg-light-subtle">
+                                        <tr>
+                                            <th class="ps-3 py-1 fs-12 text-uppercase text-muted" style="width: 50px;">Rank</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Guard</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Role</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Site</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Shifts Completed</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Shifts Missed</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">On-Time %</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Incidents Handled</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted">Performance Score</th>
+                                            <th class="py-1 fs-12 text-uppercase text-muted pe-3">Trend</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">1</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Ronaldo Esajas</h6>
+                                                </div>
+                                            </td>
+                                            <td>Lead Guard</td>
+                                            <td>Hakrinbank</td>
+                                            <td>40</td>
+                                            <td>0</td>
+                                            <td>100%</td>
+                                            <td>6</td>
+                                            <td><span class="badge bg-success-subtle text-success fs-12 p-1">97%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-up text-success fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">2</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Marcus Redan</h6>
+                                                </div>
+                                            </td>
+                                            <td>Lead Guard</td>
+                                            <td>Presidential Palace</td>
+                                            <td>42</td>
+                                            <td>1</td>
+                                            <td>98%</td>
+                                            <td>8</td>
+                                            <td><span class="badge bg-success-subtle text-success fs-12 p-1">96%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-up text-success fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">3</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Felicia Amania</h6>
+                                                </div>
+                                            </td>
+                                            <td>Patrol Guard</td>
+                                            <td>Port of Paramaribo</td>
+                                            <td>33</td>
+                                            <td>0</td>
+                                            <td>100%</td>
+                                            <td>4</td>
+                                            <td><span class="badge bg-success-subtle text-success fs-12 p-1">95%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-up text-success fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">4</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Priya Nankoe</h6>
+                                                </div>
+                                            </td>
+                                            <td>Site Guard</td>
+                                            <td>Port of Paramaribo</td>
+                                            <td>38</td>
+                                            <td>1</td>
+                                            <td>97%</td>
+                                            <td>5</td>
+                                            <td><span class="badge bg-primary-subtle text-primary fs-12 p-1">94%</span></td>
+                                            <td class="pe-3"><i class="ti ti-minus text-muted fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">5</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Aisha Jagessar</h6>
+                                                </div>
+                                            </td>
+                                            <td>Patrol Guard</td>
+                                            <td>Hakrinbank</td>
+                                            <td>31</td>
+                                            <td>1</td>
+                                            <td>97%</td>
+                                            <td>3</td>
+                                            <td><span class="badge bg-primary-subtle text-primary fs-12 p-1">93%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-up text-success fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">6</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Shanaya Perkash</h6>
+                                                </div>
+                                            </td>
+                                            <td>Site Guard</td>
+                                            <td>Staatsolie HQ</td>
+                                            <td>36</td>
+                                            <td>2</td>
+                                            <td>94%</td>
+                                            <td>3</td>
+                                            <td><span class="badge bg-primary-subtle text-primary fs-12 p-1">92%</span></td>
+                                            <td class="pe-3"><i class="ti ti-minus text-muted fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">7</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Devon Figueira</h6>
+                                                </div>
+                                            </td>
+                                            <td>Night Guard</td>
+                                            <td>Staatsolie HQ</td>
+                                            <td>35</td>
+                                            <td>2</td>
+                                            <td>94%</td>
+                                            <td>4</td>
+                                            <td><span class="badge bg-primary-subtle text-primary fs-12 p-1">91%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-down text-danger fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">8</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Keon Bouva</h6>
+                                                </div>
+                                            </td>
+                                            <td>Site Guard</td>
+                                            <td>Presidential Palace</td>
+                                            <td>28</td>
+                                            <td>2</td>
+                                            <td>93%</td>
+                                            <td>2</td>
+                                            <td><span class="badge bg-primary-subtle text-primary fs-12 p-1">90%</span></td>
+                                            <td class="pe-3"><i class="ti ti-minus text-muted fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">9</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Dwayne Kartopawiro</h6>
+                                                </div>
+                                            </td>
+                                            <td>Night Guard</td>
+                                            <td>Airport</td>
+                                            <td>30</td>
+                                            <td>3</td>
+                                            <td>90%</td>
+                                            <td>2</td>
+                                            <td><span class="badge bg-warning-subtle text-warning fs-12 p-1">89%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-down text-danger fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">10</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Remy Sedoc</h6>
+                                                </div>
+                                            </td>
+                                            <td>Trainee</td>
+                                            <td>Airport</td>
+                                            <td>12</td>
+                                            <td>1</td>
+                                            <td>92%</td>
+                                            <td>1</td>
+                                            <td><span class="badge bg-warning-subtle text-warning fs-12 p-1">87%</span></td>
+                                            <td class="pe-3"><i class="ti ti-trending-up text-success fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">11</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Mirella Tewari</h6>
+                                                </div>
+                                            </td>
+                                            <td>Trainee</td>
+                                            <td>Presidential Palace</td>
+                                            <td>8</td>
+                                            <td>1</td>
+                                            <td>88%</td>
+                                            <td>0</td>
+                                            <td><span class="badge bg-warning-subtle text-warning fs-12 p-1">85%</span></td>
+                                            <td class="pe-3"><i class="ti ti-minus text-muted fs-18"></i></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="ps-3 fw-semibold">12</td>
+                                            <td>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm">
+                                                        <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar alt="" class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <h6 class="fs-14 mb-0">Cedric Wielzen</h6>
+                                                </div>
+                                            </td>
+                                            <td>Site Guard</td>
+                                            <td>Airport</td>
+                                            <td>0</td>
+                                            <td>0</td>
+                                            <td>—</td>
+                                            <td>0</td>
+                                            <td><span class="badge bg-secondary-subtle text-secondary fs-12 p-1">—</span></td>
+                                            <td class="pe-3"><i class="ti ti-minus text-muted fs-18"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div class="text-muted">
+                                        Average Performance Score: <span class="fw-semibold">92%</span> | Total Shifts Completed: <span class="fw-semibold">333</span> | Total Incidents Handled: <span class="fw-semibold">38</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- container -->
+
+            @@include('./partials/footer.html')
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    @@include('./partials/customizer.html')
+
+    @@include('./partials/footer-scripts.html')
+
+    <script src="assets/js/pages/guard-performance.js"></script>
+
+</body>
+
+</html>

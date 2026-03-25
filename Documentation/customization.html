@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Customization | Arclon - Responsive Bootstrap Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Theme Config Js -->
+    <script src="assets/js/config.js"></script>
+
+    <!-- App css -->
+    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+    <!-- Icons css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div class="wrapper">
+
+        <!-- ========== Topbar Start ========== -->
+        <div class="navbar-custom">
+            <div class="topbar container-fluid">
+                <div class="d-flex align-items-center gap-lg-2 gap-1">
+
+                    <!-- Topbar Brand Logo -->
+                    <div class="logo-topbar">
+                        <!-- Logo light -->
+                        <a href="index.html" class="logo-light">
+                            <span class="logo-lg">
+                                <img src="assets/images/logo.png" alt="logo">
+                            </span>
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-sm.png" alt="small logo">
+                            </span>
+                        </a>
+
+                        <!-- Logo Dark -->
+                        <a href="index.html" class="logo-dark">
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-dark.png" alt="dark logo">
+                            </span>
+                            <span class="logo-sm">
+                                <img src="assets/images/logo-sm.png" alt="small logo">
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Sidebar Menu Toggle Button -->
+                    <button class="button-toggle-menu">
+                        <i class="ri-menu-2-fill"></i>
+                    </button>
+                </div>
+
+                <ul class="topbar-menu d-flex align-items-center gap-3">
+
+                    <li class="d-none d-sm-inline-block">
+                        <div class="nav-link" id="light-dark-mode">
+                            <i class="ri-moon-line fs-22"></i>
+                        </div>
+                    </li>
+
+                    <li class="nav-link"><span class="badge bg-success fs-16">v1.0</span></li>
+                </ul>
+            </div>
+        </div>
+        <!-- ========== Topbar End ========== -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="leftside-menu">
+
+            <!-- Brand Logo Light -->
+            <a href="index.html" class="logo logo-light">
+                <span class="logo-lg">
+                    <img src="assets/images/logo.png" alt="logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="assets/images/logo-sm.png" alt="small logo">
+                </span>
+            </a>
+
+            <!-- Brand Logo Dark -->
+            <a href="index.html" class="logo logo-dark">
+                <span class="logo-lg">
+                    <img src="assets/images/logo-dark.png" alt="dark logo">
+                </span>
+                <span class="logo-sm">
+                    <img src="assets/images/logo-sm.png" alt="small logo">
+                </span>
+            </a>
+
+            <!-- Sidebar Hover Menu Toggle Button -->
+            <div class="button-sm-hover" data-bs-toggle="tooltip" data-bs-placement="right" title="Show Full Sidebar">
+                <i class="ri-checkbox-blank-circle-line align-middle"></i>
+            </div>
+
+            <!-- Full Sidebar Menu Close Button -->
+            <div class="button-close-fullsidebar">
+                <i class="ri-close-fill align-middle"></i>
+            </div>
+
+            <!-- Sidebar -left -->
+            <div class="h-100" id="leftside-menu-container" data-simplebar>
+                <!-- Leftbar User -->
+                <div class="leftbar-user">
+                    <a href="pages-profile.html">
+                        <img src="assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                        <span class="leftbar-user-name mt-2">Tosha Minner</span>
+                    </a>
+                </div>
+
+                <!--- Sidemenu -->
+                <ul class="side-nav">
+
+                    <li class="side-nav-title">Getting Started</li>
+
+                    <li class="side-nav-item">
+                        <a href="index.html" class="side-nav-link">
+                            <i class="ri-honour-line"></i>
+                            <span> Introduction </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="installation.html" class="side-nav-link">
+                            <i class="ri-tools-fill"></i>
+                            <span> Installation </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-title">Customization</li>
+
+                    <li class="side-nav-item">
+                        <a href="customization.html" class="side-nav-link">
+                            <i class="ri-paint-line"></i>
+                            <span> Customization </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-title">Other</li>
+
+                    <li class="side-nav-item">
+                        <a href="changelog.html" class="side-nav-link">
+                            <i class="ri-book-open-line"></i>
+                            <span> Changelog </span>
+                        </a>
+                    </li>
+
+                </ul>
+                <!--- End Sidemenu -->
+
+                <div class="help-box text-white text-center d-none">
+                    <a href="javascript: void(0);" class="float-end close-btn text-white">
+                        <i class="mdi mdi-close"></i>
+                    </a>
+                    <img src="assets/images/svg/help-icon.svg" height="90" alt="Helper Icon Image">
+                    <h5 class="mt-3">Unlimited Access</h5>
+                    <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
+                    <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Buy Now</a>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- ========== Left Sidebar End ========== -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Arclon</a></li>
+                                        <li class="breadcrumb-item active">Customization</li>
+                                    </ol>
+                                </div>
+                                <h4 class="page-title">Customization</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mt-0 mb-2 font-weight-bold">
+                                Customizing Color Palette
+                            </h4>
+                            <p>
+                                Customizing the color palette of any demo is a breeze.
+                                All you need to do is adjust a few SCSS variables and
+                                you're ready to go. With this simple modification, you
+                                can create a unique and personalized look for your theme
+                                that perfectly reflects your brand's identity.
+                            </p>
+                            <p class="mb-0">
+                                To modify colors in the existing themes, you can open
+                                the <code>_theme-default.scss</code> file located in
+                                <code>src/assets/scss/</code>.
+                                Simply change the value of any variable to customize the
+                                color palette of the theme. Your changes will
+                                automatically reflect in any HTML elements or
+                                Bootstrap-based components. Please note that you need to
+                                set up and run the gulp flow provided in the
+                                installation steps earlier.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-2 mt-0">RTL Support</h4>
+                            <p>
+                                Arclon also includes built-in support for right-to-left
+                                (RTL) languages. To use RTL support, simply replace the
+                                reference to the standard CSS file with the RTL version.
+                                This will automatically flip the layout and alignment of
+                                elements for proper RTL display. Note that both standard
+                                and RTL CSS files are included in the Arclon package.
+                            </p>
+                            <p class="mb-0">
+                                To enable RTL support in your chosen demo, navigate to the
+                                <code>src/partials/head-css.html</code>
+                                file and replace the reference to
+                                <code>app.min.css</code> with
+                                <code>app-rtl.min.css</code>.
+                                Additionally, don't forget to add the
+                                <code>dir="rtl"</code> attribute to the HTML tag, such as
+                                <code>&lt;html lang="en" dir="rtl"&gt;</code>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-2 mt-0">
+                                Top Navigation Layouts (Horizontal)
+                            </h4>
+                            <p class="mb-0">
+                                To switch to the horizontal layout with a top navigation
+                                bar, follow these steps:
+                            </p>
+                            <ol>
+                                <li>
+                                    Open the
+                                    <code>src/partials/html.html</code>
+                                    file and add
+                                    <code> &lt;html data-layout="topnav"&gt;</code> to the
+                                    HTML tag.
+                                </li>
+                                <li>
+                                    Open the
+                                    <code>src/partials/menu.html</code>
+                                    file and remove the line
+                                    <code>@<spna></spna>@include('left-sidebar.html')</code>.
+                                </li>
+                                <li>
+                                    In the same file, add
+                                    <code>@<spna></spna>@include('horizontal-nav.html')</code>
+                                    instead
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-2 mt-0">Pre-built Layouts</h4>
+                            <p>
+                                Arclon provides multiple layout options, including vertical
+                                (main navigation on the left), horizontal (main navigation
+                                on top), and detached (main navigation on the left side,
+                                part of the main content area). To switch between these
+                                layouts, simply modify the necessary partials and add data
+                                attributes to HTML elements.
+                            </p>
+                            <p>
+                                To see how to activate a specific layout in Arclon, you can
+                                take a look at the layout examples provided in the
+                                following files:
+                            </p>
+                            <ol>
+                                <li>
+                                    <code>layouts-horizontal.html</code>
+                                </li>
+                                <li>
+                                    <code>layouts-full.html</code>
+                                </li>
+                                <li>
+                                    <code>layouts-fullscreen.html</code>
+                                </li>
+                                <li>
+                                    <code>layouts-compact.html</code>
+                                </li>
+                                <li>
+                                    <code>layouts-hover.html</code>
+                                </li>
+                                <li>
+                                    <code>layouts-icon-view.html</code>
+                                </li>
+                            </ol>
+                            <p class="mb-0">
+                                These files can be found in the <code>src/</code> or
+                                <code>dist/</code> directory
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="mb-2 mt-0">
+                                Customizing Left Sidebar, Layout Width and Right Sidebar
+                            </h4>
+                            <p>
+                                Arclon provides you with the flexibility to customize the
+                                appearance and functionality of the left sidebar, overall
+                                layout width, and right sidebar. You can choose from
+                                various sizes, themes, and types for the left sidebar, and
+                                even hide it if needed. You can also specify the overall
+                                layout width and enable/disable the right sidebar. These
+                                customizations can be easily done by setting the
+                                appropriate data attribute on the
+                                <code>html</code> element in your HTML file.
+                            </p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Type</th>
+                                            <th>Options</th>
+                                            <th>Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code class="text-nowrap">data-bs-theme</code></td>
+                                            <td>String</td>
+
+                                            <td>"light" | "dark"</td>
+                                            <td>Changes overall color scheme to dark</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><code class="text-nowrap">data-layout-mode</code></td>
+                                            <td>String</td>
+
+                                            <td>"default" | "detached"</td>
+                                            <td>Changes overall Sidebar Mode</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <code class="text-nowrap">data-menu-color</code>
+                                            </td>
+                                            <td>String</td>
+                                            <td>"light" | "dark"</td>
+                                            <td>
+                                                Changes the color scheme of the menu to a given
+                                                value
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <code class="text-nowrap">data-sidenav-size</code>
+                                            </td>
+                                            <td>String</td>
+                                            <td>
+                                                "default" | "compact" | "condensed" | "sm-hover" | "full" | "fullscreen" | "sm-hover" | "sm-hover-active"
+                                            </td>
+                                            <td>
+                                                The left sidebar size is reduced to a condensed
+                                                (small) size
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p>Following are few examples:</p>
+                            <ul>
+                                <li>
+                                    <h5>Changes the left sidebar theme to "dark"</h5>
+                                    <code>&lt;html
+                                        data-menu-color="dark"&gt;&lt;/html&gt;</code>
+                                </li>
+                                <li>
+                                    <h5>Changes the left sidebar theme to "light"</h5>
+                                    <code>&lt;html
+                                        data-menu-color="light"&gt;&lt;/html&gt;</code>
+                                </li>
+                                <li>
+                                    <h5>Changes the left sidebar to scrollable</h5>
+                                    <code>&lt;html
+                                        data-layout-position="scrollable"&gt;&lt;/html&gt;</code>
+                                </li>
+                                <li>
+                                    <h5>Changes the left sidebar size to small</h5>
+                                    <code>&lt;html
+                                        data-sidenav-size="condensed"&gt;&lt;/html&gt;</code>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="mb-2 mt-0">Adding new page</h4>
+                        <p>
+                            We have provided a starter page (pages-starter.html)
+                            located in the src/ folder that can help you get
+                            started quickly and easily when adding new pages. However,
+                            please keep in mind the following important points:
+                        </p>
+                        <p></p>
+                        <ol>
+                            <li>
+                                To ensure the proper functioning of the Arclon templates,
+                                make sure you have included the following files in your
+                                HTML code: <code>css/app.min.css</code>,
+                                <code>css/icons.min.css</code>, and
+                                <code>js/app.min.js</code>. If you are using the Modern
+                                or Creative demos, be sure to replace
+                                <code>app.min.css</code>
+                            </li>
+                            <li>
+                                Most of the default and basic form elements, along with
+                                a few advanced elements, have their own CSS and
+                                JavaScript files included in Arclon.
+                            </li>
+                            <li>
+                                You can easily enhance the functionality of Arclon by
+                                adding features like charts, data tables, calendar,
+                                maps, and more. To use these features, you need to
+                                include the corresponding CSS and JavaScript files in
+                                your HTML. You can find the specific files needed for
+                                each feature on the corresponding documentation page.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- container -->
+
+            </div>
+            <!-- content -->
+
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <script>document.write(new Date().getFullYear())</script> © Arclon - <a href="https://coderthemes.com/" target="_blank">Coderthemes.com</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-md-end footer-links d-none d-md-block">
+                                <a href="https://coderthemes.com/" target="_blank">About</a>
+                                <a href="https://coderthemes.com/" target="_blank">Support</a>
+                                <a href="https://coderthemes.com/" target="_blank">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Vendor js -->
+    <script src="assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="assets/js/app.min.js"></script>
+
+</body>
+
+</html>
