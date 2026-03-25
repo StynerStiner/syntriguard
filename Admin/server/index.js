@@ -38,6 +38,7 @@ app.use('/api/sheets', require('./routes/sheets'));
 app.use('/api/uploads', require('./routes/uploads'));
 app.use('/api/scoring', require('./routes/scoring'));
 app.use('/api/settings', require('./routes/settings'));
+app.use('/api/map-data', require('./routes/map-data'));
 
 // Clean URL routes — map friendly paths to HTML files
 const cleanRoutes = {
