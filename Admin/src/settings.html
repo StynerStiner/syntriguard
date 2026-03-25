@@ -246,6 +246,59 @@
 
                                 <h5 class="mb-3">Database Info</h5>
                                 <div id="db-info" class="text-muted">Loading...</div>
+
+                                <hr class="my-4">
+
+                                <!-- Fresh Start -->
+                                <div class="border border-danger border-opacity-25 rounded p-3">
+                                    <div class="d-flex align-items-center gap-2 mb-3">
+                                        <i class="ti ti-refresh-alert text-danger fs-24"></i>
+                                        <div>
+                                            <h5 class="mb-0 text-danger">Fresh Start — Reset Data</h5>
+                                            <p class="text-muted mb-0">Clear demo data so you can enter your own. Admin account is never deleted.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-column gap-2 mb-3">
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" class="form-check-input" id="reset-guards" checked>
+                                            <span>Guards <span class="text-muted" id="reset-guards-count">(0)</span></span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" class="form-check-input" id="reset-shifts" checked>
+                                            <span>Shifts & Schedule <span class="text-muted" id="reset-shifts-count">(0)</span></span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" class="form-check-input" id="reset-incidents" checked>
+                                            <span>Incidents <span class="text-muted" id="reset-incidents-count">(0)</span></span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" class="form-check-input" id="reset-clients" checked>
+                                            <span>Clients & Sites <span class="text-muted" id="reset-clients-count">(0)</span></span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" class="form-check-input" id="reset-messages" checked>
+                                            <span>Messages <span class="text-muted" id="reset-messages-count">(0)</span></span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2">
+                                            <input type="checkbox" class="form-check-input" id="reset-ai">
+                                            <span>AI Conversations <span class="text-muted" id="reset-ai-count">(0)</span></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label text-danger fw-semibold">Type RESET to confirm</label>
+                                        <input type="text" class="form-control" id="reset-confirm-input" placeholder="Type RESET here...">
+                                    </div>
+
+                                    <button class="btn btn-danger w-100" id="btn-fresh-start" disabled>
+                                        <i class="ti ti-trash me-1"></i> Clear Selected Data & Start Fresh
+                                    </button>
+
+                                    <div class="alert alert-success mt-3 d-none" id="reset-success">
+                                        <i class="ti ti-check me-1"></i> Data cleared! You can now enter your own data.
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -404,7 +457,7 @@
 
                 // Load data for specific tabs
                 if (this.getAttribute('data-tab') === 'users') loadUsers();
-                if (this.getAttribute('data-tab') === 'data') loadDbInfo();
+                if (this.getAttribute('data-tab') === 'data') { loadDbInfo(); loadResetCounts(); }
             });
         });
 
@@ -418,7 +471,78 @@
                 });
             }
         });
+
+        // ── Fresh Start / Reset ──
+        var resetInput = document.getElementById('reset-confirm-input');
+        var resetBtn = document.getElementById('btn-fresh-start');
+
+        if (resetInput && resetBtn) {
+            resetInput.addEventListener('input', function () {
+                resetBtn.disabled = this.value.trim() !== 'RESET';
+            });
+
+            resetBtn.addEventListener('click', async function () {
+                if (resetInput.value.trim() !== 'RESET') return;
+
+                var tables = [];
+                if (document.getElementById('reset-guards').checked) tables.push('guards');
+                if (document.getElementById('reset-shifts').checked) tables.push('shifts');
+                if (document.getElementById('reset-incidents').checked) tables.push('incidents');
+                if (document.getElementById('reset-clients').checked) tables.push('clients');
+                if (document.getElementById('reset-messages').checked) tables.push('messages');
+                if (document.getElementById('reset-ai').checked) tables.push('ai_conversations');
+
+                if (tables.length === 0) { alert('Please select at least one category to clear.'); return; }
+
+                resetBtn.disabled = true;
+                resetBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Clearing...';
+
+                try {
+                    var token = localStorage.getItem('sg_token');
+                    var resp = await fetch('/api/settings/reset', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+                        body: JSON.stringify({ tables: tables })
+                    });
+                    var result = await resp.json();
+                    if (!resp.ok) throw new Error(result.error || 'Failed');
+
+                    document.getElementById('reset-success').classList.remove('d-none');
+                    resetInput.value = '';
+                    resetBtn.innerHTML = '<i class="ti ti-check me-1"></i> Done!';
+                    loadResetCounts();
+                    loadDbInfo();
+                } catch (err) {
+                    alert('Reset failed: ' + err.message);
+                    resetBtn.innerHTML = '<i class="ti ti-trash me-1"></i> Clear Selected Data & Start Fresh';
+                    resetBtn.disabled = false;
+                }
+            });
+        }
     });
+
+    async function loadResetCounts() {
+        try {
+            var token = localStorage.getItem('sg_token');
+            var resp = await fetch('/api/settings/counts', { headers: { 'Authorization': 'Bearer ' + token } });
+            if (!resp.ok) return;
+            var counts = await resp.json();
+
+            var map = {
+                'guards': counts.guards,
+                'shifts': counts.shifts,
+                'incidents': counts.incidents,
+                'clients': parseInt(counts.clients) + parseInt(counts.sites),
+                'messages': counts.messages,
+                'ai': counts.ai_conversations
+            };
+
+            Object.keys(map).forEach(function (key) {
+                var el = document.getElementById('reset-' + key + '-count');
+                if (el) el.textContent = '(' + map[key] + ')';
+            });
+        } catch (err) {}
+    }
     </script>
 
 </body>
