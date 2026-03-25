@@ -8,8 +8,10 @@
     <!-- Mobile layout only — no font changes -->
     <style>
         @media (max-width: 768px) {
-            .fc .fc-header-toolbar { justify-content: center !important; }
+            .fc .fc-header-toolbar { justify-content: center !important; width: 100% !important; }
             .fc .fc-toolbar-chunk:first-child, .fc .fc-toolbar-chunk:nth-child(2) { display: none !important; }
+            .fc .fc-toolbar-chunk:last-child { width: 100% !important; text-align: center !important; }
+            .fc .fc-toolbar-chunk:last-child .fc-button-group { display: flex !important; justify-content: center !important; }
             .shift-types-mobile { display: flex !important; }
             .shift-types-desktop { display: none !important; }
         }
