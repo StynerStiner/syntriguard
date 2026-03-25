@@ -547,6 +547,7 @@ class CalendarSchedule {
         var prevBtn = document.getElementById('cal-prev-month');
         var nextBtn = document.getElementById('cal-next-month');
         var todayBtn = document.getElementById('cal-today-btn');
+        var todayBtnMobile = document.getElementById('cal-today-btn-mobile');
 
         if (prevBtn) prevBtn.addEventListener('click', function () {
             self.calendarObj.prev();
@@ -557,6 +558,10 @@ class CalendarSchedule {
             syncDropdowns();
         });
         if (todayBtn) todayBtn.addEventListener('click', function () {
+            self.calendarObj.today();
+            syncDropdowns();
+        });
+        if (todayBtnMobile) todayBtnMobile.addEventListener('click', function () {
             self.calendarObj.today();
             syncDropdowns();
         });
