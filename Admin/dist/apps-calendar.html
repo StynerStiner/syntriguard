@@ -23,14 +23,11 @@
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Mobile scheduler optimizations -->
+    <!-- Mobile layout only — no font changes -->
     <style>
         @media (max-width: 768px) {
             .fc .fc-toolbar { flex-wrap: wrap !important; gap: 8px !important; justify-content: center !important; }
-            .fc .fc-toolbar-title { font-size: 18px !important; width: 100% !important; text-align: center !important; }
-            .fc .fc-button { padding: 6px 10px !important; font-size: 13px !important; min-height: 40px !important; }
-            .fc .fc-daygrid-day-number { font-size: 13px !important; padding: 4px !important; }
-            .fc .fc-col-header-cell-cushion { font-size: 12px !important; }
+            .fc .fc-toolbar-title { width: 100% !important; text-align: center !important; }
             .shift-types-mobile { display: flex !important; }
             .shift-types-desktop { display: none !important; }
         }
@@ -632,8 +629,8 @@
                     <div class="card-body py-2 px-3">
                         <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                             <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
-                            <select class="form-select" id="cal-month-select" style="width: auto; min-width: 130px;"></select>
-                            <select class="form-select" id="cal-year-select" style="width: auto; min-width: 90px;"></select>
+                            <select class="form-select w-auto" id="cal-month-select"></select>
+                            <select class="form-select w-auto" id="cal-year-select"></select>
                             <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
                             <button class="btn btn-primary" id="cal-today-btn">Today</button>
                         </div>
