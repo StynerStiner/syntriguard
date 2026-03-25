@@ -244,16 +244,14 @@
                             </div>
 
                             <div class="px-3 py-3 border-top w-100 mb-0">
-                                <form class="d-flex align-items-end gap-2 w-100" name="chat-form" id="chat-form">
-                                    <div class="flex-grow-1 position-relative">
-                                        <textarea name="message" id="ai-chat-input" class="form-control rounded-3" placeholder="Ask SyntriGuard AI anything..." required rows="1"></textarea>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-1">
-                                        <button type="button" class="btn btn-icon btn-soft-primary" id="btn-voice-input" title="Voice input">
+                                <form class="position-relative w-100" name="chat-form" id="chat-form">
+                                    <textarea name="message" id="ai-chat-input" class="form-control rounded-pill pe-5" placeholder="Ask SyntriGuard AI..." required rows="1"></textarea>
+                                    <div class="position-absolute end-0 top-50 translate-middle-y d-flex align-items-center gap-1 me-2">
+                                        <button type="button" class="btn btn-icon btn-ghost-primary p-0" id="btn-voice-input" title="Voice input">
                                             <i class="ti ti-microphone fs-20"></i>
                                         </button>
-                                        <button type="submit" class="btn btn-icon btn-success chat-send">
-                                            <i class="ti ti-send fs-20"></i>
+                                        <button type="submit" class="btn btn-icon btn-success rounded-circle chat-send">
+                                            <i class="ti ti-send fs-18"></i>
                                         </button>
                                     </div>
                                 </form>
