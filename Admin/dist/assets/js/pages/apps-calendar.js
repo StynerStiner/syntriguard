@@ -477,6 +477,71 @@ class CalendarSchedule {
             });
         }
 
+        // ── Month/Year Jump Navigation ──
+        var monthSelect = document.getElementById('cal-month-select');
+        var yearSelect = document.getElementById('cal-year-select');
+        var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+        // Populate month dropdown
+        if (monthSelect) {
+            monthNames.forEach(function (m, idx) {
+                var opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = m;
+                monthSelect.appendChild(opt);
+            });
+            monthSelect.value = new Date().getMonth();
+        }
+
+        // Populate year dropdown (current year ± 3)
+        if (yearSelect) {
+            var currentYear = new Date().getFullYear();
+            for (var y = currentYear - 2; y <= currentYear + 3; y++) {
+                var opt = document.createElement('option');
+                opt.value = y;
+                opt.textContent = y;
+                yearSelect.appendChild(opt);
+            }
+            yearSelect.value = currentYear;
+        }
+
+        function jumpToDate() {
+            if (!self.calendarObj || !monthSelect || !yearSelect) return;
+            var m = parseInt(monthSelect.value);
+            var y = parseInt(yearSelect.value);
+            self.calendarObj.gotoDate(new Date(y, m, 1));
+        }
+
+        function syncDropdowns() {
+            if (!self.calendarObj || !monthSelect || !yearSelect) return;
+            var d = self.calendarObj.getDate();
+            monthSelect.value = d.getMonth();
+            yearSelect.value = d.getFullYear();
+        }
+
+        if (monthSelect) monthSelect.addEventListener('change', jumpToDate);
+        if (yearSelect) yearSelect.addEventListener('change', jumpToDate);
+
+        var prevBtn = document.getElementById('cal-prev-month');
+        var nextBtn = document.getElementById('cal-next-month');
+        var todayBtn = document.getElementById('cal-today-btn');
+
+        if (prevBtn) prevBtn.addEventListener('click', function () {
+            self.calendarObj.prev();
+            syncDropdowns();
+        });
+        if (nextBtn) nextBtn.addEventListener('click', function () {
+            self.calendarObj.next();
+            syncDropdowns();
+        });
+        if (todayBtn) todayBtn.addEventListener('click', function () {
+            self.calendarObj.today();
+            syncDropdowns();
+        });
+
+        // Sync dropdowns when FullCalendar nav buttons are used
+        self.calendarObj.on('datesSet', function () { syncDropdowns(); });
+
         // Populate today's shifts panel
         self.populateTodayShifts(apiEvents);
     }
