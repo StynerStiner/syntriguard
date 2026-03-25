@@ -10,6 +10,9 @@ server/.env
 # Build output (can be regenerated)
 Admin/dist/
 
+# Template documentation (not ours)
+Documentation/
+
 # OS files
 .DS_Store
 Thumbs.db
