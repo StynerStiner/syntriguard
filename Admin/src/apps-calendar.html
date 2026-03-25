@@ -8,8 +8,7 @@
     <!-- Mobile layout only — no font changes -->
     <style>
         @media (max-width: 768px) {
-            .fc .fc-toolbar { flex-wrap: wrap !important; gap: 8px !important; justify-content: center !important; }
-            .fc .fc-toolbar-title { width: 100% !important; text-align: center !important; }
+            .fc .fc-header-toolbar { display: none !important; }
             .shift-types-mobile { display: flex !important; }
             .shift-types-desktop { display: none !important; }
         }
@@ -64,18 +63,24 @@
                 <!-- Month/Year Jump — works on all sizes -->
                 <div class="card mb-2">
                     <div class="card-body py-2 px-3">
-                        <div class="d-flex align-items-center justify-content-center gap-1">
-                            <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button>
-                                <div class="dropdown-menu" id="cal-month-menu"></div>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center gap-1">
+                                <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button>
+                                    <div class="dropdown-menu" id="cal-month-menu"></div>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button>
+                                    <div class="dropdown-menu" id="cal-year-menu"></div>
+                                </div>
+                                <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
                             </div>
-                            <div class="dropdown">
-                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button>
-                                <div class="dropdown-menu" id="cal-year-menu"></div>
+                            <div class="d-flex align-items-center gap-1">
+                                <button class="btn btn-primary" id="cal-today-btn">Today</button>
+                                <button class="btn btn-light shift-types-mobile" id="cal-view-list">List</button>
+                                <button class="btn btn-light shift-types-mobile" id="cal-view-month">Month</button>
                             </div>
-                            <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
-                            <button class="btn btn-primary ms-1" id="cal-today-btn">Today</button>
                         </div>
                     </div>
                 </div>
