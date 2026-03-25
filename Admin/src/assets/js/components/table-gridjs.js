@@ -214,10 +214,16 @@ async function loadGuards() {
             }
         ],
         data: data,
-        pagination: { limit: 10 },
+        pagination: {
+            limit: 10,
+            buttonsCount: 2
+        },
         search: true,
         sort: true,
-        language: { search: { placeholder: "Search guards..." } }
+        language: {
+            search: { placeholder: "Search guards..." },
+            pagination: { previous: '←', next: '→' }
+        }
     }).render(container);
 }
 
