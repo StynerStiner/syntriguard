@@ -234,14 +234,14 @@
                                         <i class="ti ti-menu-2 fs-20"></i>
                                     </button>
 
-                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" data-guard-avatar class="avatar-lg rounded-circle" alt="">
+                                    <img src="https://pub-bb4fc0a4a29548cc9136a6cdb4882573.r2.dev/founder-headshot/raoulstiner.png" id="chat-active-avatar" class="avatar-lg rounded-circle" alt="">
 
                                     <div>
                                         <h5 class="my-0 lh-base">
-                                            <a href="#" class="text-reset">Marcus Redan</a>
+                                            <a href="#" class="text-reset" id="chat-active-name">Select a guard</a>
                                         </h5>
-                                        <p class="mb-0 text-muted">
-                                            <small class="ti ti-circle-filled text-success"></small> Online — Presidential Palace
+                                        <p class="mb-0 text-muted" id="chat-active-status">
+                                            <small class="ti ti-circle-filled text-muted"></small> Click a guard to start
                                         </p>
                                     </div>
                                 </div>
@@ -397,7 +397,7 @@
                                         </button>
                                     </div>
 
-                                    <input type="text" name="message" id="chat-form" class="form-control" placeholder="Message Marcus Redan..." required>
+                                    <input type="text" name="message" id="chat-input" class="form-control" placeholder="Type a message..." required>
 
                                     <div class="d-flex align-items-center gap-1">
                                         <button type="submit" class="btn btn-icon btn-success chat-send"><i class='ti ti-send'></i></button>

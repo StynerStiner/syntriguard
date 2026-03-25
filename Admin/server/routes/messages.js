@@ -2,7 +2,7 @@ const router = require('express').Router();
 const db = require('../db');
 const auth = require('../middleware/auth');
 
-// GET /api/messages/unread/count — get unread message count for current user
+// GET /api/messages/unread/count
 router.get('/unread/count', auth, async (req, res) => {
   try {
     const result = await db.query(
@@ -13,72 +13,66 @@ router.get('/unread/count', auth, async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// GET /api/messages/conversation/:userId — get messages between current user and userId
-router.get('/conversation/:userId', auth, async (req, res) => {
+// GET /api/messages/conversation/:guardId — messages between admin and a guard
+router.get('/conversation/:guardId', auth, async (req, res) => {
   try {
-    const otherUserId = req.params.userId;
-    const currentUserId = req.user.id;
-    const limit = parseInt(req.query.limit) || 50;
-    const offset = parseInt(req.query.offset) || 0;
+    var guardId = parseInt(req.params.guardId);
+    var userId = req.user.id;
+    var limit = parseInt(req.query.limit) || 50;
 
-    const result = await db.query(`
-      SELECT m.*, u.full_name as sender_name, u.avatar_url as sender_avatar
+    // Use negative guard IDs as a convention: guard messages use guard_id in sender/receiver
+    // We store: sender_id = user.id (admin) or -(guard.id) for guard-sent messages
+    // receiver_id = -(guard.id) for admin-to-guard, user.id for guard-to-admin
+    var result = await db.query(`
+      SELECT m.*,
+        CASE WHEN m.sender_id = $1 THEN 'admin' ELSE 'guard' END as direction
       FROM messages m
-      LEFT JOIN users u ON m.sender_id = u.id
       WHERE (m.sender_id = $1 AND m.receiver_id = $2)
          OR (m.sender_id = $2 AND m.receiver_id = $1)
       ORDER BY m.created_at ASC
-      LIMIT $3 OFFSET $4
-    `, [currentUserId, otherUserId, limit, offset]);
+      LIMIT $3
+    `, [userId, -guardId, limit]);
 
-    // Mark messages from the other user as read
+    // Mark received messages as read
     await db.query(
       'UPDATE messages SET is_read = true WHERE sender_id = $1 AND receiver_id = $2 AND is_read = false',
-      [otherUserId, currentUserId]
+      [-guardId, userId]
     );
 
     res.json(result.rows);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// GET /api/messages/:userId — get all messages for a user (existing behavior)
-router.get('/:userId', auth, async (req, res) => {
-  try {
-    const result = await db.query(`
-      SELECT m.*, u.full_name as sender_name, u.avatar_url as sender_avatar
-      FROM messages m
-      LEFT JOIN users u ON m.sender_id = u.id
-      WHERE m.sender_id = $1 OR m.receiver_id = $1
-      ORDER BY m.created_at DESC
-      LIMIT 50
-    `, [req.params.userId]);
-    res.json(result.rows);
-  } catch (err) { res.status(500).json({ error: err.message }); }
-});
-
-// POST /api/messages — send a new message
+// POST /api/messages — send message to a guard
 router.post('/', auth, async (req, res) => {
   try {
-    const { receiver_id, content, message_type } = req.body;
-    const result = await db.query(
-      'INSERT INTO messages (sender_id, receiver_id, content, message_type) VALUES ($1, $2, $3, COALESCE($4, $5)) RETURNING *',
-      [req.user.id, receiver_id, content, message_type, 'text']
+    var { guard_id, content } = req.body;
+    if (!guard_id || !content) return res.status(400).json({ error: 'guard_id and content required' });
+
+    var result = await db.query(
+      'INSERT INTO messages (sender_id, receiver_id, content, message_type, is_read) VALUES ($1, $2, $3, $4, false) RETURNING *',
+      [req.user.id, -parseInt(guard_id), content, 'text']
     );
     res.status(201).json(result.rows[0]);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
-// PUT /api/messages/:id/read — mark a specific message as read
-router.put('/:id/read', auth, async (req, res) => {
+// GET /api/messages/latest — get latest message per guard for sidebar
+router.get('/latest', auth, async (req, res) => {
   try {
-    const result = await db.query(
-      'UPDATE messages SET is_read = true WHERE id = $1 AND receiver_id = $2 RETURNING *',
-      [req.params.id, req.user.id]
-    );
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Message not found or not authorized' });
-    }
-    res.json(result.rows[0]);
+    var userId = req.user.id;
+    var result = await db.query(`
+      SELECT DISTINCT ON (guard_id) guard_id, content, created_at, is_read, direction
+      FROM (
+        SELECT -(m.receiver_id) as guard_id, m.content, m.created_at, m.is_read, 'sent' as direction
+        FROM messages m WHERE m.sender_id = $1 AND m.receiver_id < 0
+        UNION ALL
+        SELECT -(m.sender_id) as guard_id, m.content, m.created_at, m.is_read, 'received' as direction
+        FROM messages m WHERE m.receiver_id = $1 AND m.sender_id < 0
+      ) sub
+      ORDER BY guard_id, created_at DESC
+    `, [userId]);
+    res.json(result.rows);
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
