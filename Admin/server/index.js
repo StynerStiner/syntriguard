@@ -1,4 +1,7 @@
-require('dotenv').config({ path: require('path').join(__dirname, '.env') });
+// Only load .env locally — Vercel injects env vars natively
+if (!process.env.VERCEL) {
+  require('dotenv').config({ path: require('path').join(__dirname, '.env') });
+}
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
