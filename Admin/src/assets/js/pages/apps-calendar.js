@@ -276,22 +276,24 @@ class CalendarSchedule {
             slotMaxTime: '23:00:00',
             themeSystem: 'bootstrap',
             bootstrapFontAwesome: false,
+            initialView: window.innerWidth < 768 ? 'listWeek' : 'dayGridMonth',
+            handleWindowResize: true,
+            height: window.innerWidth < 768 ? 'auto' : (window.innerHeight - 200),
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: window.innerWidth < 768 ? 'listWeek,dayGridMonth' : 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            },
             buttonText: {
                 today: 'Today',
                 month: 'Month',
                 week: 'Week',
                 day: 'Day',
                 list: 'List',
-                prev: 'Prev',
-                next: 'Next'
-            },
-            initialView: 'dayGridMonth',
-            handleWindowResize: true,
-            height: window.innerHeight - 200,
-            headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                listWeek: 'List',
+                listMonth: 'List',
+                prev: '←',
+                next: '→'
             },
             initialEvents: apiEvents,
             editable: true,
@@ -467,6 +469,52 @@ class CalendarSchedule {
                 }
             }
         });
+        // Wire mobile Add Shift button
+        var mobileBtn = document.getElementById('btn-new-event-mobile');
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', function () {
+                self.onSelect({ date: new Date(), allDay: true });
+            });
+        }
+
+        // Populate today's shifts panel
+        self.populateTodayShifts(apiEvents);
+    }
+
+    populateTodayShifts(events) {
+        var todayList = document.getElementById('today-shifts-list');
+        var countBadge = document.getElementById('today-shift-count');
+        if (!todayList) return;
+
+        var today = new Date().toISOString().split('T')[0];
+        var todayShifts = events.filter(function (ev) {
+            return ev.start && ev.start.startsWith(today);
+        });
+
+        if (countBadge) countBadge.textContent = todayShifts.length + ' shift' + (todayShifts.length !== 1 ? 's' : '');
+
+        if (todayShifts.length === 0) {
+            todayList.innerHTML = '<p class="text-muted fs-13 mb-0">No shifts scheduled today</p>';
+            return;
+        }
+
+        var html = '';
+        todayShifts.forEach(function (ev) {
+            var props = ev.extendedProps || {};
+            var time = ev.start.split('T')[1] ? ev.start.split('T')[1].substring(0, 5) : '';
+            var endTime = ev.end && ev.end.split('T')[1] ? ev.end.split('T')[1].substring(0, 5) : '';
+            var colorClass = ev.className || 'bg-secondary';
+
+            html += '<div class="d-flex align-items-center gap-2 py-1 border-bottom border-dashed">' +
+                '<span class="shift-dot ' + colorClass + '"></span>' +
+                '<div class="flex-grow-1">' +
+                '<span class="fs-13 fw-semibold">' + (props.guardName || 'Unassigned') + '</span>' +
+                '<span class="text-muted fs-12 ms-1">' + (props.siteName || '') + '</span>' +
+                '</div>' +
+                '<span class="text-muted fs-12">' + time + (endTime ? ' - ' + endTime : '') + '</span>' +
+                '</div>';
+        });
+        todayList.innerHTML = html;
     }
 
 }

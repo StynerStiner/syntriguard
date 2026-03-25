@@ -22,6 +22,24 @@
 
     <!-- Icons css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Mobile scheduler optimizations -->
+    <style>
+        @media (max-width: 768px) {
+            .fc .fc-toolbar { flex-wrap: wrap !important; gap: 8px !important; justify-content: center !important; }
+            .fc .fc-toolbar-title { font-size: 18px !important; width: 100% !important; text-align: center !important; }
+            .fc .fc-button { padding: 6px 10px !important; font-size: 13px !important; min-height: 40px !important; }
+            .fc .fc-daygrid-day-number { font-size: 13px !important; padding: 4px !important; }
+            .fc .fc-col-header-cell-cushion { font-size: 12px !important; }
+            .shift-types-mobile { display: flex !important; }
+            .shift-types-desktop { display: none !important; }
+        }
+        @media (min-width: 769px) {
+            .shift-types-mobile { display: none !important; }
+            .shift-types-desktop { display: block !important; }
+        }
+        .shift-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    </style>
 </head>
 
 <body>
@@ -579,8 +597,39 @@
 
             <div class="page-container">
 
+                <!-- Mobile: Compact shift types + Add button -->
+                <div class="card shift-types-mobile mb-2">
+                    <div class="card-body py-2 px-3">
+                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                            <div class="d-flex flex-wrap align-items-center gap-3">
+                                <span class="d-flex align-items-center gap-1 fs-13"><span class="shift-dot bg-success"></span> Morning</span>
+                                <span class="d-flex align-items-center gap-1 fs-13"><span class="shift-dot bg-primary"></span> Afternoon</span>
+                                <span class="d-flex align-items-center gap-1 fs-13"><span class="shift-dot bg-danger"></span> Overnight</span>
+                                <span class="d-flex align-items-center gap-1 fs-13"><span class="shift-dot bg-warning"></span> Training</span>
+                            </div>
+                            <button class="btn btn-primary" id="btn-new-event-mobile">
+                                <i class="ti ti-plus me-1"></i> Add Shift
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile: Today's Shifts quick panel -->
+                <div class="card shift-types-mobile mb-2">
+                    <div class="card-body py-2 px-3">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h6 class="mb-0 fw-semibold">Today's Shifts</h6>
+                            <span class="badge bg-primary-subtle text-primary" id="today-shift-count">0 shifts</span>
+                        </div>
+                        <div id="today-shifts-list" class="d-flex flex-column gap-1">
+                            <p class="text-muted fs-13 mb-0">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col-xl-3">
+                    <!-- Desktop: Full sidebar -->
+                    <div class="col-xl-3 shift-types-desktop">
                         <div class="card">
                             <div class="card-body">
                                 <button class="btn btn-primary w-100" id="btn-new-event">
@@ -623,7 +672,7 @@
 
                 <!-- Add New Shift MODAL -->
                 <div class="modal fade" id="event-modal" tabindex="-1">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <form class="needs-validation" name="event-form" id="forms-event" novalidate>
                                 <div class="modal-header">
