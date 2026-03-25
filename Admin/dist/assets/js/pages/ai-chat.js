@@ -606,7 +606,29 @@ aiChatInstance.init();
 var voiceBtn = document.getElementById('btn-voice-input');
 var voiceStatus = document.getElementById('voice-status');
 var isListening = false;
+var stoppedManually = false;
 var recognition = null;
+
+function setMicOff() {
+    isListening = false;
+    if (voiceBtn) {
+        voiceBtn.innerHTML = '<i class="ti ti-microphone fs-20"></i>';
+        voiceBtn.classList.remove('btn-danger', 'btn-soft-danger', 'text-danger');
+        voiceBtn.classList.add('btn-ghost-primary');
+    }
+    if (voiceStatus) voiceStatus.classList.add('d-none');
+}
+
+function setMicOn() {
+    isListening = true;
+    stoppedManually = false;
+    if (voiceBtn) {
+        voiceBtn.innerHTML = '<i class="ti ti-microphone-off fs-20 text-white"></i>';
+        voiceBtn.classList.remove('btn-ghost-primary');
+        voiceBtn.classList.add('btn-danger');
+    }
+    if (voiceStatus) voiceStatus.classList.remove('d-none');
+}
 
 if (voiceBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -615,12 +637,7 @@ if (voiceBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in w
     recognition.interimResults = true;
     recognition.lang = 'en-US';
 
-    recognition.onstart = function () {
-        isListening = true;
-        voiceBtn.classList.remove('btn-soft-primary');
-        voiceBtn.classList.add('btn-danger');
-        if (voiceStatus) voiceStatus.classList.remove('d-none');
-    };
+    recognition.onstart = function () { setMicOn(); };
 
     recognition.onresult = function (event) {
         var transcript = '';
@@ -632,39 +649,35 @@ if (voiceBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in w
     };
 
     recognition.onend = function () {
-        isListening = false;
-        voiceBtn.classList.remove('btn-danger');
-        voiceBtn.classList.add('btn-soft-primary');
-        if (voiceStatus) voiceStatus.classList.add('d-none');
+        setMicOff();
 
-        // Auto-submit if we got text
-        var input = document.getElementById('ai-chat-input');
-        if (input && input.value.trim().length > 0) {
-            var msg = input.value.trim();
-            input.value = '';
-            aiChatInstance.sendMessage(msg);
+        // Only auto-submit if user didn't manually stop
+        if (!stoppedManually) {
+            var input = document.getElementById('ai-chat-input');
+            if (input && input.value.trim().length > 0) {
+                var msg = input.value.trim();
+                input.value = '';
+                aiChatInstance.sendMessage(msg);
+            }
         }
     };
 
     recognition.onerror = function (event) {
-        isListening = false;
-        voiceBtn.classList.remove('btn-danger');
-        voiceBtn.classList.add('btn-soft-primary');
-        if (voiceStatus) voiceStatus.classList.add('d-none');
-        if (event.error !== 'no-speech') {
+        setMicOff();
+        if (event.error !== 'no-speech' && event.error !== 'aborted') {
             console.error('Speech recognition error:', event.error);
         }
     };
 
     voiceBtn.addEventListener('click', function () {
         if (isListening) {
+            stoppedManually = true;
             recognition.stop();
         } else {
             recognition.start();
         }
     });
 } else if (voiceBtn) {
-    // Browser doesn't support speech recognition — hide button
     voiceBtn.classList.add('d-none');
 }
 
