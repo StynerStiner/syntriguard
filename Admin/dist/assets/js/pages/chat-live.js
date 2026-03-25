@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             leads.forEach(function (g, idx) {
                 var avatar = g.avatar_url || DEFAULT_AVATAR;
-                var name = g.name || 'Unknown';
+                var name = g.full_name || g.name || 'Unknown';
                 var role = g.role || 'Guard';
                 var activeClass = idx === 0 ? ' active' : '';
                 var onlineClass = g.status === 'on_duty' ? 'chat-avatar-online' : 'chat-avatar-offline';
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             others.forEach(function (g) {
                 var avatar = g.avatar_url || DEFAULT_AVATAR;
-                var name = g.name || 'Unknown';
+                var name = g.full_name || g.name || 'Unknown';
                 var subtitle = g.site_name ? 'On duty \u2014 ' + g.site_name : (g.role || 'Guard');
                 var onlineClass = g.status === 'on_duty' ? 'chat-avatar-online' : 'chat-avatar-offline';
 
