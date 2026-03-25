@@ -565,8 +565,56 @@ class CalendarSchedule {
         self.calendarObj.on('datesSet', function () { syncDropdowns(); });
         syncDropdowns();
 
-        // Populate today's shifts panel
+        // Populate all panels
         self.populateTodayShifts(apiEvents);
+        self.populateGuardAvailability(apiEvents);
+        self.populateWeeklyHours(apiEvents);
+        self.detectUnassignedShifts(apiEvents);
+        self.detectConflicts(apiEvents);
+
+        // Wire export buttons
+        var exportSheetsBtn = document.getElementById('btn-export-schedule-sheets');
+        if (exportSheetsBtn) {
+            exportSheetsBtn.addEventListener('click', async function () {
+                exportSheetsBtn.querySelector('.fw-semibold').textContent = 'Exporting...';
+                try {
+                    await SyntriGuard.syncScheduleSheet();
+                    exportSheetsBtn.querySelector('.fw-semibold').textContent = 'Exported!';
+                    setTimeout(function () { exportSheetsBtn.querySelector('.fw-semibold').textContent = 'Export to Sheets'; }, 2000);
+                } catch (err) {
+                    alert('Export failed: ' + err.message);
+                    exportSheetsBtn.querySelector('.fw-semibold').textContent = 'Export to Sheets';
+                }
+            });
+        }
+
+        var exportPdfBtn = document.getElementById('btn-export-schedule-pdf');
+        if (exportPdfBtn) {
+            exportPdfBtn.addEventListener('click', function () {
+                if (typeof SyntriGuard !== 'undefined') SyntriGuard.downloadPDF('schedule');
+            });
+        }
+
+        // Wire Copy Last Week
+        var copyWeekBtn = document.getElementById('btn-copy-week');
+        if (copyWeekBtn) {
+            copyWeekBtn.addEventListener('click', async function () {
+                if (!confirm('Copy last week\'s shifts to this week? This will create new shifts.')) return;
+                copyWeekBtn.querySelector('.fw-semibold').textContent = 'Copying...';
+                try {
+                    await self.copyLastWeek();
+                    copyWeekBtn.querySelector('.fw-semibold').textContent = 'Copied!';
+                    await self.reloadCalendarEvents();
+                    var freshEvents = await self.loadShiftsFromAPI();
+                    self.populateWeeklyHours(freshEvents);
+                    self.populateTodayShifts(freshEvents);
+                    setTimeout(function () { copyWeekBtn.querySelector('.fw-semibold').textContent = 'Copy Last Week'; }, 2000);
+                } catch (err) {
+                    alert('Failed: ' + err.message);
+                    copyWeekBtn.querySelector('.fw-semibold').textContent = 'Copy Last Week';
+                }
+            });
+        }
     }
 
     populateTodayShifts(events) {
@@ -603,6 +651,230 @@ class CalendarSchedule {
                 '</div>';
         });
         todayList.innerHTML = html;
+    }
+
+    // ── Guard Availability Panel ──
+    populateGuardAvailability(events) {
+        var list = document.getElementById('guard-availability-list');
+        var countBadge = document.getElementById('avail-count');
+        if (!list || !this.guardsCache) return;
+
+        var today = new Date().toISOString().split('T')[0];
+        var busyGuardIds = {};
+        events.forEach(function (ev) {
+            if (ev.start && ev.start.startsWith(today) && ev.extendedProps && ev.extendedProps.guardId) {
+                busyGuardIds[ev.extendedProps.guardId] = ev.extendedProps.siteName || 'On duty';
+            }
+        });
+
+        var available = [];
+        var onDuty = [];
+        this.guardsCache.forEach(function (g) {
+            if (busyGuardIds[g.id]) {
+                onDuty.push({ guard: g, site: busyGuardIds[g.id] });
+            } else {
+                available.push(g);
+            }
+        });
+
+        if (countBadge) countBadge.textContent = available.length + ' available';
+
+        var html = '';
+        available.forEach(function (g) {
+            html += '<div class="d-flex align-items-center gap-2 px-3 py-2 border-bottom border-dashed">' +
+                '<span class="shift-dot bg-success"></span>' +
+                '<span class="fw-semibold flex-grow-1">' + (g.full_name || 'Guard') + '</span>' +
+                '<span class="badge bg-success-subtle text-success">Available</span>' +
+                '</div>';
+        });
+        onDuty.forEach(function (item) {
+            html += '<div class="d-flex align-items-center gap-2 px-3 py-2 border-bottom border-dashed">' +
+                '<span class="shift-dot bg-primary"></span>' +
+                '<span class="fw-semibold flex-grow-1">' + (item.guard.full_name || 'Guard') + '</span>' +
+                '<span class="badge bg-primary-subtle text-primary">' + item.site + '</span>' +
+                '</div>';
+        });
+
+        if (!html) html = '<p class="text-muted px-3 py-2 mb-0">No guards loaded</p>';
+        list.innerHTML = html;
+    }
+
+    // ── Weekly Hours Summary ──
+    populateWeeklyHours(events) {
+        var tbody = document.getElementById('weekly-hours-body');
+        var totalBadge = document.getElementById('week-total-hours');
+        if (!tbody) return;
+
+        // Get current week bounds (Monday to Sunday)
+        var now = new Date();
+        var dayOfWeek = now.getDay();
+        var monday = new Date(now);
+        monday.setDate(now.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1));
+        monday.setHours(0, 0, 0, 0);
+        var sunday = new Date(monday);
+        sunday.setDate(monday.getDate() + 6);
+        sunday.setHours(23, 59, 59, 999);
+
+        var monStr = monday.toISOString().split('T')[0];
+        var sunStr = sunday.toISOString().split('T')[0];
+
+        // Calculate hours per guard
+        var guardHours = {};
+        var guardShiftCount = {};
+        var totalHours = 0;
+
+        events.forEach(function (ev) {
+            if (!ev.start || !ev.extendedProps) return;
+            var dateStr = ev.start.split('T')[0];
+            if (dateStr < monStr || dateStr > sunStr) return;
+
+            var guardId = ev.extendedProps.guardId;
+            var guardName = ev.extendedProps.guardName || 'Unassigned';
+            if (!guardId) return;
+
+            var startTime = ev.start.split('T')[1] || '06:00';
+            var endTime = ev.end ? ev.end.split('T')[1] || '14:00' : '14:00';
+            var startH = parseInt(startTime.split(':')[0]) + parseInt(startTime.split(':')[1]) / 60;
+            var endH = parseInt(endTime.split(':')[0]) + parseInt(endTime.split(':')[1]) / 60;
+            var hours = endH > startH ? endH - startH : (24 - startH + endH);
+
+            var key = guardId + '|' + guardName;
+            guardHours[key] = (guardHours[key] || 0) + hours;
+            guardShiftCount[key] = (guardShiftCount[key] || 0) + 1;
+            totalHours += hours;
+        });
+
+        if (totalBadge) totalBadge.textContent = Math.round(totalHours) + ' hrs total';
+
+        // Sort by hours descending
+        var entries = Object.keys(guardHours).map(function (key) {
+            var parts = key.split('|');
+            return { id: parts[0], name: parts[1], hours: guardHours[key], shifts: guardShiftCount[key] };
+        });
+        entries.sort(function (a, b) { return b.hours - a.hours; });
+
+        var html = '';
+        entries.forEach(function (e) {
+            var hoursClass = e.hours > 48 ? 'text-danger fw-bold' : (e.hours > 40 ? 'text-warning' : '');
+            html += '<tr>' +
+                '<td class="ps-3">' + e.name + '</td>' +
+                '<td class="text-center ' + hoursClass + '">' + Math.round(e.hours) + 'h</td>' +
+                '<td class="text-center pe-3">' + e.shifts + '</td>' +
+                '</tr>';
+        });
+
+        if (!html) html = '<tr><td colspan="3" class="text-center text-muted py-3">No shifts this week</td></tr>';
+        tbody.innerHTML = html;
+    }
+
+    // ── Unassigned Shifts Alert ──
+    detectUnassignedShifts(events) {
+        var alertDiv = document.getElementById('unassigned-alert');
+        var alertText = document.getElementById('unassigned-alert-text');
+        if (!alertDiv) return;
+
+        var unassigned = events.filter(function (ev) {
+            return !ev.extendedProps || !ev.extendedProps.guardId;
+        });
+
+        if (unassigned.length > 0) {
+            alertDiv.classList.remove('d-none');
+            if (alertText) alertText.textContent = unassigned.length + ' shift' + (unassigned.length !== 1 ? 's have' : ' has') + ' no guard assigned — coverage gap!';
+        } else {
+            alertDiv.classList.add('d-none');
+        }
+    }
+
+    // ── Shift Conflict Detection ──
+    detectConflicts(events) {
+        var alertDiv = document.getElementById('conflict-alert');
+        var alertList = document.getElementById('conflict-alert-list');
+        if (!alertDiv || !alertList) return;
+
+        // Group shifts by guard and date
+        var guardShifts = {};
+        events.forEach(function (ev) {
+            if (!ev.extendedProps || !ev.extendedProps.guardId) return;
+            var key = ev.extendedProps.guardId + '|' + (ev.start ? ev.start.split('T')[0] : '');
+            if (!guardShifts[key]) guardShifts[key] = [];
+            guardShifts[key].push(ev);
+        });
+
+        var conflicts = [];
+        Object.keys(guardShifts).forEach(function (key) {
+            var shifts = guardShifts[key];
+            if (shifts.length < 2) return;
+            // Check for time overlaps
+            for (var i = 0; i < shifts.length; i++) {
+                for (var j = i + 1; j < shifts.length; j++) {
+                    var s1Start = shifts[i].start.split('T')[1] || '00:00';
+                    var s1End = shifts[i].end ? shifts[i].end.split('T')[1] || '23:59' : '23:59';
+                    var s2Start = shifts[j].start.split('T')[1] || '00:00';
+                    var s2End = shifts[j].end ? shifts[j].end.split('T')[1] || '23:59' : '23:59';
+
+                    if (s1Start < s2End && s2Start < s1End) {
+                        conflicts.push({
+                            guard: shifts[i].extendedProps.guardName || 'Guard',
+                            date: shifts[i].start.split('T')[0],
+                            site1: shifts[i].extendedProps.siteName || '',
+                            site2: shifts[j].extendedProps.siteName || ''
+                        });
+                    }
+                }
+            }
+        });
+
+        if (conflicts.length > 0) {
+            alertDiv.classList.remove('d-none');
+            var html = '';
+            conflicts.forEach(function (c) {
+                html += '<p class="mb-1 text-muted"><strong>' + c.guard + '</strong> double-booked on ' + c.date + ' (' + c.site1 + ' &amp; ' + c.site2 + ')</p>';
+            });
+            alertList.innerHTML = html;
+        } else {
+            alertDiv.classList.add('d-none');
+        }
+    }
+
+    // ── Copy Last Week's Schedule ──
+    async copyLastWeek() {
+        var now = new Date();
+        var dayOfWeek = now.getDay();
+        var lastMonday = new Date(now);
+        lastMonday.setDate(now.getDate() - (dayOfWeek === 0 ? 6 : dayOfWeek - 1) - 7);
+        var lastSunday = new Date(lastMonday);
+        lastSunday.setDate(lastMonday.getDate() + 6);
+
+        var start = lastMonday.toISOString().split('T')[0];
+        var end = lastSunday.toISOString().split('T')[0];
+
+        var lastWeekShifts = await SyntriGuard.getShifts(start, end);
+        if (!lastWeekShifts || lastWeekShifts.length === 0) {
+            alert('No shifts found last week to copy.');
+            return;
+        }
+
+        var created = 0;
+        for (var i = 0; i < lastWeekShifts.length; i++) {
+            var s = lastWeekShifts[i];
+            var oldDate = new Date(s.shift_date);
+            var newDate = new Date(oldDate);
+            newDate.setDate(oldDate.getDate() + 7);
+
+            try {
+                await SyntriGuard.createShift({
+                    guard_id: s.guard_id,
+                    site_id: s.site_id,
+                    shift_date: newDate.toISOString().split('T')[0],
+                    start_time: s.start_time,
+                    end_time: s.end_time,
+                    shift_type: s.shift_type,
+                    notes: 'Copied from ' + s.shift_date.split('T')[0]
+                });
+                created++;
+            } catch (err) { console.error('Failed to copy shift:', err); }
+        }
+        alert(created + ' shifts copied to this week!');
     }
 
 }

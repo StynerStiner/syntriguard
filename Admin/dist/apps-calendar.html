@@ -695,6 +695,112 @@
                 </div>
                 <!--end row-->
 
+                <!-- Unassigned Shifts Alert -->
+                <div class="card border-danger border-opacity-50 mb-2 d-none" id="unassigned-alert">
+                    <div class="card-body py-2 px-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="ti ti-alert-triangle text-danger fs-22"></i>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 text-danger">Coverage Gaps Detected</h6>
+                                <p class="mb-0 text-muted" id="unassigned-alert-text">0 shifts have no guard assigned</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shift Conflicts Alert -->
+                <div class="card border-warning border-opacity-50 mb-2 d-none" id="conflict-alert">
+                    <div class="card-body py-2 px-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="ti ti-alert-circle text-warning fs-22"></i>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 text-warning">Shift Conflicts</h6>
+                                <div id="conflict-alert-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- Guard Availability -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card">
+                            <div class="card-header border-bottom border-dashed d-flex flex-wrap align-items-center justify-content-between gap-2">
+                                <h4 class="header-title mb-0">Guard Availability</h4>
+                                <span class="badge bg-success-subtle text-success" id="avail-count">0 available</span>
+                            </div>
+                            <div class="card-body p-0">
+                                <div id="guard-availability-list" style="max-height: 300px; overflow-y: auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Hours Summary -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card">
+                            <div class="card-header border-bottom border-dashed d-flex flex-wrap align-items-center justify-content-between gap-2">
+                                <h4 class="header-title mb-0">Weekly Hours</h4>
+                                <span class="badge bg-primary-subtle text-primary" id="week-total-hours">0 hrs total</span>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="bg-light-subtle">
+                                            <tr>
+                                                <th class="ps-3 py-2">Guard</th>
+                                                <th class="py-2 text-center">Hours</th>
+                                                <th class="py-2 text-center pe-3">Shifts</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="weekly-hours-body"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="col-xl-4 col-md-12">
+                        <div class="card">
+                            <div class="card-header border-bottom border-dashed">
+                                <h4 class="header-title mb-0">Schedule Actions</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex flex-column gap-2">
+                                    <button class="btn btn-soft-primary d-flex align-items-center gap-2" id="btn-copy-week">
+                                        <i class="ti ti-copy fs-20"></i>
+                                        <div class="text-start">
+                                            <span class="fw-semibold d-block">Copy Last Week</span>
+                                            <span class="text-muted">Duplicate previous week's schedule</span>
+                                        </div>
+                                    </button>
+                                    <button class="btn btn-soft-success d-flex align-items-center gap-2" id="btn-export-schedule-sheets">
+                                        <img src="assets/images/icons8-google-sheets-48.png" alt="Sheets" height="22">
+                                        <div class="text-start">
+                                            <span class="fw-semibold d-block">Export to Sheets</span>
+                                            <span class="text-muted">Sync schedule to Google Sheets</span>
+                                        </div>
+                                    </button>
+                                    <button class="btn btn-soft-danger d-flex align-items-center gap-2" id="btn-export-schedule-pdf">
+                                        <img src="assets/images/icons8-pdf-48.png" alt="PDF" height="22">
+                                        <div class="text-start">
+                                            <span class="fw-semibold d-block">Download PDF</span>
+                                            <span class="text-muted">Print-ready weekly schedule</span>
+                                        </div>
+                                    </button>
+                                    <button class="btn btn-soft-info d-flex align-items-center gap-2" onclick="sgQuickAction('Generate an optimized guard schedule for next week based on availability and fair rotation')">
+                                        <i class="ti ti-robot fs-20"></i>
+                                        <div class="text-start">
+                                            <span class="fw-semibold d-block">AI Auto-Schedule</span>
+                                            <span class="text-muted">Let AI suggest next week's shifts</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Add New Shift MODAL -->
                 <div class="modal fade" id="event-modal" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
