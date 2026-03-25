@@ -65,25 +65,25 @@
                 <!-- Month/Year Jump -->
                 <div class="card mb-2">
                     <div class="card-body py-2 px-3">
-                        <div class="row g-2 align-items-center">
-                            <div class="col">
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
                                 <div class="dropdown">
                                     <button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button>
                                     <div class="dropdown-menu" id="cal-month-menu"></div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="dropdown">
                                     <button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button>
                                     <div class="dropdown-menu" id="cal-year-menu"></div>
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <div class="btn-group">
-                                    <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
-                                    <button class="btn btn-primary" id="cal-today-btn">Today</button>
-                                    <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
-                                </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group">
+                                <button class="btn btn-light" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button>
+                                <button class="btn btn-primary" id="cal-today-btn">Today</button>
+                                <button class="btn btn-light" id="cal-next-month"><i class="ti ti-chevron-right"></i></button>
                             </div>
                         </div>
                     </div>
@@ -123,8 +123,8 @@
                     </div> <!-- end col-->
 
                     <div class="col-xl-9">
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-0 p-md-3">
                                 <div id="calendar"></div>
                             </div>
                         </div>
