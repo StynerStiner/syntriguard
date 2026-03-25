@@ -274,7 +274,7 @@ class AIChatApp {
         this.isSending = false;
         if (this.chatInput) {
             this.chatInput.disabled = false;
-            this.chatInput.placeholder = 'Ask SyntriGuard AI anything...';
+            this.chatInput.placeholder = 'Ask SyntriGuard AI';
             this.chatInput.focus();
         }
         if (submitBtn) submitBtn.disabled = false;
