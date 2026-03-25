@@ -265,7 +265,7 @@
                                 <span class="noti-icon-badge"></span>
                             </button>
 
-                            <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg shadow" style="min-height: 300px; background-color: #1e2532 !important; border: 1px solid #2e3a4e !important;">
+                            <div class="dropdown-menu p-0 dropdown-menu-end dropdown-menu-lg shadow" id="notif-dropdown" style="min-height: 300px;">
                                 <div class="p-2 border-bottom position-relative border-dashed">
                                     <div class="row align-items-center">
                                         <div class="col">
@@ -582,6 +582,23 @@
                 </div>
             </div>
         </div>
+
+        <style>
+        #notif-dropdown,
+        #notif-dropdown *,
+        #notif-dropdown .dropdown-item,
+        #notif-dropdown .notification-item {
+            --bs-dropdown-bg: #1e2532;
+            background-color: #1e2532 !important;
+        }
+        #notif-dropdown .dropdown-item:hover,
+        #notif-dropdown .notification-item:hover {
+            background-color: #263043 !important;
+        }
+        #notif-dropdown {
+            border: 1px solid #2e3a4e !important;
+        }
+        </style>
         
 
         
