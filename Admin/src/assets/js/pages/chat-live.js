@@ -118,8 +118,11 @@ async function selectGuard(guardId) {
     var inputEl = document.getElementById('chat-input');
 
     if (nameEl) nameEl.textContent = guard.full_name || guard.name || 'Guard';
-    if (statusEl) statusEl.innerHTML = '<small class="ti ti-circle-filled text-success"></small> ' + (guard.site_name ? 'On duty \u2014 ' + guard.site_name : (guard.role || 'Guard'));
-    if (avatarEl) avatarEl.src = guard.avatar_url || DEFAULT_AVATAR;
+    if (statusEl) statusEl.innerHTML = '<i class="ti ti-circle-filled fs-10 text-success"></i> ' + (guard.site_name ? guard.site_name : (guard.role || 'Online'));
+    if (avatarEl) {
+        avatarEl.src = guard.avatar_url || DEFAULT_AVATAR;
+        avatarEl.classList.remove('d-none');
+    }
     if (inputEl) inputEl.placeholder = 'Message ' + (guard.full_name || 'guard') + '...';
 
     // Highlight active in sidebar
