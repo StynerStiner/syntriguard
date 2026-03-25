@@ -11,7 +11,7 @@ class AIChatApp {
         this.messagesList = document.querySelector('[data-apps-chat="messages-list"]');
         this.messagesSimplebar = null;
         this.chatForm = document.querySelector('#chat-form');
-        if (this.chatForm) this.chatInput = this.chatForm.querySelector('input');
+        if (this.chatForm) this.chatInput = document.getElementById('ai-chat-input') || this.chatForm.querySelector('textarea') || this.chatForm.querySelector('input');
         if (this.messagesScrollWrapper) this.messagesSimplebar = new SimpleBar(this.messagesScrollWrapper);
         this.conversationId = null;
         this.isSending = false;
@@ -32,12 +32,15 @@ class AIChatApp {
     getAIMessageHTML(message) {
         var time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
         var formatted = this.formatAIResponse(message);
+        var msgId = 'ai-msg-' + Date.now();
         return '<li class="chat-group">' +
             '<div class="avatar-sm rounded-circle bg-light d-flex align-items-center justify-content-center">' +
             '<img src="assets/images/logo-sm.png" height="20" alt="AI"></div>' +
             '<div class="chat-body">' +
-            '<div><h6 class="d-inline-flex">SyntriGuard AI.</h6> <h6 class="d-inline-flex text-muted">' + time + '</h6></div>' +
-            '<div class="chat-message">' + formatted + '</div>' +
+            '<div><h6 class="d-inline-flex">SyntriGuard AI.</h6> <h6 class="d-inline-flex text-muted">' + time + '</h6>' +
+            '<button class="btn btn-icon btn-ghost-primary ms-2" onclick="readAloud(this)" title="Read aloud"><i class="ti ti-volume fs-18"></i></button>' +
+            '</div>' +
+            '<div class="chat-message" id="' + msgId + '">' + formatted + '</div>' +
             '</div></li>';
     }
 
@@ -556,13 +559,29 @@ class AIChatApp {
         // Chat form submit
         this.chatForm?.addEventListener('submit', function(e) {
             e.preventDefault();
-            var data = Object.fromEntries(new FormData(e.target).entries());
-            if (data.message && data.message.trim().length > 0) {
-                var msg = data.message;
+            var msg = self.chatInput ? self.chatInput.value.trim() : '';
+            if (msg.length > 0) {
                 self.chatInput.value = '';
+                self.chatInput.style.height = 'auto';
                 self.sendMessage(msg);
             }
         });
+
+        // Enter to send (Shift+Enter for new line)
+        if (this.chatInput) {
+            this.chatInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    self.chatForm.dispatchEvent(new Event('submit'));
+                }
+            });
+
+            // Auto-resize textarea
+            this.chatInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+            });
+        }
     }
 }
 
@@ -582,6 +601,111 @@ function handleExportAction(action) {
 
 var aiChatInstance = new AIChatApp();
 aiChatInstance.init();
+
+// ── Voice Input (Speech-to-Text) ──
+var voiceBtn = document.getElementById('btn-voice-input');
+var voiceStatus = document.getElementById('voice-status');
+var isListening = false;
+var recognition = null;
+
+if (voiceBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onstart = function () {
+        isListening = true;
+        voiceBtn.classList.remove('btn-soft-primary');
+        voiceBtn.classList.add('btn-danger');
+        if (voiceStatus) voiceStatus.classList.remove('d-none');
+    };
+
+    recognition.onresult = function (event) {
+        var transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+        }
+        var input = document.getElementById('ai-chat-input');
+        if (input) input.value = transcript;
+    };
+
+    recognition.onend = function () {
+        isListening = false;
+        voiceBtn.classList.remove('btn-danger');
+        voiceBtn.classList.add('btn-soft-primary');
+        if (voiceStatus) voiceStatus.classList.add('d-none');
+
+        // Auto-submit if we got text
+        var input = document.getElementById('ai-chat-input');
+        if (input && input.value.trim().length > 0) {
+            var msg = input.value.trim();
+            input.value = '';
+            aiChatInstance.sendMessage(msg);
+        }
+    };
+
+    recognition.onerror = function (event) {
+        isListening = false;
+        voiceBtn.classList.remove('btn-danger');
+        voiceBtn.classList.add('btn-soft-primary');
+        if (voiceStatus) voiceStatus.classList.add('d-none');
+        if (event.error !== 'no-speech') {
+            console.error('Speech recognition error:', event.error);
+        }
+    };
+
+    voiceBtn.addEventListener('click', function () {
+        if (isListening) {
+            recognition.stop();
+        } else {
+            recognition.start();
+        }
+    });
+} else if (voiceBtn) {
+    // Browser doesn't support speech recognition — hide button
+    voiceBtn.classList.add('d-none');
+}
+
+// ── Read Aloud (Text-to-Speech) ──
+function readAloud(btn) {
+    if (!('speechSynthesis' in window)) {
+        alert('Text-to-speech is not supported in this browser.');
+        return;
+    }
+
+    // If already speaking, stop
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        btn.innerHTML = '<i class="ti ti-volume fs-18"></i>';
+        return;
+    }
+
+    // Get the text from the next chat-message div
+    var messageDiv = btn.closest('.chat-body').querySelector('.chat-message');
+    if (!messageDiv) return;
+
+    var text = messageDiv.innerText || messageDiv.textContent;
+    if (!text.trim()) return;
+
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.95;
+    utterance.pitch = 1;
+    utterance.lang = 'en-US';
+
+    btn.innerHTML = '<i class="ti ti-player-stop fs-18"></i>';
+
+    utterance.onend = function () {
+        btn.innerHTML = '<i class="ti ti-volume fs-18"></i>';
+    };
+
+    utterance.onerror = function () {
+        btn.innerHTML = '<i class="ti ti-volume fs-18"></i>';
+    };
+
+    window.speechSynthesis.speak(utterance);
+}
 
 // Check if we arrived here via a Quick Action from the navbar
 var pendingPrompt = sessionStorage.getItem('sg_quick_prompt');

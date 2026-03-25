@@ -806,23 +806,23 @@
                                 </ul>
                             </div>
 
-                            <div class="px-3 pt-5 pb-5 border-top w-100 mb-0 d-flex align-items-center">
-                                <form class="d-flex align-items-center gap-2 w-100" name="chat-form" id="chat-form">
-
-                                    <div>
-                                        <button type="button" class="btn btn-icon btn-soft-warning">
-                                            <iconify-icon icon="solar:smile-circle-outline" class="fs-20"></iconify-icon>
+                            <div class="px-3 py-3 border-top w-100 mb-0">
+                                <form class="d-flex align-items-end gap-2 w-100" name="chat-form" id="chat-form">
+                                    <div class="flex-grow-1 position-relative">
+                                        <textarea name="message" id="ai-chat-input" class="form-control rounded-3" placeholder="Ask SyntriGuard AI anything..." required rows="1"></textarea>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-1">
+                                        <button type="button" class="btn btn-icon btn-soft-primary" id="btn-voice-input" title="Voice input">
+                                            <i class="ti ti-microphone fs-20"></i>
+                                        </button>
+                                        <button type="submit" class="btn btn-icon btn-success chat-send">
+                                            <i class="ti ti-send fs-20"></i>
                                         </button>
                                     </div>
-
-                                    <input type="text" name="message" id="chat-form" class="form-control rounded-3" placeholder="Ask SyntriGuard AI anything..." required style="padding: 16px 18px; height: 54px;">
-
-                                    <div class="d-flex align-items-center gap-1">
-                                        <button type="submit" class="btn btn-icon btn-success chat-send"><i class='ti ti-send'></i></button>
-                                        <a href="#" class="btn btn-icon btn-soft-primary d-none d-md-inline-flex"><i class="ti ti-microphone"></i> </a>
-                                        <a href="#" class="btn btn-icon btn-soft-primary d-none d-md-inline-flex"><i class="ti ti-paperclip"></i></a>
-                                    </div>
                                 </form>
+                                <div class="d-none text-center mt-2" id="voice-status">
+                                    <span class="badge bg-danger-subtle text-danger"><i class="ti ti-microphone me-1"></i>Listening...</span>
+                                </div>
                             </div>
                         </div>
                     </div>
