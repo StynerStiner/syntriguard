@@ -477,107 +477,68 @@ class CalendarSchedule {
             });
         }
 
-        // ── Month/Year Jump Navigation (Bootstrap dropdowns) ──
+        // ── Month/Year Dropdowns + Nav ──
         var monthBtn = document.getElementById('cal-month-btn');
         var yearBtn = document.getElementById('cal-year-btn');
         var monthMenu = document.getElementById('cal-month-menu');
         var yearMenu = document.getElementById('cal-year-menu');
         var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        var selectedMonth = new Date().getMonth();
-        var selectedYear = new Date().getFullYear();
+        var selMonth = new Date().getMonth();
+        var selYear = new Date().getFullYear();
 
-        // Build month dropdown items
         if (monthMenu) {
-            monthNames.forEach(function (m, idx) {
+            monthNames.forEach(function (m, i) {
                 var a = document.createElement('a');
                 a.className = 'dropdown-item';
                 a.href = 'javascript:void(0);';
                 a.textContent = m;
-                a.setAttribute('data-month', idx);
                 a.addEventListener('click', function () {
-                    selectedMonth = idx;
-                    self.calendarObj.gotoDate(new Date(selectedYear, selectedMonth, 1));
-                    syncDropdowns();
+                    selMonth = i;
+                    self.calendarObj.gotoDate(new Date(selYear, selMonth, 1));
+                    sync();
                 });
                 monthMenu.appendChild(a);
             });
         }
-
-        // Build year dropdown items
         if (yearMenu) {
-            var currentYear = new Date().getFullYear();
-            for (var y = currentYear - 2; y <= currentYear + 3; y++) {
+            for (var y = selYear - 2; y <= selYear + 3; y++) {
                 var a = document.createElement('a');
                 a.className = 'dropdown-item';
                 a.href = 'javascript:void(0);';
                 a.textContent = y;
-                a.setAttribute('data-year', y);
                 (function (yr) {
                     a.addEventListener('click', function () {
-                        selectedYear = yr;
-                        self.calendarObj.gotoDate(new Date(selectedYear, selectedMonth, 1));
-                        syncDropdowns();
+                        selYear = yr;
+                        self.calendarObj.gotoDate(new Date(selYear, selMonth, 1));
+                        sync();
                     });
                 })(y);
                 yearMenu.appendChild(a);
             }
         }
 
-        function syncDropdowns() {
-            if (!self.calendarObj) return;
+        function sync() {
             var d = self.calendarObj.getDate();
-            selectedMonth = d.getMonth();
-            selectedYear = d.getFullYear();
-            if (monthBtn) monthBtn.textContent = window.innerWidth < 768 ? monthNames[selectedMonth].substring(0, 3) : monthNames[selectedMonth];
-            if (yearBtn) yearBtn.textContent = selectedYear;
-
-            // Highlight active items
-            if (monthMenu) {
-                monthMenu.querySelectorAll('.dropdown-item').forEach(function (item) {
-                    item.classList.toggle('active', parseInt(item.getAttribute('data-month')) === selectedMonth);
-                });
-            }
-            if (yearMenu) {
-                yearMenu.querySelectorAll('.dropdown-item').forEach(function (item) {
-                    item.classList.toggle('active', parseInt(item.getAttribute('data-year')) === selectedYear);
-                });
-            }
+            selMonth = d.getMonth();
+            selYear = d.getFullYear();
+            if (monthBtn) monthBtn.textContent = monthNames[selMonth];
+            if (yearBtn) yearBtn.textContent = selYear;
         }
 
         var prevBtn = document.getElementById('cal-prev-month');
         var nextBtn = document.getElementById('cal-next-month');
         var todayBtn = document.getElementById('cal-today-btn');
-        var todayBtnMobile = document.getElementById('cal-today-btn-mobile');
+        if (prevBtn) prevBtn.addEventListener('click', function () { self.calendarObj.prev(); sync(); });
+        if (nextBtn) nextBtn.addEventListener('click', function () { self.calendarObj.next(); sync(); });
+        if (todayBtn) todayBtn.addEventListener('click', function () { self.calendarObj.today(); sync(); });
 
-        if (prevBtn) prevBtn.addEventListener('click', function () {
-            self.calendarObj.prev();
-            syncDropdowns();
-        });
-        if (nextBtn) nextBtn.addEventListener('click', function () {
-            self.calendarObj.next();
-            syncDropdowns();
-        });
-        if (todayBtn) todayBtn.addEventListener('click', function () {
-            self.calendarObj.today();
-            syncDropdowns();
-        });
-        if (todayBtnMobile) todayBtnMobile.addEventListener('click', function () {
-            self.calendarObj.today();
-            syncDropdowns();
-        });
+        var viewList = document.getElementById('cal-view-list');
+        var viewMonth = document.getElementById('cal-view-month');
+        if (viewList) viewList.addEventListener('click', function () { self.calendarObj.changeView('listWeek'); });
+        if (viewMonth) viewMonth.addEventListener('click', function () { self.calendarObj.changeView('dayGridMonth'); });
 
-        var listMobile = document.getElementById('cal-view-list-mobile');
-        var monthMobile = document.getElementById('cal-view-month-mobile');
-        if (listMobile) listMobile.addEventListener('click', function () {
-            self.calendarObj.changeView('listWeek');
-        });
-        if (monthMobile) monthMobile.addEventListener('click', function () {
-            self.calendarObj.changeView('dayGridMonth');
-        });
-
-        // Sync when FullCalendar's own nav is used
-        self.calendarObj.on('datesSet', function () { syncDropdowns(); });
-        syncDropdowns();
+        self.calendarObj.on('datesSet', function () { sync(); });
+        sync();
 
         // Populate all panels
         self.populateTodayShifts(apiEvents);
