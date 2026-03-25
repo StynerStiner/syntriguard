@@ -528,7 +528,7 @@ class CalendarSchedule {
             var d = self.calendarObj.getDate();
             selectedMonth = d.getMonth();
             selectedYear = d.getFullYear();
-            if (monthBtn) monthBtn.textContent = monthNames[selectedMonth];
+            if (monthBtn) monthBtn.textContent = window.innerWidth < 768 ? monthNames[selectedMonth].substring(0, 3) : monthNames[selectedMonth];
             if (yearBtn) yearBtn.textContent = selectedYear;
 
             // Highlight active items

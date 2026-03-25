@@ -625,18 +625,20 @@
 
                 <!-- Month/Year Jump -->
                 <div class="card mb-2">
-                    <div class="card-body py-2 px-2">
-                        <table class="w-100"><tr>
-                            <td class="text-center" style="width:12%"><button class="btn btn-light w-100" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button></td>
-                            <td class="text-center px-1"><div class="dropdown"><button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-month-btn">March</button><div class="dropdown-menu" id="cal-month-menu"></div></div></td>
-                            <td class="text-center px-1"><div class="dropdown"><button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button><div class="dropdown-menu" id="cal-year-menu"></div></div></td>
-                            <td class="text-center" style="width:12%"><button class="btn btn-light w-100" id="cal-next-month"><i class="ti ti-chevron-right"></i></button></td>
-                            <td class="text-center d-none d-md-table-cell" style="width:15%"><button class="btn btn-primary w-100" id="cal-today-btn">Today</button></td>
-                        </tr></table>
-                        <div class="d-flex gap-2 mt-2 d-md-none">
-                            <button class="btn btn-primary flex-grow-1" id="cal-today-btn-mobile">Today</button>
-                            <button class="btn btn-light" id="cal-view-list-mobile">List</button>
-                            <button class="btn btn-light" id="cal-view-month-mobile">Month</button>
+                    <div class="card-body py-2 px-2 overflow-hidden">
+                        <div class="row g-1">
+                            <div class="col"><button class="btn btn-light w-100" id="cal-prev-month"><i class="ti ti-chevron-left"></i></button></div>
+                            <div class="col"><div class="dropdown"><button class="btn btn-light w-100 dropdown-toggle text-truncate" type="button" data-bs-toggle="dropdown" id="cal-month-btn">Mar</button><div class="dropdown-menu" id="cal-month-menu"></div></div></div>
+                            <div class="col"><div class="dropdown"><button class="btn btn-light w-100 dropdown-toggle" type="button" data-bs-toggle="dropdown" id="cal-year-btn">2026</button><div class="dropdown-menu" id="cal-year-menu"></div></div></div>
+                            <div class="col"><button class="btn btn-light w-100" id="cal-next-month"><i class="ti ti-chevron-right"></i></button></div>
+                        </div>
+                        <div class="row g-1 mt-1 d-md-none">
+                            <div class="col"><button class="btn btn-primary w-100" id="cal-today-btn-mobile">Today</button></div>
+                            <div class="col"><button class="btn btn-light w-100" id="cal-view-list-mobile">List</button></div>
+                            <div class="col"><button class="btn btn-light w-100" id="cal-view-month-mobile">Month</button></div>
+                        </div>
+                        <div class="d-none d-md-block mt-1">
+                            <button class="btn btn-primary" id="cal-today-btn">Today</button>
                         </div>
                     </div>
                 </div>
