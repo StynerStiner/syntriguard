@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "buildCommand": "cd Admin && npm install && npx gulp build && cp -r src/assets/js/pages dist/assets/js/ && cp src/assets/js/api.js dist/assets/js/api.js",
-  "installCommand": "cd Admin && npm install && cd server && npm install",
+  "buildCommand": "cd Admin && npm install && cd server && npm install && cd ../.. && cd Admin && npx gulp build && cp -r src/assets/js/pages dist/assets/js/ && cp src/assets/js/api.js dist/assets/js/api.js",
   "outputDirectory": "Admin/dist",
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 30
+    }
+  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.js" },
     { "source": "/dashboard", "destination": "/index.html" },
@@ -28,11 +32,5 @@
   ],
   "redirects": [
     { "source": "/", "destination": "/login" }
-  ],
-  "functions": {
-    "api/index.js": {
-      "maxDuration": 30,
-      "includeFiles": "Admin/server/**,Admin/dist/**"
-    }
-  }
+  ]
 }
