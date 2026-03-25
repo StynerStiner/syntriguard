@@ -1,0 +1,10 @@
+{
+  "name": "syntriguard",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "cd Admin && npm install && cd server && npm install",
+    "build": "cd Admin && npx gulp build && cp -r src/assets/js/pages dist/assets/js/ && cp src/assets/js/api.js dist/assets/js/api.js",
+    "start": "cd Admin && node server/index.js"
+  }
+}

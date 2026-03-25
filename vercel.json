@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "buildCommand": "cd Admin && npm install && npx gulp build && cp -r src/assets/js/pages dist/assets/js/ && cp src/assets/js/api.js dist/assets/js/api.js",
+  "installCommand": "cd Admin && npm install && cd server && npm install",
+  "outputDirectory": "Admin/dist",
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/dashboard", "destination": "/index.html" },
+    { "source": "/login", "destination": "/auth-login.html" },
+    { "source": "/register", "destination": "/auth-register.html" },
+    { "source": "/guards", "destination": "/tables-gridjs.html" },
+    { "source": "/guard-roster", "destination": "/tables-gridjs.html" },
+    { "source": "/scheduler", "destination": "/apps-calendar.html" },
+    { "source": "/calendar", "destination": "/apps-calendar.html" },
+    { "source": "/map", "destination": "/maps-leaflet.html" },
+    { "source": "/deployment-map", "destination": "/maps-leaflet.html" },
+    { "source": "/clients", "destination": "/clients-sites.html" },
+    { "source": "/sites", "destination": "/clients-sites.html" },
+    { "source": "/incidents", "destination": "/apps-invoices.html" },
+    { "source": "/incident-log", "destination": "/apps-invoices.html" },
+    { "source": "/file-report", "destination": "/apps-invoice-create.html" },
+    { "source": "/messages", "destination": "/apps-chat.html" },
+    { "source": "/chat", "destination": "/apps-chat.html" },
+    { "source": "/ai", "destination": "/ai-assistant.html" },
+    { "source": "/ai-assistant", "destination": "/ai-assistant.html" },
+    { "source": "/settings", "destination": "/settings.html" },
+    { "source": "/performance", "destination": "/guard-performance.html" }
+  ],
+  "redirects": [
+    { "source": "/", "destination": "/login" }
+  ],
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 30,
+      "includeFiles": "Admin/server/**,Admin/dist/**"
+    }
+  }
+}

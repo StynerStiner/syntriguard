@@ -71,5 +71,11 @@ Object.keys(cleanRoutes).forEach(function(route) {
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`SyntriGuard API running on port ${PORT}`));
+// Export for Vercel serverless
+module.exports = app;
+
+// Start server only when run directly (not imported by Vercel)
+if (require.main === module) {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => console.log(`SyntriGuard API running on port ${PORT}`));
+}
